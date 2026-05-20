@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AETERNA™ Civil Shield</title>
+
+<style>
+
+:root{
+--gold:#d4af37;
+--black:#000;
+--grey:#0b0b0b;
+--white:#f5f5f5;
+}
+
+body{
+margin:0;
+padding:0;
+background:#000;
+font-family:Georgia, serif;
+color:var(--gold);
+overflow-x:hidden;
+}
+
+.container{
+max-width:1300px;
+margin:auto;
+padding:40px 20px;
+}
+
+.hero{
+text-align:center;
+padding:60px 20px;
+border-bottom:1px solid #222;
+margin-bottom:50px;
+}
+
+.hero h1{
+font-size:58px;
+letter-spacing:5px;
+margin-bottom:15px;
+color:white;
+}
+
+.hero p{
+font-size:18px;
+color:#999;
+max-width:800px;
+margin:auto;
+line-height:1.8;
+}
+
+.price-box{
+margin-top:40px;
+background:#0b0b0b;
+border:1px solid gold;
+padding:40px;
+box-shadow:0 0 35px rgba(212,175,55,0.12);
+}
+
+.price{
+font-size:50px;
+font-weight:bold;
+color:white;
+margin-bottom:15px;
+}
+
+.price-sub{
+letter-spacing:3px;
+text-transform:uppercase;
+font-size:13px;
+color:gold;
+}
+
+.scan-btn{
+margin-top:25px;
+padding:20px 45px;
+background:gold;
+color:black;
+border:none;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:0.4s;
+}
+
+.scan-btn:hover{
+background:white;
+}
+
+.shield{
+display:none;
+margin-top:50px;
+background:#0b0b0b;
+border:1px solid gold;
+padding:40px;
+box-shadow:0 0 25px rgba(212,175,55,0.08);
+}
+
+h2{
+font-size:22px;
+letter-spacing:2px;
+text-transform:uppercase;
+border-bottom:1px solid gold;
+padding-bottom:10px;
+margin-bottom:30px;
+color:white;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
+}
+
+.card{
+background:#050505;
+border:1px solid #1c1c1c;
+padding:25px;
+transition:0.3s;
+}
+
+.card:hover{
+border:1px solid gold;
+}
+
+.card h3{
+margin-top:0;
+color:white;
+}
+
+input, textarea{
+width:100%;
+padding:16px;
+background:#111;
+border:1px solid #333;
+color:gold;
+font-family:Georgia, serif;
+box-sizing:border-box;
+margin-top:12px;
+}
+
+.upload{
+margin-top:15px;
+padding:20px;
+border:1px dashed gold;
+text-align:center;
+color:#888;
+}
+
+.notice{
+margin-top:30px;
+padding:25px;
+background:#050505;
+border-left:3px solid gold;
+line-height:1.8;
+color:#bbb;
+}
+
+.notice strong{
+color:white;
+}
+
+.infinity{
+margin-top:60px;
+background:#0a0a0a;
+border:1px solid gold;
+padding:40px;
+text-align:center;
+}
+
+.infinity h2{
+border:none;
+margin-bottom:10px;
+}
+
+.infinity-symbol{
+font-size:70px;
+color:white;
+margin-top:15px;
+}
+
+.footer{
+text-align:center;
+margin-top:70px;
+padding-bottom:40px;
+color:#666;
+font-size:13px;
+}
+
+@media(max-width:768px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:40px;
+}
+
+.price{
+font-size:38px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="hero">
+
+<h1>AETERNA™ Civil Shield</h1>
+
+<p>
+Sistema intelligente di immunità cognitiva digitale.
+Protezione contro phishing, truffe digitali,
+link sospetti e manipolazioni cognitive online.
+</p>
+
+<div class="price-box">
+
+<div class="price">
+PRENOTA UNA SCANSIONE
+</div>
+
+<div class="price-sub">
+ACCESSO SU RICHIESTA
+</div>
+
+<button class="scan-btn" onclick="sbloccaScanner()">
+RICHIEDI ANALISI CIVIL SHIELD™
+</button>
+
+<p style="margin-top:20px;color:#777;">
+Il team AETERNA™ analizzerà manualmente
+la richiesta ricevuta.
+</p>
+
+</div>
+
+</div>
+
+<div class="shield" id="shield">
+
+<h2>Richiesta Analisi AETERNA™</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Dati Cliente</h3>
+
+<input type="text" id="nome"
+placeholder="Nome e Cognome">
+
+<input type="email" id="email"
+placeholder="Email">
+
+<input type="text" id="telefono"
+placeholder="Telefono">
+
+</div>
+
+<div class="card">
+
+<h3>Link o QR sospetto</h3>
+
+<input type="text" id="linkScan"
+placeholder="https://">
+
+</div>
+
+<div class="card">
+
+<h3>Email o messaggio sospetto</h3>
+
+<textarea id="smsScan" rows="7"
+placeholder="Incolla qui email, SMS o testo sospetto..."></textarea>
+
+</div>
+
+<div class="card">
+
+<h3>Upload File</h3>
+
+<div class="upload">
+
+PDF • Fatture • Immagini • Vocali • Video
+
+<br><br>
+
+<input type="file">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="notice">
+
+<strong>ZERO RETENTION POLICY™</strong><br><br>
+
+Nessun contenuto viene archiviato automaticamente.
+Le richieste vengono gestite direttamente dal team AETERNA™
+nel massimo rispetto della privacy e della riservatezza digitale.
+
+</div>
+
+<button class="scan-btn"
+style="width:100%;margin-top:35px;"
+onclick="inviaRichiesta()">
+
+INVIA RICHIESTA AL TEAM AETERNA™
+
+</button>
+
+</div>
+
+<div class="infinity">
+
+<h2>Protocollo AETERNA™ Premium</h2>
+
+<p>
+Gli abbonati AETERNA™ ottengono:
+</p>
+
+<p style="line-height:2;color:#bbb;">
+
+✔ scansioni illimitate<br>
+✔ continuità digitale<br>
+✔ archivio protetto<br>
+✔ AI Guardian™ evolutivo<br>
+✔ supporto dedicato<br>
+✔ infrastruttura Civil Shield™
+
+</p>
+
+<div class="infinity-symbol">
+∞
+</div>
+
+</div>
+
+<div class="footer">
+AETERNA Digital Legacy™ — Civil Shield Infrastructure
+</div>
+
+</div>
+
+<script>
+
+function sbloccaScanner(){
+
+document.getElementById("shield").style.display = "block";
+
+window.scrollTo({
+top:700,
+behavior:"smooth"
+});
+
+}
+
+function inviaRichiesta(){
+
+let nome =
+document.getElementById("nome").value;
+
+let email =
+document.getElementById("email").value;
+
+let telefono =
+document.getElementById("telefono").value;
+
+let link =
+document.getElementById("linkScan").value;
+
+let testo =
+document.getElementById("smsScan").value;
+
+let corpo =
+`NUOVA RICHIESTA CIVIL SHIELD™
+
+Cliente:
+${nome}
+
+Email:
+${email}
+
+Telefono:
+${telefono}
+
+Link sospetto:
+${link}
+
+Messaggio / Email sospetta:
+${testo}
+
+Il cliente richiede una verifica manuale AETERNA™.`;
+
+window.location.href =
+`mailto:info@aeternadigitallegacy.com?subject=Richiesta Civil Shield™&body=${encodeURIComponent(corpo)}`;
+
+}
+
+</script>
+
+</body>
+</html>

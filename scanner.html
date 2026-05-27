@@ -197,27 +197,31 @@ const data = await response.json();
 
 let dangerClass = "safe";
 
-if(data.risk_score >= 70){
+let score = data.threat_score;
+
+let dangerClass = "safe";
+
+if(score >= 70){
 dangerClass = "danger";
 }
-else if(data.risk_score >= 40){
+else if(score >= 40){
 dangerClass = "medium";
 }
 
 scoreText.className = "score " + dangerClass;
 
 scoreText.innerHTML =
-"RISK SCORE: " + data.risk_score + "/100";
+"RISK SCORE: " + score + "/100";
 
 analysisText.innerHTML = `
 
-<p><strong>Livello:</strong> ${data.risk_level}</p>
+<p><strong>Livello:</strong> ${data.rischio}</p>
 
 <p><strong>Analisi:</strong><br>
-${data.analysis}</p>
+${data.disclaimer}</p>
 
-<p><strong>Parole rilevate:</strong><br>
-${data.detected_words.join(", ")}</p>
+<p><strong>Pattern rilevati:</strong><br>
+${data.analisi.join(", ")}</p>
 
 `;
 

@@ -187,6 +187,81 @@ headers:{
 "Content-Type":"application/json"
 },
 
+body: JSON.stringify({
+message: text
+})
+
+});
+
+const data = await response.json();
+
+console.log(data);
+
+let score = data.threat_score || 0;
+
+let dangerClass = "safe";
+
+if(score >= 70){
+dangerClass = "danger";
+}
+else if(score >= 40){
+dangerClass = "medium";
+}
+
+scoreText.className = "score " + dangerClass;
+
+scoreText.innerHTML =
+"RISK SCORE: " + score + "/100";
+
+analysisText.innerHTML = `
+
+<p><strong>Livello rischio:</strong> ${data.rischio}</p>
+
+<p><strong>Motore:</strong> ${data.motore}</p>
+
+<p><strong>Analisi:</strong><br>
+${data.disclaimer}</p>
+
+<p><strong>Pattern rilevati:</strong><br>
+${data.analisi.join(", ")}</p>
+
+`;
+
+}
+catch(error){
+
+console.log(error);
+
+scoreText.className = "score danger";
+
+scoreText.innerHTML = "ERRORE CONNESSIONE";
+
+analysisText.innerHTML =
+"Impossibile contattare il motore AETERNA™.";
+
+}
+
+}
+
+const resultBox = document.getElementById("resultBox");
+const scoreText = document.getElementById("scoreText");
+const analysisText = document.getElementById("analysisText");
+
+resultBox.style.display = "block";
+
+scoreText.innerHTML = "Analisi in corso...";
+analysisText.innerHTML = "";
+
+try{
+
+const response = await fetch("https://aeterna-scanner.onrender.com/scan",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
 body:JSON.stringify({
 message:text
 })

@@ -1,61 +1,114 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AETERNA Civil Shield™</title>
+<title>AETERNA Civil Shield™ PREMIUM</title>
 
 <link rel="icon" type="image/png" href="nuovologo.png">
 
 <style>
 
 body{
-background:#050505;
-font-family:Arial,sans-serif;
 margin:0;
 padding:0;
+background:#030303;
+font-family:Arial,sans-serif;
 color:white;
-text-align:center;
 overflow-x:hidden;
 }
 
-.container{
-max-width:1000px;
-margin:auto;
-padding:30px;
+.topbar{
+width:100%;
+padding:20px;
+background:#070707;
+border-bottom:1px solid #d4af37;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 0 25px rgba(212,175,55,0.2);
+}
+
+.logo-area{
+display:flex;
+align-items:center;
+gap:15px;
 }
 
 .logo{
-width:140px;
-margin-top:20px;
-margin-bottom:10px;
+width:70px;
 }
 
-h1{
-font-size:42px;
+.title{
+font-size:28px;
 color:#d4af37;
-margin-bottom:5px;
+font-weight:bold;
 }
 
-.subtitle{
-color:#aaa;
-margin-bottom:40px;
+.status{
+color:#00ff99;
+font-size:14px;
 }
 
-.cyber-box{
-background:#101010;
-border:1px solid #d4af37;
+.dashboard{
+padding:30px;
+max-width:1400px;
+margin:auto;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:20px;
+margin-bottom:25px;
+}
+
+.card{
+background:#0d0d0d;
+border:1px solid #1f1f1f;
+border-radius:20px;
+padding:25px;
+box-shadow:0 0 25px rgba(212,175,55,0.08);
+}
+
+.card h3{
+margin-top:0;
+color:#d4af37;
+}
+
+.big-number{
+font-size:40px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.green{
+color:#00ff99;
+}
+
+.yellow{
+color:#ffcc00;
+}
+
+.red{
+color:#ff4444;
+}
+
+.scanner{
+background:#0d0d0d;
 border-radius:20px;
 padding:30px;
-box-shadow:0 0 30px rgba(212,175,55,0.15);
+border:1px solid #d4af37;
+box-shadow:0 0 40px rgba(212,175,55,0.15);
 }
 
 textarea{
 width:100%;
-height:220px;
-background:#000;
+height:240px;
+background:black;
 color:white;
 border:1px solid #d4af37;
 border-radius:15px;
@@ -68,11 +121,11 @@ button{
 margin-top:25px;
 background:#d4af37;
 color:black;
-padding:15px 40px;
 border:none;
+padding:18px 40px;
 font-size:18px;
 font-weight:bold;
-border-radius:14px;
+border-radius:15px;
 cursor:pointer;
 transition:0.3s;
 }
@@ -82,72 +135,130 @@ transform:scale(1.05);
 }
 
 .result{
-margin-top:35px;
+margin-top:30px;
 padding:25px;
-background:#080808;
+background:#050505;
 border-radius:15px;
 display:none;
-text-align:left;
-}
-
-.safe{
-color:#00ff99;
-}
-
-.medium{
-color:#ffcc00;
-}
-
-.danger{
-color:#ff4444;
+border:1px solid #222;
 }
 
 .score{
-font-size:34px;
+font-size:38px;
 font-weight:bold;
 margin-bottom:20px;
 }
 
-.counter{
-margin-top:25px;
-font-size:18px;
-color:#d4af37;
+.footer{
+margin-top:50px;
+padding:20px;
+font-size:12px;
+color:#777;
+text-align:center;
+line-height:1.8;
 }
 
-.footer{
-margin-top:60px;
-font-size:12px;
-color:#888;
-line-height:1.6;
+.live{
+margin-top:15px;
+font-size:13px;
+color:#00ff99;
+}
+
+@media(max-width:900px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.title{
+font-size:22px;
+}
+
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="container">
+<div class="topbar">
+
+<div class="logo-area">
 
 <img src="nuovologo.png" class="logo">
 
-<h1>AETERNA Civil Shield™</h1>
+<div>
 
-<p class="subtitle">
-Cyber Scam Detection • AI Risk Analysis • Threat Intelligence
+<div class="title">
+AETERNA Civil Shield™
+</div>
+
+<div class="status">
+AI ENGINE ONLINE
+</div>
+
+</div>
+
+</div>
+
+<div class="live">
+THREAT MONITOR ACTIVE
+</div>
+
+</div>
+
+<div class="dashboard">
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Threat Engine</h3>
+
+<div class="big-number green">
+ONLINE
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Cyber Protection</h3>
+
+<div class="big-number yellow">
+ACTIVE
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Premium Access</h3>
+
+<div class="big-number red">
+UNLIMITED
+</div>
+
+</div>
+
+</div>
+
+<div class="scanner">
+
+<h2 style="color:#d4af37;">
+Advanced Scam Analyzer
+</h2>
+
+<p style="color:#aaa;">
+Analizza messaggi, email, phishing, bonifici, link e comunicazioni sospette tramite il motore AETERNA™
 </p>
 
-<div class="cyber-box">
-
-<textarea id="textInput" placeholder="Incolla qui il messaggio sospetto..."></textarea>
+<textarea id="textInput" placeholder="Incolla qui il contenuto sospetto..."></textarea>
 
 <button onclick="scanText()">
-AVVIA SCANSIONE
+AVVIA ANALISI CYBER
 </button>
-
-<div class="counter">
-Scansioni residue:
-<span id="remaining">10</span>/10
-</div>
 
 <div class="result" id="resultBox">
 
@@ -169,16 +280,7 @@ AETERNA Civil Shield™ fornisce analisi probabilistiche basate su pattern euris
 
 <script>
 
-let scansioni = 999999;
-
 async function scanText(){
-
-if(scansioni <= 0){
-
-alert("Limite scansioni raggiunto.");
-return;
-
-}
 
 const text = document.getElementById("textInput").value;
 
@@ -193,7 +295,7 @@ const analysisText = document.getElementById("analysisText");
 
 resultBox.style.display = "block";
 
-scoreText.innerHTML = "Analisi in corso...";
+scoreText.innerHTML = "ANALISI IN CORSO...";
 analysisText.innerHTML = "";
 
 try{
@@ -216,49 +318,48 @@ const data = await response.json();
 
 let score = data.threat_score || 0;
 
-let level = data.rischio || "BASSO RISCHIO";
+let livello = data.rischio || "BASSO RISCHIO";
 
-let detected = data.analisi || [];
+let found = data.analisi || [];
 
-let css = "safe";
+let css = "green";
 
 if(score >= 70){
-css = "danger";
+css = "red";
 }
 else if(score >= 40){
-css = "medium";
+css = "yellow";
 }
 
 scoreText.className = "score " + css;
 
 scoreText.innerHTML =
-"RISK SCORE: " + score + "/100";
+"THREAT SCORE " + score + "/100";
 
 analysisText.innerHTML = `
 
-<p><strong>Livello rischio:</strong> ${level}</p>
+<p><strong>Livello Minaccia:</strong> ${livello}</p>
 
 <p><strong>Pattern rilevati:</strong><br>
-${detected.join(", ")}</p>
+${found.join(", ")}</p>
 
 <p><strong>Motore:</strong><br>
 ${data.motore}</p>
 
+<p><strong>Disclaimer:</strong><br>
+${data.disclaimer}</p>
+
 `;
-
-scansioni--;
-
-document.getElementById("remaining").innerText = scansioni;
 
 }
 catch(error){
 
-scoreText.className = "score danger";
+scoreText.className = "score red";
 
-scoreText.innerHTML = "ERRORE CONNESSIONE";
+scoreText.innerHTML = "ERRORE";
 
 analysisText.innerHTML =
-"Motore AETERNA™ non raggiungibile.";
+"Connessione al motore AETERNA™ non disponibile.";
 
 }
 

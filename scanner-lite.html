@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AETERNA Civil Shield™</title>
+
+<link rel="icon" type="image/png" href="nuovologo.png">
+
+<style>
+
+body{
+background:#050505;
+font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:30px;
+}
+
+.logo{
+width:140px;
+margin-top:20px;
+margin-bottom:10px;
+}
+
+h1{
+font-size:42px;
+color:#d4af37;
+margin-bottom:5px;
+}
+
+.subtitle{
+color:#aaa;
+margin-bottom:40px;
+}
+
+.cyber-box{
+background:#101010;
+border:1px solid #d4af37;
+border-radius:20px;
+padding:30px;
+box-shadow:0 0 30px rgba(212,175,55,0.15);
+}
+
+textarea{
+width:100%;
+height:220px;
+background:#000;
+color:white;
+border:1px solid #d4af37;
+border-radius:15px;
+padding:20px;
+font-size:16px;
+resize:none;
+}
+
+button{
+margin-top:25px;
+background:#d4af37;
+color:black;
+padding:15px 40px;
+border:none;
+font-size:18px;
+font-weight:bold;
+border-radius:14px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.result{
+margin-top:35px;
+padding:25px;
+background:#080808;
+border-radius:15px;
+display:none;
+text-align:left;
+}
+
+.safe{
+color:#00ff99;
+}
+
+.medium{
+color:#ffcc00;
+}
+
+.danger{
+color:#ff4444;
+}
+
+.score{
+font-size:34px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.counter{
+margin-top:25px;
+font-size:18px;
+color:#d4af37;
+}
+
+.footer{
+margin-top:60px;
+font-size:12px;
+color:#888;
+line-height:1.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="nuovologo.png" class="logo">
+
+<h1>AETERNA Civil Shield™</h1>
+
+<p class="subtitle">
+Cyber Scam Detection • AI Risk Analysis • Threat Intelligence
+</p>
+
+<div class="cyber-box">
+
+<textarea id="textInput" placeholder="Incolla qui il messaggio sospetto..."></textarea>
+
+<button onclick="scanText()">
+AVVIA SCANSIONE
+</button>
+
+<div class="counter">
+Scansioni residue:
+<span id="remaining">10</span>/10
+</div>
+
+<div class="result" id="resultBox">
+
+<div class="score" id="scoreText"></div>
+
+<div id="analysisText"></div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+AETERNA Civil Shield™ fornisce analisi probabilistiche basate su pattern euristici, indicatori comportamentali e segnali cyber automatizzati. Il servizio non garantisce certezza assoluta sull’affidabilità o pericolosità dei contenuti analizzati e non sostituisce consulenze professionali legali, investigative o finanziarie.
+
+</div>
+
+</div>
+
+<script>
+
+let scansioni = 10;
+
+async function scanText(){
+
+if(scansioni <= 0){
+
+alert("Limite scansioni raggiunto.");
+return;
+
+}
+
+const text = document.getElementById("textInput").value;
+
+if(text.trim() === ""){
+alert("Inserisci un contenuto.");
+return;
+}
+
+const resultBox = document.getElementById("resultBox");
+const scoreText = document.getElementById("scoreText");
+const analysisText = document.getElementById("analysisText");
+
+resultBox.style.display = "block";
+
+scoreText.innerHTML = "Analisi in corso...";
+analysisText.innerHTML = "";
+
+try{
+
+const response = await fetch("https://aeterna-scanner.onrender.com/scan",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+message:text
+})
+
+});
+
+const data = await response.json();
+
+let score = data.threat_score || 0;
+
+let level = data.rischio || "BASSO RISCHIO";
+
+let detected = data.analisi || [];
+
+let css = "safe";
+
+if(score >= 70){
+css = "danger";
+}
+else if(score >= 40){
+css = "medium";
+}
+
+scoreText.className = "score " + css;
+
+scoreText.innerHTML =
+"RISK SCORE: " + score + "/100";
+
+analysisText.innerHTML = `
+
+<p><strong>Livello rischio:</strong> ${level}</p>
+
+<p><strong>Pattern rilevati:</strong><br>
+${detected.join(", ")}</p>
+
+<p><strong>Motore:</strong><br>
+${data.motore}</p>
+
+`;
+
+scansioni--;
+
+document.getElementById("remaining").innerText = scansioni;
+
+}
+catch(error){
+
+scoreText.className = "score danger";
+
+scoreText.innerHTML = "ERRORE CONNESSIONE";
+
+analysisText.innerHTML =
+"Motore AETERNA™ non raggiungibile.";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

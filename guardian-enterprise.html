@@ -18,10 +18,6 @@ padding:0;
 box-sizing:border-box;
 }
 
-html{
-scroll-behavior:smooth;
-}
-
 body{
 background:#030303;
 font-family:Arial,sans-serif;
@@ -38,18 +34,6 @@ background:rgba(212,175,55,0.05);
 filter:blur(180px);
 top:-300px;
 right:-300px;
-z-index:0;
-}
-
-body::after{
-content:"";
-position:fixed;
-width:700px;
-height:700px;
-background:rgba(0,255,153,0.03);
-filter:blur(160px);
-bottom:-250px;
-left:-250px;
 z-index:0;
 }
 
@@ -83,7 +67,6 @@ border-radius:26px;
 overflow:hidden;
 border:2px solid #d4af37;
 box-shadow:0 0 35px rgba(212,175,55,0.18);
-background:#000;
 }
 
 .logo img{
@@ -102,7 +85,6 @@ color:#d4af37;
 margin-top:8px;
 font-size:13px;
 color:#00ff99;
-letter-spacing:2px;
 }
 
 .enterprise{
@@ -112,7 +94,6 @@ border-radius:18px;
 border:1px solid rgba(212,175,55,0.15);
 font-size:13px;
 color:#00ff99;
-box-shadow:0 0 25px rgba(0,255,153,0.06);
 }
 
 .hero{
@@ -157,12 +138,6 @@ border-radius:18px;
 border:1px solid #1f1f1f;
 font-size:13px;
 color:#ccc;
-transition:0.3s;
-}
-
-.badge:hover{
-border:1px solid rgba(212,175,55,0.4);
-transform:translateY(-2px);
 }
 
 .stats{
@@ -176,12 +151,6 @@ background:#111;
 padding:25px;
 border-radius:22px;
 border:1px solid #1d1d1d;
-transition:0.3s;
-}
-
-.stat:hover{
-transform:translateY(-4px);
-border:1px solid rgba(212,175,55,0.22);
 }
 
 .stat-number{
@@ -239,7 +208,7 @@ overflow:hidden;
 .progress-fill{
 height:100%;
 width:0%;
-background:linear-gradient(90deg,#d4af37,#ffe38a);
+background:#d4af37;
 transition:0.6s;
 }
 
@@ -251,7 +220,6 @@ border-radius:22px;
 line-height:1.9;
 font-size:13px;
 color:#999;
-border:1px solid #1f1f1f;
 }
 
 .wizard{
@@ -271,17 +239,14 @@ display:block;
 }
 
 @keyframes fade{
-
 from{
 opacity:0;
 transform:translateY(15px);
 }
-
 to{
 opacity:1;
 transform:translateY(0);
 }
-
 }
 
 .step-title{
@@ -314,14 +279,6 @@ color:white;
 font-size:15px;
 outline:none;
 margin-bottom:18px;
-transition:0.3s;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-border:1px solid rgba(212,175,55,0.45);
-box-shadow:0 0 20px rgba(212,175,55,0.08);
 }
 
 textarea{
@@ -351,10 +308,6 @@ background:#1b1b1b;
 color:white;
 }
 
-.btn-back:hover{
-background:#242424;
-}
-
 .btn-next{
 background:#d4af37;
 color:black;
@@ -362,7 +315,6 @@ color:black;
 
 .btn-next:hover{
 transform:scale(1.02);
-box-shadow:0 0 25px rgba(212,175,55,0.18);
 }
 
 .protection-grid{
@@ -406,7 +358,6 @@ border-radius:18px;
 font-size:13px;
 line-height:1.8;
 color:#e7d596;
-border:1px solid rgba(212,175,55,0.15);
 }
 
 .dashboard{
@@ -418,26 +369,29 @@ gap:20px;
 
 .dashboard-box{
 background:#111;
-padding:24px;
+padding:30px;
 border-radius:24px;
 border:1px solid #1f1f1f;
+text-align:center;
 }
 
 .dashboard-box h3{
 color:#d4af37;
-margin-bottom:14px;
+margin-bottom:18px;
+font-size:24px;
 }
 
 .dashboard-box p{
 color:#aaa;
 line-height:1.8;
-font-size:14px;
+font-size:26px;
+font-weight:bold;
 }
 
 .score{
-font-size:64px;
+font-size:74px;
 font-weight:bold;
-margin-top:20px;
+margin-top:25px;
 color:#00ff99;
 }
 
@@ -488,7 +442,6 @@ text-align:center;
 font-size:12px;
 line-height:2;
 color:#666;
-padding-bottom:40px;
 }
 
 @media(max-width:1100px){
@@ -694,32 +647,24 @@ Configurazione iniziale del profilo cliente e dell’ecosistema digitale da prot
 <div class="grid">
 
 <input type="text" id="nome" placeholder="Nome o Azienda">
-
 <input type="email" id="email" placeholder="Email operativa">
-
 <input type="text" id="telefono" placeholder="Telefono">
 
 <select id="cliente">
-
 <option>Privato</option>
 <option>Libero Professionista</option>
 <option>PMI</option>
 <option>Azienda Enterprise</option>
 <option>Creator / Influencer</option>
-
 </select>
 
 <input type="number" id="social" placeholder="Numero account social">
-
 <input type="number" id="emailnum" placeholder="Numero email operative">
-
 <input type="number" id="siti" placeholder="Numero siti web">
-
 <input type="number" id="wallet" placeholder="Numero wallet crypto">
 
 <input type="number" id="dipendenti" placeholder="Numero dipendenti">
-
-<input type="number" id="dispositivi" placeholder="Numero dispositivi">
+<input type="number" id="dispositivi" placeholder="Numero dispositivi utilizzati">
 
 </div>
 
@@ -744,58 +689,46 @@ Cyber Risk Audit™
 
 <div class="step-description">
 
-Valutazione preliminare delle esposizioni cyber e delle vulnerabilità operative.
+Valutazione avanzata delle vulnerabilità cyber, esposizioni reputazionali, continuità digitale e criticità operative.
 
 </div>
 
 <div class="grid">
 
 <select id="phishing">
-
 <option value="0">Nessun attacco phishing noto</option>
 <option value="90">Tentativi phishing sospetti</option>
 <option value="180">Compromissione phishing subita</option>
-
 </select>
 
 <select id="scam">
-
 <option value="0">Nessuna truffa segnalata</option>
 <option value="100">Tentativi scam ricevuti</option>
 <option value="220">Perdite economiche sospette</option>
-
 </select>
 
 <select id="leak">
-
-<option value="0">Nessun leak noto</option>
-<option value="120">Possibile esposizione dati</option>
-<option value="260">Leak confermato</option>
-
+<option value="0">Nessuna esposizione dati rilevata</option>
+<option value="120">Possibile esposizione dati sensibili</option>
+<option value="260">Esposizione dati confermata</option>
 </select>
 
 <select id="reputation">
-
 <option value="0">Reputazione stabile</option>
 <option value="120">Segnalazioni online</option>
 <option value="280">Impersonificazione o attacchi</option>
-
 </select>
 
 <select id="continuity">
-
 <option value="0">Continuità digitale stabile</option>
-<option value="180">Rischi continuità moderati</option>
-<option value="350">Rischi continuità elevati</option>
-
+<option value="120">Backup o recupero limitato</option>
+<option value="250">Rischio perdita continuità</option>
 </select>
 
 <select id="legacy">
-
-<option value="0">Nessuna esigenza eredità digitale</option>
-<option value="140">Necessità pianificazione base</option>
-<option value="300">Gestione eredità complessa</option>
-
+<option value="0">Nessun protocollo eredità digitale</option>
+<option value="100">Gestione parziale asset digitali</option>
+<option value="220">Asset digitali non protetti</option>
 </select>
 
 </div>
@@ -837,50 +770,74 @@ Seleziona il livello di protezione AETERNA™ desiderato.
 <div class="protection-grid">
 
 <div class="protection"
-onclick="setProtection(120,'Base Shield™','Protezione iniziale, audit standard e valutazione preliminare dell’esposizione digitale.')">
+onclick="setProtection(
+120,
+'Base Shield™',
+'✔ Audit cyber iniziale<br><br>✔ Analisi esposizione digitale<br><br>✔ Verifica account principali<br><br>✔ Report preliminare Guardian™<br><br>✔ Supporto onboarding standard'
+)">
 
 <h3>Base Shield™</h3>
 
 <p>
+
 Protezione iniziale, audit standard e valutazione preliminare dell’esposizione digitale.
+
 </p>
 
 </div>
 
 <div class="protection"
-onclick="setProtection(320,'Silver Shield™','Audit avanzato, analisi reputazionale e onboarding prioritario.')">
+onclick="setProtection(
+320,
+'Silver Shield™',
+'✔ Audit avanzato multilivello<br><br>✔ Analisi reputazionale online<br><br>✔ Simulazione attacchi phishing<br><br>✔ Priorità onboarding Guardian™<br><br>✔ Supporto operativo avanzato'
+)">
 
 <h3>Silver Shield™</h3>
 
 <p>
+
 Audit avanzato, analisi reputazionale e onboarding prioritario.
+
 </p>
 
 </div>
 
 <div class="protection"
-onclick="setProtection(690,'Gold Shield™','Protezione premium, intelligence multilivello e supporto Guardian™.')">
+onclick="setProtection(
+690,
+'Gold Shield™',
+'✔ Intelligence cyber premium<br><br>✔ Protezione ecosistema digitale<br><br>✔ Monitoraggio vulnerabilità<br><br>✔ Continuità digitale avanzata<br><br>✔ Supporto Guardian™ prioritario'
+)">
 
 <h3>Gold Shield™</h3>
 
 <p>
+
 Protezione premium, intelligence multilivello e supporto Guardian™.
+
 </p>
 
 </div>
 
 <div class="protection"
-onclick="setProtection(1290,'Guardian Shield™','Accesso ecosistema AETERNA Digital Legacy™, scanner cyber premium illimitato e onboarding prioritario.')">
+onclick="setProtection(
+1290,
+'Guardian Shield™',
+'✔ Accesso ecosistema AETERNA™<br><br>✔ Scanner cyber premium illimitato<br><br>✔ Continuità digitale enterprise<br><br>✔ Protezione reputazionale avanzata<br><br>✔ Supporto Guardian™ dedicato<br><br>✔ Membership Club AETERNA™'
+)">
 
 <h3>Guardian Shield™</h3>
 
 <p>
+
 Accesso ecosistema AETERNA Digital Legacy™, scanner cyber premium illimitato e onboarding prioritario.
+
 </p>
 
 <div class="highlight">
 
-Entrando nel Club AETERNA™ il cliente riceverà accesso continuativo ai sistemi proprietari AETERNA Guardian™, incluso lo scanner cyber premium senza limitazioni operative standard.
+Entrando nel Club AETERNA™ il cliente riceverà accesso continuativo ai sistemi proprietari AETERNA Guardian™.
 
 </div>
 
@@ -921,25 +878,48 @@ Il motore euristico proprietario AETERNA Guardian™ ha completato l’analisi p
 <div class="dashboard">
 
 <div class="dashboard-box">
-<h3>Threat Level™</h3>
-<p id="riskLevel">PROCESSING...</p>
+
+<h3>
+Threat Level™
+</h3>
+
+<p id="riskLevel">
+PROCESSING...
+</p>
+
 </div>
 
 <div class="dashboard-box">
-<h3>Infrastructure™</h3>
-<p id="infraLevel">PROCESSING...</p>
+
+<h3>
+Infrastructure™
+</h3>
+
+<p id="infraLevel">
+PROCESSING...
+</p>
+
 </div>
 
 <div class="dashboard-box">
-<h3>Protection™</h3>
-<p id="protectionText">PROCESSING...</p>
+
+<h3>
+Protection™
+</h3>
+
+<p id="protectionText">
+PROCESSING...
+</p>
+
 </div>
 
 </div>
 
 <div class="timeline">
 
-<h3>Guardian Timeline™</h3>
+<h3>
+Guardian Timeline™
+</h3>
 
 <div class="timeline-item">
 ✔ Audit infrastrutturale completato
@@ -1094,8 +1074,6 @@ ACQUISTA
 <div class="footer">
 
 AETERNA Guardian Enterprise™ fornisce valutazioni preliminari basate su modelli euristici, pattern comportamentali e simulazioni operative.
-I risultati non costituiscono garanzia assoluta, consulenza legale o certezza investigativa.
-L’utente mantiene piena responsabilità sulle decisioni intraprese.
 
 </div>
 
@@ -1239,26 +1217,6 @@ document.getElementById(
 "finalPrice"
 ).innerHTML =
 "...";
-
-document.getElementById(
-"serviceBreakdown"
-).innerHTML =
-
-`
-<div style="line-height:2;color:#888;">
-
-✔ Analisi cyber avanzata...<br><br>
-
-✔ Verifica continuità digitale...<br><br>
-
-✔ Simulazione onboarding Guardian™...<br><br>
-
-✔ Elaborazione rischio operativo...<br><br>
-
-✔ Valutazione eredità digitale...<br><br>
-
-</div>
-`;
 
 }
 
@@ -1497,17 +1455,12 @@ ${totalPrice.toFixed(2)}€
 <br><br>
 
 <strong>
-Incluso:
+Servizi inclusi:
 </strong>
 
 <br><br>
 
-✔ audit cyber avanzato<br>
-✔ onboarding Guardian™<br>
-✔ continuità digitale<br>
-✔ protocollo eredità digitale<br>
-✔ membership annuale AETERNA™<br>
-✔ accesso ecosistema premium
+${protectionDescription}
 
 `;
 

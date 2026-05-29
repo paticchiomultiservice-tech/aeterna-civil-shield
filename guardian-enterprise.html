@@ -18,6 +18,10 @@ padding:0;
 box-sizing:border-box;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 background:#030303;
 font-family:Arial,sans-serif;
@@ -34,6 +38,18 @@ background:rgba(212,175,55,0.05);
 filter:blur(180px);
 top:-300px;
 right:-300px;
+z-index:0;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:700px;
+height:700px;
+background:rgba(0,255,153,0.03);
+filter:blur(160px);
+bottom:-250px;
+left:-250px;
 z-index:0;
 }
 
@@ -67,6 +83,7 @@ border-radius:26px;
 overflow:hidden;
 border:2px solid #d4af37;
 box-shadow:0 0 35px rgba(212,175,55,0.18);
+background:#000;
 }
 
 .logo img{
@@ -85,6 +102,7 @@ color:#d4af37;
 margin-top:8px;
 font-size:13px;
 color:#00ff99;
+letter-spacing:2px;
 }
 
 .enterprise{
@@ -94,6 +112,7 @@ border-radius:18px;
 border:1px solid rgba(212,175,55,0.15);
 font-size:13px;
 color:#00ff99;
+box-shadow:0 0 25px rgba(0,255,153,0.06);
 }
 
 .hero{
@@ -103,10 +122,7 @@ gap:30px;
 margin-bottom:35px;
 }
 
-.card,
-.sidebar,
-.wizard,
-.payment-box{
+.card{
 background:#0b0b0b;
 padding:35px;
 border-radius:34px;
@@ -141,6 +157,12 @@ border-radius:18px;
 border:1px solid #1f1f1f;
 font-size:13px;
 color:#ccc;
+transition:0.3s;
+}
+
+.badge:hover{
+border:1px solid rgba(212,175,55,0.4);
+transform:translateY(-2px);
 }
 
 .stats{
@@ -154,6 +176,12 @@ background:#111;
 padding:25px;
 border-radius:22px;
 border:1px solid #1d1d1d;
+transition:0.3s;
+}
+
+.stat:hover{
+transform:translateY(-4px);
+border:1px solid rgba(212,175,55,0.22);
 }
 
 .stat-number{
@@ -176,6 +204,10 @@ gap:30px;
 }
 
 .sidebar{
+background:#0b0b0b;
+padding:30px;
+border-radius:30px;
+border:1px solid rgba(212,175,55,0.12);
 height:fit-content;
 position:sticky;
 top:20px;
@@ -207,7 +239,7 @@ overflow:hidden;
 .progress-fill{
 height:100%;
 width:0%;
-background:#d4af37;
+background:linear-gradient(90deg,#d4af37,#ffe38a);
 transition:0.6s;
 }
 
@@ -219,6 +251,14 @@ border-radius:22px;
 line-height:1.9;
 font-size:13px;
 color:#999;
+border:1px solid #1f1f1f;
+}
+
+.wizard{
+background:#0b0b0b;
+padding:35px;
+border-radius:34px;
+border:1px solid rgba(212,175,55,0.12);
 }
 
 .step{
@@ -231,14 +271,17 @@ display:block;
 }
 
 @keyframes fade{
+
 from{
 opacity:0;
 transform:translateY(15px);
 }
+
 to{
 opacity:1;
 transform:translateY(0);
 }
+
 }
 
 .step-title{
@@ -271,6 +314,14 @@ color:white;
 font-size:15px;
 outline:none;
 margin-bottom:18px;
+transition:0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border:1px solid rgba(212,175,55,0.45);
+box-shadow:0 0 20px rgba(212,175,55,0.08);
 }
 
 textarea{
@@ -300,6 +351,10 @@ background:#1b1b1b;
 color:white;
 }
 
+.btn-back:hover{
+background:#242424;
+}
+
 .btn-next{
 background:#d4af37;
 color:black;
@@ -307,6 +362,7 @@ color:black;
 
 .btn-next:hover{
 transform:scale(1.02);
+box-shadow:0 0 25px rgba(212,175,55,0.18);
 }
 
 .protection-grid{
@@ -350,6 +406,7 @@ border-radius:18px;
 font-size:13px;
 line-height:1.8;
 color:#e7d596;
+border:1px solid rgba(212,175,55,0.15);
 }
 
 .dashboard{
@@ -406,14 +463,12 @@ color:#aaa;
 line-height:1.9;
 }
 
-#serviceBreakdown{
-margin-top:35px;
-padding:35px;
+.payment-box{
 background:#111;
-border-radius:28px;
+padding:35px;
+border-radius:30px;
 border:1px solid rgba(212,175,55,0.12);
-color:#aaa;
-line-height:2;
+margin-top:25px;
 }
 
 .payment-box h2{
@@ -433,15 +488,28 @@ text-align:center;
 font-size:12px;
 line-height:2;
 color:#666;
+padding-bottom:40px;
 }
 
 @media(max-width:1100px){
 
-.layout,
-.hero,
-.dashboard,
-.protection-grid,
+.layout{
+grid-template-columns:1fr;
+}
+
+.hero{
+grid-template-columns:1fr;
+}
+
 .grid{
+grid-template-columns:1fr;
+}
+
+.protection-grid{
+grid-template-columns:1fr;
+}
+
+.dashboard{
 grid-template-columns:1fr;
 }
 
@@ -492,11 +560,14 @@ ENTERPRISE INTERNAL SYSTEM™
 <div class="card">
 
 <div class="title">
-Cyber Intelligence Onboarding System™
+Cyber Intelligence
+Onboarding System™
 </div>
 
 <div class="description">
+
 Piattaforma enterprise AETERNA™ progettata per audit cyber avanzati, onboarding premium, intelligence operativa, analisi reputazionale, protezione account, valutazione infrastrutturale e accesso ai sistemi proprietari AETERNA Guardian™.
+
 </div>
 
 <div class="badges">
@@ -556,27 +627,37 @@ Guardian Progress™
 
 <div class="progress-item">
 <div class="progress-label">STEP 1</div>
-<div class="progress-bar"><div class="progress-fill" id="bar1"></div></div>
+<div class="progress-bar">
+<div class="progress-fill" id="bar1"></div>
+</div>
 </div>
 
 <div class="progress-item">
 <div class="progress-label">STEP 2</div>
-<div class="progress-bar"><div class="progress-fill" id="bar2"></div></div>
+<div class="progress-bar">
+<div class="progress-fill" id="bar2"></div>
+</div>
 </div>
 
 <div class="progress-item">
 <div class="progress-label">STEP 3</div>
-<div class="progress-bar"><div class="progress-fill" id="bar3"></div></div>
+<div class="progress-bar">
+<div class="progress-fill" id="bar3"></div>
+</div>
 </div>
 
 <div class="progress-item">
 <div class="progress-label">STEP 4</div>
-<div class="progress-bar"><div class="progress-fill" id="bar4"></div></div>
+<div class="progress-bar">
+<div class="progress-fill" id="bar4"></div>
+</div>
 </div>
 
 <div class="progress-item">
 <div class="progress-label">STEP 5</div>
-<div class="progress-bar"><div class="progress-fill" id="bar5"></div></div>
+<div class="progress-bar">
+<div class="progress-fill" id="bar5"></div>
+</div>
 </div>
 
 <div class="ai-monitor">
@@ -605,36 +686,50 @@ Identity & Infrastructure™
 </div>
 
 <div class="step-description">
+
 Configurazione iniziale del profilo cliente e dell’ecosistema digitale da proteggere.
+
 </div>
 
 <div class="grid">
 
 <input type="text" id="nome" placeholder="Nome o Azienda">
+
 <input type="email" id="email" placeholder="Email operativa">
+
 <input type="text" id="telefono" placeholder="Telefono">
 
 <select id="cliente">
+
 <option>Privato</option>
 <option>Libero Professionista</option>
 <option>PMI</option>
 <option>Azienda Enterprise</option>
 <option>Creator / Influencer</option>
+
 </select>
 
 <input type="number" id="social" placeholder="Numero account social">
+
 <input type="number" id="emailnum" placeholder="Numero email operative">
+
 <input type="number" id="siti" placeholder="Numero siti web">
+
 <input type="number" id="wallet" placeholder="Numero wallet crypto">
+
 <input type="number" id="dipendenti" placeholder="Numero dipendenti">
+
 <input type="number" id="dispositivi" placeholder="Numero dispositivi">
 
 </div>
 
 <div class="navigation">
-<button class="btn-next" onclick="nextStep(1)">
+
+<button class="btn-next"
+onclick="nextStep(1)">
 CONTINUA
 </button>
+
 </div>
 
 </div>
@@ -648,59 +743,76 @@ Cyber Risk Audit™
 </div>
 
 <div class="step-description">
+
 Valutazione preliminare delle esposizioni cyber e delle vulnerabilità operative.
+
 </div>
 
 <div class="grid">
 
 <select id="phishing">
+
 <option value="0">Nessun attacco phishing noto</option>
 <option value="90">Tentativi phishing sospetti</option>
 <option value="180">Compromissione phishing subita</option>
+
 </select>
 
 <select id="scam">
+
 <option value="0">Nessuna truffa segnalata</option>
 <option value="100">Tentativi scam ricevuti</option>
 <option value="220">Perdite economiche sospette</option>
+
 </select>
 
 <select id="leak">
+
 <option value="0">Nessun leak noto</option>
 <option value="120">Possibile esposizione dati</option>
 <option value="260">Leak confermato</option>
+
 </select>
 
 <select id="reputation">
+
 <option value="0">Reputazione stabile</option>
 <option value="120">Segnalazioni online</option>
 <option value="280">Impersonificazione o attacchi</option>
+
 </select>
 
 <select id="continuity">
+
 <option value="0">Continuità digitale stabile</option>
-<option value="120">Possibili criticità operative</option>
-<option value="280">Rischio blocco operativo elevato</option>
+<option value="180">Rischi continuità moderati</option>
+<option value="350">Rischi continuità elevati</option>
+
 </select>
 
 <select id="legacy">
+
 <option value="0">Nessuna esigenza eredità digitale</option>
-<option value="90">Protezione accessi e continuità</option>
-<option value="220">Necessità protocollo eredità completo</option>
+<option value="140">Necessità pianificazione base</option>
+<option value="300">Gestione eredità complessa</option>
+
 </select>
 
 </div>
 
-<textarea id="note"
+<textarea
+id="note"
 placeholder="Descrivi eventuali problematiche, minacce o richieste operative..."></textarea>
 
 <div class="navigation">
 
-<button class="btn-back" onclick="backStep(2)">
+<button class="btn-back"
+onclick="backStep(2)">
 INDIETRO
 </button>
 
-<button class="btn-next" onclick="nextStep(2)">
+<button class="btn-next"
+onclick="nextStep(2)">
 CONTINUA
 </button>
 
@@ -717,67 +829,59 @@ Protection Level™
 </div>
 
 <div class="step-description">
+
 Seleziona il livello di protezione AETERNA™ desiderato.
+
 </div>
 
 <div class="protection-grid">
 
 <div class="protection"
-onclick="setProtection(event,149,'Base Shield™','Protezione iniziale dedicata a privati e piccoli ecosistemi digitali.')">
+onclick="setProtection(120,'Base Shield™','Protezione iniziale, audit standard e valutazione preliminare dell’esposizione digitale.')">
 
 <h3>Base Shield™</h3>
 
 <p>
-✔ Audit cyber base<br>
-✔ Verifica account principali<br>
-✔ Analisi phishing preliminare<br>
-✔ Monitoraggio reputazione iniziale
+Protezione iniziale, audit standard e valutazione preliminare dell’esposizione digitale.
 </p>
 
 </div>
 
 <div class="protection"
-onclick="setProtection(event,390,'Silver Shield™','Sistema avanzato per professionisti e PMI.')">
+onclick="setProtection(320,'Silver Shield™','Audit avanzato, analisi reputazionale e onboarding prioritario.')">
 
 <h3>Silver Shield™</h3>
 
 <p>
-✔ Audit avanzato<br>
-✔ Analisi social engineering<br>
-✔ Continuità digitale iniziale<br>
-✔ Priorità Guardian™
+Audit avanzato, analisi reputazionale e onboarding prioritario.
 </p>
 
 </div>
 
 <div class="protection"
-onclick="setProtection(event,890,'Gold Shield™','Protezione premium enterprise multilivello.')">
+onclick="setProtection(690,'Gold Shield™','Protezione premium, intelligence multilivello e supporto Guardian™.')">
 
 <h3>Gold Shield™</h3>
 
 <p>
-✔ Intelligence reputazionale<br>
-✔ Audit AI multilivello<br>
-✔ Continuità avanzata<br>
-✔ Protocollo eredità digitale
+Protezione premium, intelligence multilivello e supporto Guardian™.
 </p>
 
 </div>
 
 <div class="protection"
-onclick="setProtection(event,1690,'Guardian Shield™','Accesso completo ecosistema AETERNA Guardian™.')">
+onclick="setProtection(1290,'Guardian Shield™','Accesso ecosistema AETERNA Digital Legacy™, scanner cyber premium illimitato e onboarding prioritario.')">
 
 <h3>Guardian Shield™</h3>
 
 <p>
-✔ Scanner premium illimitato<br>
-✔ Accesso Club AETERNA™<br>
-✔ Monitoraggio continuativo<br>
-✔ Intelligence strategica
+Accesso ecosistema AETERNA Digital Legacy™, scanner cyber premium illimitato e onboarding prioritario.
 </p>
 
 <div class="highlight">
-Accesso continuativo ai sistemi proprietari AETERNA Guardian™.
+
+Entrando nel Club AETERNA™ il cliente riceverà accesso continuativo ai sistemi proprietari AETERNA Guardian™, incluso lo scanner cyber premium senza limitazioni operative standard.
+
 </div>
 
 </div>
@@ -786,11 +890,13 @@ Accesso continuativo ai sistemi proprietari AETERNA Guardian™.
 
 <div class="navigation">
 
-<button class="btn-back" onclick="backStep(3)">
+<button class="btn-back"
+onclick="backStep(3)">
 INDIETRO
 </button>
 
-<button class="btn-next" onclick="nextStep(3)">
+<button class="btn-next"
+onclick="nextStep(3)">
 CONTINUA
 </button>
 
@@ -807,7 +913,9 @@ AI Intelligence Score™
 </div>
 
 <div class="step-description">
-Il motore euristico AETERNA Guardian™ ha completato l’elaborazione preliminare.
+
+Il motore euristico proprietario AETERNA Guardian™ ha completato l’analisi preliminare dell’infrastruttura digitale.
+
 </div>
 
 <div class="dashboard">
@@ -833,25 +941,55 @@ Il motore euristico AETERNA Guardian™ ha completato l’elaborazione prelimina
 
 <h3>Guardian Timeline™</h3>
 
-<div class="timeline-item">✔ Verifica infrastruttura digitale completata</div>
-<div class="timeline-item">✔ Analisi rischio cyber elaborata</div>
-<div class="timeline-item">✔ Simulazione onboarding premium eseguita</div>
-<div class="timeline-item">✔ Priorità Guardian™ assegnata</div>
-<div class="timeline-item">✔ Calcolo operativo completato</div>
+<div class="timeline-item">
+✔ Audit infrastrutturale completato
+</div>
+
+<div class="timeline-item">
+✔ Simulazione esposizione cyber elaborata
+</div>
+
+<div class="timeline-item">
+✔ Verifica continuità digitale eseguita
+</div>
+
+<div class="timeline-item">
+✔ Protocollo eredità digitale valutato
+</div>
+
+<div class="timeline-item">
+✔ Priorità Guardian™ assegnata
+</div>
 
 </div>
 
-<div class="score" id="finalPrice">...</div>
+<div class="score" id="finalPrice">
+...
+</div>
 
-<div id="serviceBreakdown"></div>
+<div id="serviceBreakdown"
+
+style="
+margin-top:35px;
+padding:35px;
+background:#111;
+border-radius:30px;
+border:1px solid rgba(212,175,55,0.12);
+line-height:2.2;
+color:#aaa;
+">
+
+</div>
 
 <div class="navigation">
 
-<button class="btn-back" onclick="backStep(4)">
+<button class="btn-back"
+onclick="backStep(4)">
 INDIETRO
 </button>
 
-<button class="btn-next" onclick="nextStep(4)">
+<button class="btn-next"
+onclick="nextStep(4)">
 CONTINUA
 </button>
 
@@ -868,27 +1006,51 @@ Payment & Guardian Onboarding™
 </div>
 
 <div class="step-description">
-Per completare l’onboarding effettuare il pagamento tramite coordinate operative AETERNA™.
+
+Per completare la richiesta operativa effettuare il pagamento tramite coordinate bancarie AETERNA™.
+
 </div>
 
 <div class="payment-box">
 
-<h2>Coordinate Operative™</h2>
+<h2>
+Riepilogo Operativo™
+</h2>
+
+<p id="paymentSummary"
+style="
+margin-bottom:35px;
+line-height:2.2;
+">
+
+PROCESSING...
+
+</p>
+
+<h2>
+Coordinate Operative™
+</h2>
 
 <p>
 
 Beneficiario:
-<strong>Andrea Paticchio</strong>
+<strong>
+Andrea Paticchio
+</strong>
 
 <br><br>
 
 IBAN:
-<strong>IT72Q0306979272100000007248</strong>
+<strong>
+IT72Q0306979272100000007248
+</strong>
 
 <br><br>
 
 Causale:
-<strong>AETERNA Guardian Request</strong>
+<strong>
+AETERNA Guardian Request
+</strong>
 
 <br><br>
 
@@ -896,7 +1058,16 @@ Dopo verifica operativa del pagamento il cliente verrà contattato entro 24 ore 
 
 <br><br>
 
-I clienti Guardian Shield™ riceveranno accesso continuativo allo scanner cyber premium illimitato AETERNA™.
+L’abbonamento annuale continuativo AETERNA™ include:
+
+<br><br>
+
+✔ Scanner cyber premium<br>
+✔ Continuità digitale<br>
+✔ Monitoraggio ecosistema<br>
+✔ Aggiornamenti intelligence AI<br>
+✔ Accesso Club AETERNA™<br>
+✔ Supporto operativo Guardian™
 
 </p>
 
@@ -904,12 +1075,14 @@ I clienti Guardian Shield™ riceveranno accesso continuativo allo scanner cyber
 
 <div class="navigation">
 
-<button class="btn-back" onclick="backStep(5)">
+<button class="btn-back"
+onclick="backStep(5)">
 INDIETRO
 </button>
 
-<button class="btn-next" onclick="completeOnboarding()">
-COMPLETA
+<button class="btn-next"
+onclick="completeOnboarding()">
+ACQUISTA
 </button>
 
 </div>
@@ -919,7 +1092,11 @@ COMPLETA
 </div>
 
 <div class="footer">
-AETERNA Guardian Enterprise™ fornisce valutazioni preliminari basate su modelli euristici e simulazioni operative.
+
+AETERNA Guardian Enterprise™ fornisce valutazioni preliminari basate su modelli euristici, pattern comportamentali e simulazioni operative.
+I risultati non costituiscono garanzia assoluta, consulenza legale o certezza investigativa.
+L’utente mantiene piena responsabilità sulle decisioni intraprese.
+
 </div>
 
 </div>
@@ -932,64 +1109,109 @@ let protectionPrice = 0;
 let protectionName = "Nessuna";
 let protectionDescription = "";
 
+let totalPrice = 0;
+
 function nextStep(step){
 
-document.getElementById("step"+step).classList.remove("active");
+document.getElementById(
+"step"+step
+).classList.remove("active");
 
-document.getElementById("bar"+step).style.width = "100%";
+document.getElementById(
+"bar"+step
+).style.width = "100%";
 
 currentStep++;
 
-document.getElementById("step"+currentStep).classList.add("active");
+document.getElementById(
+"step"+currentStep
+).classList.add("active");
 
-document.getElementById("bar"+currentStep).style.width = "70%";
+document.getElementById(
+"bar"+currentStep
+).style.width = "70%";
 
 if(currentStep === 4){
 
 simulateAI();
 
 setTimeout(()=>{
+
 calculateRisk();
-},2400);
+
+},2200);
 
 }
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
+if(currentStep === 5){
+
+generatePaymentSummary();
+
+}
+
+setTimeout(()=>{
+
+document.getElementById(
+"step"+currentStep
+).scrollIntoView({
+
+behavior:"smooth",
+block:"start"
+
 });
+
+},120);
 
 }
 
 function backStep(step){
 
-document.getElementById("step"+step).classList.remove("active");
+document.getElementById(
+"step"+step
+).classList.remove("active");
 
 currentStep--;
 
-document.getElementById("step"+currentStep).classList.add("active");
+document.getElementById(
+"step"+currentStep
+).classList.add("active");
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
+setTimeout(()=>{
+
+document.getElementById(
+"step"+currentStep
+).scrollIntoView({
+
+behavior:"smooth",
+block:"start"
+
 });
+
+},120);
 
 }
 
-function setProtection(event,price,name,description){
+function setProtection(price,name,description){
 
 protectionPrice = price;
+
 protectionName = name;
+
 protectionDescription = description;
 
-document.querySelectorAll(".protection").forEach(el=>{
+document.querySelectorAll(".protection")
+.forEach(el=>{
 
-el.style.border = "1px solid #1f1f1f";
-el.style.boxShadow = "none";
+el.style.border =
+"1px solid #1f1f1f";
+
+el.style.boxShadow =
+"none";
 
 });
 
-event.currentTarget.style.border = "1px solid #d4af37";
+event.currentTarget.style.border =
+"1px solid #d4af37";
 
 event.currentTarget.style.boxShadow =
 "0 0 45px rgba(212,175,55,0.18)";
@@ -998,45 +1220,97 @@ event.currentTarget.style.boxShadow =
 
 function simulateAI(){
 
-document.getElementById("riskLevel").innerHTML =
-"AI PROCESSING...";
+document.getElementById(
+"riskLevel"
+).innerHTML =
+"GUARDIAN AI ENGINE™";
 
-document.getElementById("infraLevel").innerHTML =
-"SCANNING...";
+document.getElementById(
+"infraLevel"
+).innerHTML =
+"ANALISI INFRASTRUTTURALE";
 
-document.getElementById("protectionText").innerHTML =
-"GUARDIAN ENGINE™";
+document.getElementById(
+"protectionText"
+).innerHTML =
+"SIMULAZIONE PROTOCOLLO AETERNA™";
 
-document.getElementById("finalPrice").innerHTML =
+document.getElementById(
+"finalPrice"
+).innerHTML =
 "...";
+
+document.getElementById(
+"serviceBreakdown"
+).innerHTML =
+
+`
+<div style="line-height:2;color:#888;">
+
+✔ Analisi cyber avanzata...<br><br>
+
+✔ Verifica continuità digitale...<br><br>
+
+✔ Simulazione onboarding Guardian™...<br><br>
+
+✔ Elaborazione rischio operativo...<br><br>
+
+✔ Valutazione eredità digitale...<br><br>
+
+</div>
+`;
 
 }
 
 function calculateRisk(){
 
-let social = parseInt(document.getElementById("social").value || 0);
-let emails = parseInt(document.getElementById("emailnum").value || 0);
-let siti = parseInt(document.getElementById("siti").value || 0);
-let wallet = parseInt(document.getElementById("wallet").value || 0);
-let dipendenti = parseInt(document.getElementById("dipendenti").value || 0);
-let dispositivi = parseInt(document.getElementById("dispositivi").value || 0);
+let social =
+parseInt(document.getElementById("social").value || 0);
 
-let phishing = parseInt(document.getElementById("phishing").value || 0);
-let scam = parseInt(document.getElementById("scam").value || 0);
-let leak = parseInt(document.getElementById("leak").value || 0);
-let reputation = parseInt(document.getElementById("reputation").value || 0);
-let continuity = parseInt(document.getElementById("continuity").value || 0);
-let legacy = parseInt(document.getElementById("legacy").value || 0);
+let emails =
+parseInt(document.getElementById("emailnum").value || 0);
+
+let siti =
+parseInt(document.getElementById("siti").value || 0);
+
+let wallet =
+parseInt(document.getElementById("wallet").value || 0);
+
+let dipendenti =
+parseInt(document.getElementById("dipendenti").value || 0);
+
+let dispositivi =
+parseInt(document.getElementById("dispositivi").value || 0);
+
+let phishing =
+parseInt(document.getElementById("phishing").value || 0);
+
+let scam =
+parseInt(document.getElementById("scam").value || 0);
+
+let leak =
+parseInt(document.getElementById("leak").value || 0);
+
+let reputation =
+parseInt(document.getElementById("reputation").value || 0);
+
+let continuity =
+parseInt(document.getElementById("continuity").value || 0);
+
+let legacy =
+parseInt(document.getElementById("legacy").value || 0);
 
 let complexity =
-(social * 14) +
-(emails * 10) +
+
+(social * 15) +
+(emails * 12) +
 (siti * 18) +
 (wallet * 30) +
 (dipendenti * 4) +
 (dispositivi * 3);
 
 let cyberRisk =
+
 phishing +
 scam +
 leak +
@@ -1044,92 +1318,243 @@ reputation +
 continuity +
 legacy;
 
-let annualMembership = 49.99;
+let membership = 49.99;
 
-let risk =
+totalPrice =
+
 complexity +
 cyberRisk +
 protectionPrice +
-annualMembership;
+membership;
 
 let level = "RISCHIO CONTENUTO";
 let color = "#00ff99";
 
-if(risk >= 700){
+if(totalPrice >= 700){
+
 level = "RISCHIO MODERATO";
 color = "#ffd000";
+
 }
 
-if(risk >= 1400){
+if(totalPrice >= 1400){
+
 level = "RISCHIO ELEVATO";
 color = "#ff8800";
+
 }
 
-if(risk >= 2400){
+if(totalPrice >= 2400){
+
 level = "RISCHIO CRITICO";
 color = "#ff4444";
+
 }
 
 let infra = "BRONZE™";
 
-if(risk >= 700){
+if(totalPrice >= 700){
 infra = "SILVER™";
 }
 
-if(risk >= 1400){
+if(totalPrice >= 1400){
 infra = "GOLD™";
 }
 
-if(risk >= 2400){
+if(totalPrice >= 2400){
 infra = "GUARDIAN ELITE™";
 }
 
-document.getElementById("riskLevel").innerHTML =
-`<span style="color:${color};">${level}</span>`;
-
-document.getElementById("infraLevel").innerHTML =
-infra;
-
-document.getElementById("protectionText").innerHTML =
-protectionName;
-
-document.getElementById("finalPrice").innerHTML =
-risk.toFixed(2) + "€";
-
-document.getElementById("serviceBreakdown").innerHTML =
+document.getElementById(
+"riskLevel"
+).innerHTML =
 
 `
-<h2 style="color:#d4af37;margin-bottom:20px;">
-Dettaglio Servizi Inclusi™
+<span style="color:${color};">
+${level}
+</span>
+`;
+
+document.getElementById(
+"infraLevel"
+).innerHTML =
+infra;
+
+document.getElementById(
+"protectionText"
+).innerHTML =
+protectionName;
+
+document.getElementById(
+"finalPrice"
+).innerHTML =
+totalPrice.toFixed(2) + "€";
+
+document.getElementById(
+"serviceBreakdown"
+).innerHTML =
+
+`
+
+<h2 style="
+color:#d4af37;
+margin-bottom:30px;
+font-size:30px;
+">
+
+Servizi Inclusi™
 </h2>
 
-✔ Audit infrastrutturale multilivello AI<br><br>
-✔ Analisi rischio phishing e scam<br><br>
-✔ Simulazione attacchi reputazionali<br><br>
-✔ Continuità digitale aziendale<br><br>
+✔ Audit cyber AI multilivello<br><br>
+
+✔ Analisi phishing e scam<br><br>
+
+✔ Monitoraggio esposizione digitale<br><br>
+
+✔ Protocollo continuità digitale<br><br>
+
 ✔ Protocollo eredità digitale<br><br>
 
-<hr style="margin:25px 0;border:1px solid #1f1f1f;">
+✔ Simulazione attacchi reputazionali<br><br>
 
-<h2 style="color:#d4af37;margin-bottom:20px;">
+✔ Accesso ecosistema AETERNA™<br><br>
+
+✔ Onboarding Guardian™ prioritario<br><br>
+
+✔ Supporto intelligence operativo<br><br>
+
+✔ Membership annuale Club AETERNA™<br><br>
+
+<hr style="
+margin-top:25px;
+margin-bottom:25px;
+border:1px solid #1f1f1f;
+">
+
+<h2 style="
+color:#d4af37;
+margin-bottom:25px;
+font-size:28px;
+">
+
 Pacchetto Selezionato™
 </h2>
 
 ${protectionDescription}
 
-<hr style="margin:25px 0;border:1px solid #1f1f1f;">
+<hr style="
+margin-top:25px;
+margin-bottom:25px;
+border:1px solid #1f1f1f;
+">
 
-49.99€ annuali per mantenimento infrastruttura,
-monitoraggio Guardian™,
-supporto ecosistema AETERNA™
+<h2 style="
+color:#d4af37;
+margin-bottom:25px;
+font-size:28px;
+">
+
+Membership Continuativa™
+</h2>
+
+49.99€ annuali per:
+
+<br><br>
+
+✔ aggiornamenti AI<br>
+✔ monitoraggio ecosistema<br>
+✔ permanenza Club AETERNA™<br>
+✔ continuità digitale<br>
+✔ supporto Guardian™<br>
+✔ scanner cyber premium
+
+`;
+
+}
+
+function generatePaymentSummary(){
+
+document.getElementById(
+"paymentSummary"
+).innerHTML =
+
+`
+
+<strong>
+Pacchetto selezionato:
+</strong>
+
+${protectionName}
+
+<br><br>
+
+<strong>
+Totale onboarding:
+</strong>
+
+${totalPrice.toFixed(2)}€
+
+<br><br>
+
+<strong>
+Incluso:
+</strong>
+
+<br><br>
+
+✔ audit cyber avanzato<br>
+✔ onboarding Guardian™<br>
+✔ continuità digitale<br>
+✔ protocollo eredità digitale<br>
+✔ membership annuale AETERNA™<br>
+✔ accesso ecosistema premium
+
 `;
 
 }
 
 function completeOnboarding(){
 
+let nome =
+document.getElementById("nome").value;
+
+let email =
+document.getElementById("email").value;
+
+let subject =
+encodeURIComponent(
+"AETERNA Guardian Request™"
+);
+
+let body =
+encodeURIComponent(
+
+`
+Nuova richiesta AETERNA™
+
+Cliente: ${nome}
+
+Email: ${email}
+
+Pacchetto:
+${protectionName}
+
+Totale:
+${totalPrice.toFixed(2)}€
+
+Il cliente ha completato il preventivo operativo.
+`
+
+);
+
+window.location.href =
+
+`mailto:info@aeternadigitallegacy.com?subject=${subject}&body=${body}`;
+
 alert(
-"Richiesta AETERNA™ completata. Dopo verifica del pagamento il cliente verrà contattato entro 24 ore."
+
+"Preventivo generato correttamente. Dopo verifica operativa del pagamento il cliente verrà contattato entro 24 ore."
+
 );
 
 }

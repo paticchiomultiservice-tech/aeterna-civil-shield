@@ -486,7 +486,502 @@ font-size:38px;
 </style>
 
 </head>
+<div class="card wizard">
 
+<!-- STEP 1 -->
+
+<div class="step active" id="step1">
+
+<div class="step-title">
+Identity & Infrastructure™
+</div>
+
+<div class="step-description">
+
+Configurazione iniziale del profilo cliente e dell’infrastruttura digitale da proteggere.
+
+</div>
+
+<div class="grid">
+
+<input type="text"
+id="nome"
+placeholder="Nome o Azienda">
+
+<input type="email"
+id="email"
+placeholder="Email operativa">
+
+<input type="text"
+id="telefono"
+placeholder="Telefono">
+
+<select id="cliente">
+
+<option>
+Privato
+</option>
+
+<option>
+Libero Professionista
+</option>
+
+<option>
+PMI
+</option>
+
+<option>
+Azienda Enterprise
+</option>
+
+<option>
+Creator / Influencer
+</option>
+
+</select>
+
+<input type="number"
+id="social"
+placeholder="Numero account social">
+
+<input type="number"
+id="emailnum"
+placeholder="Numero email operative">
+
+<input type="number"
+id="siti"
+placeholder="Numero siti web">
+
+<input type="number"
+id="wallet"
+placeholder="Numero wallet crypto">
+
+</div>
+
+<div class="navigation">
+
+<button class="btn-next"
+onclick="nextStep(1)">
+CONTINUA
+</button>
+
+</div>
+
+</div>
+
+<!-- STEP 2 -->
+
+<div class="step" id="step2">
+
+<div class="step-title">
+Cyber Risk Audit™
+</div>
+
+<div class="step-description">
+
+Valutazione preliminare delle esposizioni cyber e dei rischi digitali.
+
+</div>
+
+<div class="grid">
+
+<select id="phishing">
+
+<option value="0">
+Nessun attacco phishing noto
+</option>
+
+<option value="80">
+Tentativi phishing sospetti
+</option>
+
+<option value="160">
+Compromissione phishing subita
+</option>
+
+</select>
+
+<select id="scam">
+
+<option value="0">
+Nessuna truffa segnalata
+</option>
+
+<option value="70">
+Tentativi scam ricevuti
+</option>
+
+<option value="140">
+Perdite economiche sospette
+</option>
+
+</select>
+
+<select id="leak">
+
+<option value="0">
+Nessun leak noto
+</option>
+
+<option value="100">
+Possibile esposizione dati
+</option>
+
+<option value="200">
+Leak confermato
+</option>
+
+</select>
+
+<select id="reputation">
+
+<option value="0">
+Reputazione stabile
+</option>
+
+<option value="70">
+Segnalazioni online
+</option>
+
+<option value="150">
+Impersonificazione o attacchi
+</option>
+
+</select>
+
+</div>
+
+<textarea
+id="note"
+placeholder="Descrivi eventuali problematiche o situazioni sospette..."></textarea>
+
+<div class="navigation">
+
+<button class="btn-back"
+onclick="backStep(2)">
+INDIETRO
+</button>
+
+<button class="btn-next"
+onclick="nextStep(2)">
+CONTINUA
+</button>
+
+</div>
+
+</div>
+
+<!-- STEP 3 -->
+
+<div class="step" id="step3">
+
+<div class="step-title">
+Protection Level™
+</div>
+
+<div class="step-description">
+
+Seleziona il livello di protezione operativo desiderato.
+
+</div>
+
+<div class="protection-grid">
+
+<div class="protection"
+onclick="setProtection(90,'Base Shield™')">
+
+<h3>Base Shield™</h3>
+
+<p>
+
+Protezione essenziale e valutazione standard delle esposizioni digitali.
+
+</p>
+
+</div>
+
+<div class="protection"
+onclick="setProtection(220,'Silver Shield™')">
+
+<h3>Silver Shield™</h3>
+
+<p>
+
+Audit avanzato, verifica prioritaria e monitoraggio operativo iniziale.
+
+</p>
+
+</div>
+
+<div class="protection"
+onclick="setProtection(420,'Gold Shield™')">
+
+<h3>Gold Shield™</h3>
+
+<p>
+
+Protezione premium, analisi approfondite e gestione rischio digitale.
+
+</p>
+
+</div>
+
+<div class="protection"
+onclick="setProtection(790,'Guardian Shield™')">
+
+<h3>Guardian Shield™</h3>
+
+<p>
+
+Accesso ecosistema AETERNA Digital Legacy™, supporto prioritario e scanner cyber continuativo.
+
+</p>
+
+<div class="highlight">
+
+Entrando nel Club AETERNA Digital Legacy™ il cliente riceverà accesso continuativo ai sistemi proprietari AETERNA™, incluso lo scanner cyber premium senza limitazioni operative standard.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="navigation">
+
+<button class="btn-back"
+onclick="backStep(3)">
+INDIETRO
+</button>
+
+<button class="btn-next"
+onclick="nextStep(3)">
+CONTINUA
+</button>
+
+</div>
+
+</div>
+
+<!-- STEP 4 -->
+
+<div class="step" id="step4">
+
+<div class="step-title">
+AI Intelligence Score™
+</div>
+
+<div class="step-description">
+
+Il motore AETERNA™ ha completato la valutazione preliminare.
+
+</div>
+
+<div class="card">
+
+<h2 id="riskLevel"></h2>
+
+<br>
+
+<div id="riskText"
+style="color:#aaa;line-height:2;"></div>
+
+<br><br>
+
+<h1 id="finalPrice"
+style="font-size:58px;color:#00ff99;"></h1>
+
+</div>
+
+<div class="navigation">
+
+<button class="btn-back"
+onclick="backStep(4)">
+INDIETRO
+</button>
+
+<button class="btn-next"
+onclick="nextStep(4)">
+CONTINUA
+</button>
+
+</div>
+
+</div>
+
+<!-- STEP 5 -->
+
+<div class="step" id="step5">
+
+<div class="step-title">
+Payment & Guardian Onboarding™
+</div>
+
+<div class="step-description">
+
+Per completare la richiesta operativa effettuare il pagamento tramite coordinate bancarie AETERNA™.
+
+</div>
+
+<div class="card">
+
+<h2 style="color:#d4af37;margin-bottom:25px;">
+
+Coordinate Operative™
+
+</h2>
+
+<p style="line-height:2;color:#bbb;">
+
+Beneficiario: <strong>Andrea Paticchio</strong><br>
+IBAN: <strong>IT72Q0306979272100000007248</strong><br>
+Causale:
+<strong>
+AETERNA Guardian Request
+</strong>
+
+</p>
+
+<br>
+
+<p style="line-height:2;color:#888;">
+
+Dopo la verifica operativa del pagamento il cliente verrà contattato entro 24 ore da un Guardian™ AETERNA Digital Legacy.
+
+</p>
+
+</div>
+
+<div class="navigation">
+
+<button class="btn-back"
+onclick="backStep(5)">
+INDIETRO
+</button>
+
+<button class="btn-next"
+onclick="alert('Onboarding completato.')">
+COMPLETA
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let currentStep = 1;
+
+let protectionPrice = 0;
+
+let protectionName = "";
+
+function nextStep(step){
+
+document.getElementById(
+"step"+step
+).classList.remove("active");
+
+currentStep++;
+
+document.getElementById(
+"step"+currentStep
+).classList.add("active");
+
+if(currentStep === 4){
+
+calculateRisk();
+
+}
+
+}
+
+function backStep(step){
+
+document.getElementById(
+"step"+step
+).classList.remove("active");
+
+currentStep--;
+
+document.getElementById(
+"step"+currentStep
+).classList.add("active");
+
+}
+
+function setProtection(price,name){
+
+protectionPrice = price;
+
+protectionName = name;
+
+}
+
+function calculateRisk(){
+
+let risk = 0;
+
+risk += parseInt(
+document.getElementById("phishing").value
+);
+
+risk += parseInt(
+document.getElementById("scam").value
+);
+
+risk += parseInt(
+document.getElementById("leak").value
+);
+
+risk += parseInt(
+document.getElementById("reputation").value
+);
+
+risk += protectionPrice;
+
+let level = "LOW RISK";
+
+if(risk >= 300){
+level = "MEDIUM RISK";
+}
+
+if(risk >= 600){
+level = "HIGH RISK";
+}
+
+if(risk >= 900){
+level = "CRITICAL RISK";
+}
+
+document.getElementById(
+"riskLevel"
+).innerHTML =
+"AI Threat Level™: " + level;
+
+document.getElementById(
+"riskText"
+).innerHTML =
+
+`
+Protezione selezionata:
+<strong>${protectionName}</strong>
+
+<br><br>
+
+Esposizione digitale analizzata tramite sistema euristico proprietario AETERNA™ con valutazione preliminare del livello operativo richiesto.
+`;
+
+document.getElementById(
+"finalPrice"
+).innerHTML =
+risk + "€";
+
+}
+
+</script>
 <body>
 
 <div class="container">

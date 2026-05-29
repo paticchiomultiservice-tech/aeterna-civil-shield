@@ -32,10 +32,10 @@ overflow-x:hidden;
 position:fixed;
 width:700px;
 height:700px;
-background:rgba(212,175,55,0.06);
-filter:blur(120px);
-top:-200px;
-right:-200px;
+background:rgba(212,175,55,0.05);
+filter:blur(140px);
+top:-250px;
+right:-250px;
 z-index:0;
 
 }
@@ -57,6 +57,8 @@ position:sticky;
 top:0;
 z-index:10;
 
+backdrop-filter:blur(10px);
+
 }
 
 .logo-area{
@@ -69,16 +71,16 @@ gap:15px;
 
 .logo{
 
-width:65px;
-height:65px;
+width:70px;
+height:70px;
 
-border-radius:18px;
+border-radius:20px;
 
 border:2px solid #d4af37;
 
 overflow:hidden;
 
-box-shadow:0 0 20px rgba(212,175,55,0.2);
+box-shadow:0 0 25px rgba(212,175,55,0.25);
 
 }
 
@@ -92,7 +94,7 @@ object-fit:cover;
 
 .brand{
 
-font-size:24px;
+font-size:25px;
 font-weight:bold;
 color:#d4af37;
 
@@ -108,7 +110,7 @@ margin-top:4px;
 
 .hero{
 
-max-width:1200px;
+max-width:1300px;
 margin:auto;
 
 padding:70px 25px;
@@ -131,19 +133,19 @@ background:#0b0b0b;
 
 border:1px solid rgba(212,175,55,0.15);
 
-border-radius:30px;
+border-radius:32px;
 
-padding:35px;
+padding:38px;
 
-box-shadow:0 0 40px rgba(212,175,55,0.08);
+box-shadow:0 0 45px rgba(212,175,55,0.08);
 
 }
 
 .main-title{
 
-font-size:52px;
+font-size:54px;
 line-height:1.2;
-margin-bottom:20px;
+margin-bottom:25px;
 
 color:#d4af37;
 
@@ -173,11 +175,21 @@ margin-top:25px;
 
 background:#121212;
 
-padding:20px;
+padding:22px;
 
-border-radius:18px;
+border-radius:20px;
 
 border:1px solid #1f1f1f;
+
+transition:0.3s;
+
+}
+
+.feature:hover{
+
+transform:translateY(-3px);
+
+border:1px solid rgba(212,175,55,0.25);
 
 }
 
@@ -194,16 +206,103 @@ font-weight:bold;
 
 color:#999;
 font-size:14px;
-line-height:1.6;
+line-height:1.7;
+
+}
+
+.payment-box{
+
+margin-top:35px;
+
+padding:30px;
+
+background:#111;
+
+border-radius:25px;
+
+border:1px solid rgba(212,175,55,0.18);
+
+box-shadow:0 0 30px rgba(212,175,55,0.06);
+
+}
+
+.payment-title{
+
+color:#d4af37;
+
+font-size:24px;
+
+margin-bottom:22px;
+
+}
+
+.payment-text{
+
+color:#c5c5c5;
+
+line-height:1.9;
+
+font-size:15px;
+
+}
+
+.highlight{
+
+color:#d4af37;
+font-weight:bold;
+
+}
+
+.cyber-status{
+
+margin-top:35px;
+
+padding:22px;
+
+border-radius:20px;
+
+background:#070707;
+
+border:1px solid #1c1c1c;
+
+}
+
+.status-line{
+
+display:flex;
+justify-content:space-between;
+
+padding:14px 0;
+
+border-bottom:1px solid #111;
+
+}
+
+.status-line:last-child{
+
+border:none;
+
+}
+
+.status-name{
+
+color:#888;
+
+}
+
+.status-value{
+
+color:#00ff99;
+font-weight:bold;
 
 }
 
 .form-title{
 
-font-size:30px;
+font-size:32px;
 color:#d4af37;
 
-margin-bottom:25px;
+margin-bottom:28px;
 
 }
 
@@ -236,7 +335,7 @@ textarea:focus{
 
 border:1px solid #d4af37;
 
-box-shadow:0 0 15px rgba(212,175,55,0.15);
+box-shadow:0 0 18px rgba(212,175,55,0.15);
 
 }
 
@@ -275,96 +374,25 @@ button:hover{
 
 transform:scale(1.02);
 
-}
-
-.payment-box{
-
-margin-top:30px;
-
-padding:25px;
-
-background:#111;
-
-border-radius:22px;
-
-border:1px solid rgba(212,175,55,0.2);
+box-shadow:0 0 20px rgba(212,175,55,0.25);
 
 }
 
-.payment-title{
+.notice{
 
-color:#d4af37;
+margin-top:20px;
 
-font-size:22px;
-
-margin-bottom:20px;
-
-}
-
-.payment-text{
-
-color:#bdbdbd;
-
-line-height:1.9;
-
-font-size:15px;
-
-}
-
-.highlight{
-
-color:#d4af37;
-font-weight:bold;
-
-}
-
-.cyber-status{
-
-margin-top:35px;
-
-padding:20px;
-
-border-radius:18px;
-
-background:#070707;
-
-border:1px solid #1c1c1c;
-
-}
-
-.status-line{
-
-display:flex;
-justify-content:space-between;
-
-padding:12px 0;
-
-border-bottom:1px solid #111;
-
-}
-
-.status-line:last-child{
-
-border:none;
-
-}
-
-.status-name{
+font-size:13px;
 
 color:#888;
 
-}
-
-.status-value{
-
-color:#00ff99;
-font-weight:bold;
+line-height:1.8;
 
 }
 
 .footer{
 
-margin-top:60px;
+margin-top:70px;
 
 text-align:center;
 
@@ -372,9 +400,13 @@ font-size:12px;
 
 color:#666;
 
-line-height:1.9;
+line-height:2;
 
-padding-bottom:40px;
+padding-bottom:50px;
+
+max-width:1000px;
+margin-left:auto;
+margin-right:auto;
 
 }
 
@@ -395,6 +427,12 @@ font-size:38px;
 .topbar{
 
 padding:20px;
+
+}
+
+.brand{
+
+font-size:20px;
 
 }
 
@@ -451,7 +489,7 @@ Against Digital Threats
 
 <div class="description">
 
-AETERNA Civil Shield™ è una piattaforma avanzata di analisi cyber progettata per identificare possibili truffe digitali, phishing, richieste sospette, tentativi di manipolazione psicologica e contenuti potenzialmente dannosi attraverso motori euristici e sistemi di rilevamento intelligente.
+AETERNA Civil Shield™ è una piattaforma avanzata di analisi cyber progettata per identificare possibili truffe digitali, phishing, richieste sospette, manipolazioni economiche, social engineering e contenuti potenzialmente dannosi tramite motori euristici intelligenti e sistemi dinamici di rilevamento rischio.
 
 </div>
 
@@ -464,7 +502,7 @@ Scam Detection
 </div>
 
 <div class="feature-text">
-Analisi avanzata di messaggi sospetti, phishing e richieste fraudolente.
+Analisi di messaggi sospetti, phishing, richieste fraudolente e comunicazioni manipolative.
 </div>
 
 </div>
@@ -476,7 +514,7 @@ AI Risk Engine
 </div>
 
 <div class="feature-text">
-Sistema dinamico di valutazione rischio basato su pattern cyber.
+Sistema avanzato di valutazione rischio basato su pattern cyber comportamentali.
 </div>
 
 </div>
@@ -488,7 +526,7 @@ Threat Intelligence
 </div>
 
 <div class="feature-text">
-Rilevamento indicatori di rischio economico e sociale.
+Rilevamento automatico di indicatori economici, sociali e digitali sospetti.
 </div>
 
 </div>
@@ -496,11 +534,11 @@ Rilevamento indicatori di rischio economico e sociale.
 <div class="feature">
 
 <div class="feature-title">
-Premium Access
+Premium Protection
 </div>
 
 <div class="feature-text">
-Accesso riservato ai sistemi avanzati AETERNA™.
+Accesso riservato ai servizi avanzati AETERNA™ e supporto Guardian™.
 </div>
 
 </div>
@@ -515,24 +553,36 @@ Accesso Scanner Premium™
 
 <div class="payment-text">
 
-Per ricevere il link personale con <span class="highlight">1 scansione premium disponibile</span>,
+Per ricevere il link personale con
+<span class="highlight">1 scansione premium disponibile</span>,
 effettua un contributo di
-<span class="highlight">1.99€</span> tramite bonifico.
+<span class="highlight">0.99€</span> tramite bonifico.
+
+<br><br>
+
+<strong>Beneficiario:</strong><br>
+Andrea Paticchio
 
 <br><br>
 
 <strong>IBAN:</strong><br>
-TUO_IBAN_QUI
+IT72Q0306979272100000007248
 
 <br><br>
 
 <strong>Causale:</strong><br>
 ACCESSO AETERNA CIVIL SHIELD™
 
+</div>
+
+<div class="notice">
+
+Dopo il pagamento inviare conferma tramite email.
+L’accesso verrà verificato manualmente dal team AETERNA™.
+
 <br><br>
 
-Dopo il pagamento invia conferma tramite email.
-Il team AETERNA™ verificherà il contributo e invierà il link ufficiale personale per accedere al sistema.
+Dopo la verifica del pagamento il cliente potrà essere contattato entro 24 ore da un Guardian AETERNA™ per l’accesso ai servizi riservati.
 
 </div>
 
@@ -623,38 +673,16 @@ placeholder="Descrivi richiesta, problema o attività sospetta..."></textarea>
 <button type="submit">
 
 INVIA RICHIESTA
-<div style="margin-top:40px;padding:25px;background:#111;border:1px solid #d4af37;border-radius:15px;">
 
-<h2 style="color:#d4af37;">
-Accesso Scanner Premium™
-</h2>
-
-<p style="line-height:1.8;color:#ccc;">
-
-Per ricevere l’accesso temporaneo ad AETERNA Civil Shield™
-effettua un contributo di <strong>3.99€</strong> tramite bonifico.
-
-<br><br>
-
-<strong>IBAN:</strong><br>
-IT72Q0306979272100000007248
-
-<br><br>
-
-<strong>Causale:</strong><br>
-ACCESSO AETERNA CIVIL SHIELD™
-
-<br><br>
-
-Dopo il pagamento invia conferma via email.
-Riceverai il link personale con 1 scansione disponibile.
-
-</p>
-
-</div>
 </button>
 
 </form>
+
+<div class="notice">
+
+Il team AETERNA™ analizzerà la richiesta e potrà contattarti per ulteriori verifiche operative o per l’accesso ai servizi premium disponibili.
+
+</div>
 
 </div>
 

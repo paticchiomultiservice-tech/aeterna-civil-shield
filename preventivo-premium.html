@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AETERNA Guardian Dashboard™</title>
+
+<link rel="icon" type="image/png" href="./nuovologo.png">
+
+<style>
+
+body{
+margin:0;
+background:#030303;
+font-family:Arial,sans-serif;
+color:white;
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:40px;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:40px;
+}
+
+.logo-area{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.logo{
+width:85px;
+height:85px;
+border-radius:24px;
+overflow:hidden;
+border:2px solid #d4af37;
+}
+
+.logo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.brand{
+font-size:30px;
+font-weight:bold;
+color:#d4af37;
+}
+
+.status{
+font-size:13px;
+color:#00ff99;
+margin-top:5px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+.card{
+background:#0b0b0b;
+padding:35px;
+border-radius:30px;
+border:1px solid rgba(212,175,55,0.15);
+box-shadow:0 0 35px rgba(212,175,55,0.08);
+}
+
+.title{
+font-size:34px;
+color:#d4af37;
+margin-bottom:25px;
+}
+
+input,select,textarea{
+width:100%;
+padding:18px;
+margin-bottom:18px;
+background:#050505;
+border:1px solid #1f1f1f;
+border-radius:18px;
+color:white;
+font-size:15px;
+}
+
+textarea{
+height:160px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:18px;
+background:#d4af37;
+color:black;
+font-weight:bold;
+font-size:16px;
+border:none;
+border-radius:18px;
+cursor:pointer;
+}
+
+.result{
+margin-top:25px;
+padding:30px;
+background:#111;
+border-radius:25px;
+display:none;
+}
+
+.price{
+font-size:45px;
+color:#00ff99;
+font-weight:bold;
+margin-top:20px;
+}
+
+.box{
+background:#111;
+padding:20px;
+border-radius:20px;
+margin-bottom:18px;
+}
+
+.box-title{
+color:#d4af37;
+margin-bottom:10px;
+font-weight:bold;
+}
+
+.box-text{
+color:#aaa;
+line-height:1.7;
+font-size:14px;
+}
+
+.footer{
+margin-top:50px;
+font-size:12px;
+color:#666;
+text-align:center;
+line-height:1.9;
+}
+
+@media(max-width:950px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="topbar">
+
+<div class="logo-area">
+
+<div class="logo">
+<img src="./nuovologo.png">
+</div>
+
+<div>
+
+<div class="brand">
+AETERNA Guardian Dashboard™
+</div>
+
+<div class="status">
+PREMIUM INTERNAL SYSTEM ACTIVE
+</div>
+
+</div>
+
+</div>
+
+<div style="color:#00ff99;">
+ONLINE
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="title">
+Preventivo Premium Interno™
+</div>
+
+<input type="text" id="cliente"
+placeholder="Cliente">
+
+<select id="servizio">
+
+<option value="90">
+Cyber Audit
+</option>
+
+<option value="150">
+Premium Intelligence
+</option>
+
+<option value="250">
+Guardian Protection
+</option>
+
+<option value="500">
+Elite Investigation
+</option>
+
+</select>
+
+<select id="urgenza">
+
+<option value="0">
+Normale
+</option>
+
+<option value="80">
+Urgente
+</option>
+
+<option value="150">
+Massima Priorità
+</option>
+
+</select>
+
+<textarea id="note"
+placeholder="Note operative interne..."></textarea>
+
+<button onclick="calcola()">
+
+CALCOLA PREVENTIVO
+
+</button>
+
+<div class="result" id="result">
+
+<div id="livello"></div>
+
+<div class="price" id="totale"></div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="title">
+Guardian Intelligence™
+</div>
+
+<div class="box">
+
+<div class="box-title">
+Sistema Premium
+</div>
+
+<div class="box-text">
+Dashboard privata per simulazioni preventivi e valutazioni premium AETERNA™.
+</div>
+
+</div>
+
+<div class="box">
+
+<div class="box-title">
+Livelli Cliente
+</div>
+
+<div class="box-text">
+Bronze™ • Silver™ • Gold™ • Guardian™ • Elite™
+</div>
+
+</div>
+
+<div class="box">
+
+<div class="box-title">
+Modalità Operativa
+</div>
+
+<div class="box-text">
+Uso interno illimitato senza vincoli pubblici.
+</div>
+
+</div>
+
+<div class="box">
+
+<div class="box-title">
+Espansioni Future
+</div>
+
+<div class="box-text">
+CRM • Database • AI Risk • Analytics • Guardian Network™
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+AETERNA Internal Guardian System™ • Proprietary Infrastructure
+
+</div>
+
+</div>
+
+<script>
+
+function calcola(){
+
+const servizio =
+parseInt(document.getElementById("servizio").value);
+
+const urgenza =
+parseInt(document.getElementById("urgenza").value);
+
+let totale =
+servizio + urgenza;
+
+let livello = "Bronze™";
+
+if(totale >= 200){
+livello = "Silver™";
+}
+
+if(totale >= 350){
+livello = "Gold™";
+}
+
+if(totale >= 500){
+livello = "Guardian™";
+}
+
+if(totale >= 700){
+livello = "Elite™";
+}
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("livello").innerHTML =
+"<h2>Livello Cliente: " + livello + "</h2>";
+
+document.getElementById("totale").innerHTML =
+totale + "€";
+
+}
+
+</script>
+
+</body>
+</html>

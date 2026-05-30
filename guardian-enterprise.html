@@ -1468,47 +1468,46 @@ ${protectionDescription}
 
 function completeOnboarding(){
 
-let nome =
-document.getElementById("nome").value;
+const dati = {
 
-let email =
-document.getElementById("email").value;
+nome: document.getElementById("nome").value || "",
+email: document.getElementById("email").value || "",
+telefono: document.getElementById("telefono").value || "",
+cliente: document.getElementById("cliente").value || "",
+pacchetto: protectionName,
+totale: totalPrice.toFixed(2) + "€",
+rischio: document.getElementById("riskLevel").innerText,
+note: document.getElementById("note").value || ""
 
-let subject =
-encodeURIComponent(
-"AETERNA Guardian Request™"
-);
+};
 
-let body =
-encodeURIComponent(
-
-`
-Nuova richiesta AETERNA™
-
-Cliente: ${nome}
-
-Email: ${email}
-
-Pacchetto:
-${protectionName}
-
-Totale:
-${totalPrice.toFixed(2)}€
-
-Il cliente ha completato il preventivo operativo.
-`
-
-);
-
-window.location.href =
-
-`mailto:info@aeternadigitallegacy.com?subject=${subject}&body=${body}`;
+fetch(
+"https://script.google.com/macros/s/AKfycbwXgJmz2HDhukJTixDSC0YkW6EPWI-SdAYEnGK8lXgNfXfFkxeCXH3eCBtEGd1Xnc3RYQ/exec",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(dati)
+}
+)
+.then(response=>response.text())
+.then(result=>{
 
 alert(
-
-"Preventivo generato correttamente. Dopo verifica operativa del pagamento il cliente verrà contattato entro 24 ore."
-
+"Richiesta inviata correttamente. Il preventivo è stato registrato nei sistemi AETERNA™."
 );
+
+})
+.catch(error=>{
+
+alert(
+"Errore di invio. Riprovare tra qualche minuto."
+);
+
+console.error(error);
+
+});
 
 }
 

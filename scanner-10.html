@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>AETERNA Civil Shield™ | 10 Scansioni Final</title>
+<title>AETERNA Civil Shield™ | 10 Scansioni Stable</title>
 
 <link rel="icon" type="image/png" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=final-logo-1">
 <link rel="apple-touch-icon" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=final-logo-1">
@@ -622,7 +622,7 @@ button:disabled{
     </div>
     <div>
       <div class="brand">AETERNA Civil Shield™</div>
-      <div class="status">10 SCANSIONI TOKENIZZATE FINAL</div>
+      <div class="status">10 SCANSIONI TOKENIZZATE STABLE STABLE</div>
     </div>
   </div>
 
@@ -673,9 +673,20 @@ button:disabled{
   <aside class="sidebar">
     <div class="panel">
       <h3>Accesso Scanner™</h3>
-      <div class="access-status ok" id="accessBox">
-        <strong>10 scansioni tokenizzate attivo.</strong><br>
-        Versione clienti occasionali: 10 scansioni Civil Shield™ a 2,99€, senza scadenza temporale.
+      <div class="access-status warn" id="accessBox">
+        <strong>Verifica accesso in corso...</strong><br>
+        Inserisci l'email cliente associata al token.
+      </div>
+
+      <div class="token-box">
+        <div>
+          <label for="customerEmail">Email cliente</label>
+          <input id="customerEmail" type="email" placeholder="email usata per l'acquisto">
+        </div>
+        <button id="verifyTokenButton" class="btn-secondary" type="button">VERIFICA ACCESSO</button>
+        <div class="token-small">
+          Il token funziona solo con l'email associata. Le scansioni non hanno scadenza temporale.
+        </div>
       </div>
     </div>
 
@@ -872,6 +883,7 @@ const ACCESS_MODE = "token";
 const TOKEN_API_URL = "https://script.google.com/macros/s/AKfycbzvOWD8IydyrqAZOGwgtlHq65v1jPZQMr0XYp6VgC1jnHHbnJKLjpxlLW0fQMVFO5NyIg/exec";
 
 let accessReady = false;
+let currentAuthorizedEmail = "";
 let activeScanType = "message";
 let uploadedFile = null;
 let extractedOcrText = "";
@@ -961,8 +973,8 @@ function getTokenFromUrl(){
 function getCustomerEmail(){
   const token = getTokenFromUrl();
   const inputEmail = $("customerEmail") ? $("customerEmail").value.trim().toLowerCase() : "";
-  const savedEmail = token ? (localStorage.getItem("civilShieldEmail_" + token) || "") : "";
-  return inputEmail || savedEmail;
+  const savedEmail = token ? (localStorage.getItem("civilShieldEmail_" + token) || "").trim().toLowerCase() : "";
+  return inputEmail || currentAuthorizedEmail || savedEmail;
 }
 
 function saveCustomerEmail(email){
@@ -1022,6 +1034,7 @@ async function checkAccessStatus(){
 
   if(!token){
     accessReady = false;
+    currentAuthorizedEmail = "";
     $("accessBox").className = "access-status danger";
     $("accessBox").innerHTML = "<strong>Token mancante.</strong><br>Apri lo scanner dal link personale ricevuto dopo l'acquisto.";
     $("scanButton").disabled = true;
@@ -1040,6 +1053,7 @@ async function checkAccessStatus(){
 
     if(!data.ok){
       accessReady = false;
+      currentAuthorizedEmail = "";
       $("accessBox").className = "access-status danger";
       $("accessBox").innerHTML = "<strong>Accesso non disponibile.</strong><br>" + escapeHtml(data.error || "Token non valido.");
       $("scanButton").disabled = true;
@@ -1047,15 +1061,11 @@ async function checkAccessStatus(){
     }
 
     const boundEmail = String(data.customerEmail || "").trim().toLowerCase();
-    const chosenEmail = boundEmail || email;
-
-    if(chosenEmail && $("customerEmail")){
-      $("customerEmail").value = chosenEmail;
-      saveCustomerEmail(chosenEmail);
-    }
+    const selectedEmail = boundEmail || email;
 
     if(Number(data.remaining) <= 0){
       accessReady = false;
+      currentAuthorizedEmail = selectedEmail || "";
       $("scanButton").disabled = true;
       $("accessBox").className = "access-status danger";
       $("accessBox").innerHTML =
@@ -1064,18 +1074,26 @@ async function checkAccessStatus(){
       return;
     }
 
-    if(!chosenEmail || !chosenEmail.includes("@")){
+    if(!selectedEmail || !selectedEmail.includes("@")){
       accessReady = false;
+      currentAuthorizedEmail = "";
       $("scanButton").disabled = true;
       $("accessBox").className = "access-status warn";
       $("accessBox").innerHTML =
         "<strong>Token valido.</strong><br>" +
         "Scansioni disponibili: <strong>" + data.remaining + "</strong> / " + data.total + "<br>" +
-        "Inserisci l'email cliente nel campo qui sotto e clicca <strong>VERIFICA ACCESSO</strong>.";
+        "Inserisci l'email cliente e clicca <strong>VERIFICA ACCESSO</strong>.";
       if($("customerEmail")){
         $("customerEmail").focus();
       }
       return;
+    }
+
+    currentAuthorizedEmail = selectedEmail;
+    saveCustomerEmail(selectedEmail);
+
+    if($("customerEmail")){
+      $("customerEmail").value = selectedEmail;
     }
 
     accessReady = true;
@@ -1084,12 +1102,13 @@ async function checkAccessStatus(){
     $("accessBox").className = "access-status ok";
     $("accessBox").innerHTML =
       "<strong>Accesso Civil Shield™ attivo.</strong><br>" +
-      "Email associata: <strong>" + escapeHtml(chosenEmail) + "</strong><br>" +
+      "Email associata: <strong>" + escapeHtml(selectedEmail) + "</strong><br>" +
       "Scansioni disponibili: <strong>" + data.remaining + "</strong> / " + data.total + "<br>" +
       "Le scansioni non hanno scadenza temporale.";
 
   } catch(error){
     accessReady = false;
+    currentAuthorizedEmail = "";
     $("accessBox").className = "access-status danger";
     $("accessBox").innerHTML =
       "<strong>Token gateway non raggiungibile.</strong><br>" +
@@ -1108,12 +1127,24 @@ async function consumeScanCredit(){
   }
 
   if(!email || !email.includes("@")){
-    alert("Inserisci l'email cliente, poi clicca VERIFICA ACCESSO prima di avviare la scansione.");
+    alert("Email cliente non rilevata. Inserisci l'email e clicca VERIFICA ACCESSO.");
+    accessReady = false;
+    currentAuthorizedEmail = "";
+    $("scanButton").disabled = true;
     if($("customerEmail")){
       $("customerEmail").focus();
     }
-    accessReady = false;
-    $("scanButton").disabled = true;
+    return false;
+  }
+
+  if(!accessReady || !currentAuthorizedEmail){
+    await checkAccessStatus();
+  }
+
+  const finalEmail = getCustomerEmail();
+
+  if(!accessReady || !finalEmail || !finalEmail.includes("@")){
+    alert("Accesso non ancora verificato. Clicca VERIFICA ACCESSO e poi avvia la scansione.");
     return false;
   }
 
@@ -1121,7 +1152,7 @@ async function consumeScanCredit(){
     const data = await jsonp(TOKEN_API_URL, {
       action: "consume",
       token: token,
-      email: email
+      email: finalEmail
     });
 
     if(!data.ok){
@@ -1130,12 +1161,17 @@ async function consumeScanCredit(){
       return false;
     }
 
-    saveCustomerEmail(email);
+    currentAuthorizedEmail = finalEmail;
+    saveCustomerEmail(finalEmail);
+
+    if($("customerEmail")){
+      $("customerEmail").value = finalEmail;
+    }
 
     $("accessBox").className = "access-status ok";
     $("accessBox").innerHTML =
       "<strong>Scansione autorizzata.</strong><br>" +
-      "Email associata: <strong>" + escapeHtml(email) + "</strong><br>" +
+      "Email associata: <strong>" + escapeHtml(finalEmail) + "</strong><br>" +
       "Scansioni rimanenti: <strong>" + data.remaining + "</strong> / " + data.total + "<br>" +
       "Le scansioni non hanno scadenza temporale.";
 
@@ -1622,6 +1658,24 @@ function resetScanner(){
   extractedOcrText = "";
   ocrPromise = null;
   lastResult = null;
+
+
+  if($("verifyTokenButton")){
+    $("verifyTokenButton").addEventListener("click", checkAccessStatus);
+  }
+
+  if($("customerEmail")){
+    const token = getTokenFromUrl();
+    const savedEmail = token ? (localStorage.getItem("civilShieldEmail_" + token) || "") : "";
+    if(savedEmail && !$("customerEmail").value){
+      $("customerEmail").value = savedEmail;
+    }
+    $("customerEmail").addEventListener("change", function(){
+      currentAuthorizedEmail = "";
+      accessReady = false;
+      checkAccessStatus();
+    });
+  }
 
   setScanType("message");
 }

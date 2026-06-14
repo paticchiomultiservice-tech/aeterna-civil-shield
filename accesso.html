@@ -1,700 +1,686 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AETERNA Civil Shield™ Access</title>
-
-<link rel="icon" type="image/png" href="./nuovologo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AETERNA Civil Shield™ | Accesso Scanner</title>
+<link rel="icon" type="image/png" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=accesso-final-1">
+<link rel="apple-touch-icon" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=accesso-final-1">
 
 <style>
-
+:root{
+  --gold:#d4af37;
+  --gold2:#f3d77c;
+  --bg:#030303;
+  --panel:#0b0b0b;
+  --panel2:#111;
+  --line:rgba(212,175,55,.18);
+  --muted:#bdbdbd;
+  --green:#00ff99;
+  --red:#ff4444;
+  --yellow:#ffcc00;
+}
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
-
+html{
+  scroll-behavior:smooth;
+}
 body{
-
-background:#030303;
-font-family:Arial,sans-serif;
-color:white;
-overflow-x:hidden;
-
+  background:var(--bg);
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  overflow-x:hidden;
 }
-
-.background-glow{
-
-position:fixed;
-width:700px;
-height:700px;
-background:rgba(212,175,55,0.05);
-filter:blur(140px);
-top:-250px;
-right:-250px;
-z-index:0;
-
+body::before{
+  content:"";
+  position:fixed;
+  top:-420px;
+  right:-420px;
+  width:1050px;
+  height:1050px;
+  background:rgba(212,175,55,.06);
+  filter:blur(220px);
+  pointer-events:none;
+  z-index:0;
 }
-
+body::after{
+  content:"";
+  position:fixed;
+  bottom:-420px;
+  left:-360px;
+  width:880px;
+  height:880px;
+  background:rgba(255,68,68,.045);
+  filter:blur(220px);
+  pointer-events:none;
+  z-index:0;
+}
+.container{
+  max-width:1240px;
+  margin:0 auto;
+  padding:34px 22px 70px;
+  position:relative;
+  z-index:1;
+}
 .topbar{
-
-width:100%;
-padding:20px 40px;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-border-bottom:1px solid rgba(212,175,55,0.15);
-
-background:#050505;
-
-position:sticky;
-top:0;
-z-index:10;
-
-backdrop-filter:blur(10px);
-
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  flex-wrap:wrap;
+  margin-bottom:32px;
 }
-
 .logo-area{
-
-display:flex;
-align-items:center;
-gap:15px;
-
+  display:flex;
+  align-items:center;
+  gap:16px;
 }
-
-.logo{
-
-width:70px;
-height:70px;
-
-border-radius:20px;
-
-border:2px solid #d4af37;
-
-overflow:hidden;
-
-box-shadow:0 0 25px rgba(212,175,55,0.25);
-
+.logo-shell{
+  width:82px;
+  height:82px;
+  border-radius:24px;
+  border:2px solid var(--gold);
+  background:#070707;
+  box-shadow:0 0 42px rgba(212,175,55,.22);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  flex:0 0 auto;
 }
-
-.logo img{
-
-width:100%;
-height:100%;
-object-fit:cover;
-
+.logo-shell img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:7px;
+  display:block;
 }
-
+.logo-fallback{
+  display:none;
+  position:absolute;
+  inset:0;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-size:44px;
+  font-weight:1000;
+}
 .brand{
-
-font-size:25px;
-font-weight:bold;
-color:#d4af37;
-
+  font-size:33px;
+  line-height:1.05;
+  font-weight:950;
+  color:var(--gold);
+  letter-spacing:-.6px;
 }
-
 .status{
-
-font-size:13px;
-color:#00ff99;
-margin-top:4px;
-
+  margin-top:8px;
+  color:var(--green);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:1.4px;
 }
-
-.hero{
-
-max-width:1300px;
-margin:auto;
-
-padding:70px 25px;
-position:relative;
-z-index:1;
-
+.badges{
+  display:flex;
+  gap:11px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
 }
-
-.hero-grid{
-
-display:grid;
-grid-template-columns:1.1fr 0.9fr;
-gap:35px;
-
+.badge{
+  padding:11px 15px;
+  background:#0b0b0b;
+  border:1px solid rgba(212,175,55,.16);
+  border-radius:18px;
+  color:#d9d9d9;
+  font-size:13px;
 }
-
+.badge strong{
+  color:var(--gold);
+}
 .card{
-
-background:#0b0b0b;
-
-border:1px solid rgba(212,175,55,0.15);
-
-border-radius:32px;
-
-padding:38px;
-
-box-shadow:0 0 45px rgba(212,175,55,0.08);
-
+  background:linear-gradient(145deg,#0b0b0b,#070707);
+  border:1px solid rgba(212,175,55,.14);
+  box-shadow:0 0 55px rgba(212,175,55,.07);
+  border-radius:34px;
 }
-
-.main-title{
-
-font-size:54px;
-line-height:1.2;
-margin-bottom:25px;
-
-color:#d4af37;
-
+.hero{
+  padding:40px;
+  margin-bottom:24px;
 }
-
-.description{
-
-color:#bdbdbd;
-line-height:1.9;
-font-size:17px;
-
-margin-bottom:35px;
-
+.kicker{
+  color:var(--green);
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:1.8px;
+  font-weight:850;
+  margin-bottom:14px;
 }
-
-.feature-box{
-
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px;
-
-margin-top:25px;
-
+h1{
+  color:var(--gold);
+  font-size:56px;
+  line-height:1.06;
+  letter-spacing:-1.8px;
+  margin-bottom:20px;
 }
-
-.feature{
-
-background:#121212;
-
-padding:22px;
-
-border-radius:20px;
-
-border:1px solid #1f1f1f;
-
-transition:0.3s;
-
+.lead{
+  color:var(--muted);
+  line-height:1.9;
+  font-size:16px;
+  max-width:970px;
 }
-
-.feature:hover{
-
-transform:translateY(-3px);
-
-border:1px solid rgba(212,175,55,0.25);
-
+.hero-note{
+  margin-top:22px;
+  padding:18px;
+  border-radius:22px;
+  background:rgba(212,175,55,.07);
+  border:1px solid rgba(212,175,55,.16);
+  color:#e7d79e;
+  line-height:1.75;
+  font-size:14px;
 }
-
-.feature-title{
-
-color:#d4af37;
-font-size:15px;
-margin-bottom:10px;
-font-weight:bold;
-
+.paths{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+  margin-bottom:24px;
 }
-
-.feature-text{
-
-color:#999;
-font-size:14px;
-line-height:1.7;
-
+.path{
+  padding:30px;
 }
-
-.payment-box{
-
-margin-top:35px;
-
-padding:30px;
-
-background:#111;
-
-border-radius:25px;
-
-border:1px solid rgba(212,175,55,0.18);
-
-box-shadow:0 0 30px rgba(212,175,55,0.06);
-
+.path h2{
+  color:var(--gold);
+  font-size:30px;
+  margin-bottom:13px;
+  letter-spacing:-.5px;
 }
-
-.payment-title{
-
-color:#d4af37;
-
-font-size:24px;
-
-margin-bottom:22px;
-
+.path p{
+  color:#bcbcbc;
+  line-height:1.8;
+  font-size:14.5px;
+  margin-bottom:18px;
 }
-
-.payment-text{
-
-color:#c5c5c5;
-
-line-height:1.9;
-
-font-size:15px;
-
+.price{
+  font-size:46px;
+  color:#fff;
+  font-weight:1000;
+  margin:10px 0 4px;
 }
-
-.highlight{
-
-color:#d4af37;
-font-weight:bold;
-
+.price span{
+  color:var(--gold);
 }
-
-.cyber-status{
-
-margin-top:35px;
-
-padding:22px;
-
-border-radius:20px;
-
-background:#070707;
-
-border:1px solid #1c1c1c;
-
+.small{
+  color:#8f8f8f;
+  font-size:12.5px;
+  line-height:1.65;
 }
-
-.status-line{
-
-display:flex;
-justify-content:space-between;
-
-padding:14px 0;
-
-border-bottom:1px solid #111;
-
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  border:none;
+  border-radius:18px;
+  padding:16px 20px;
+  min-height:54px;
+  font-weight:950;
+  font-size:15px;
+  cursor:pointer;
+  transition:.22s;
+  width:100%;
+  text-align:center;
 }
-
-.status-line:last-child{
-
-border:none;
-
+.btn:hover{
+  transform:scale(1.012);
 }
-
-.status-name{
-
-color:#888;
-
+.btn-primary{
+  background:var(--gold);
+  color:#000;
 }
-
-.status-value{
-
-color:#00ff99;
-font-weight:bold;
-
+.btn-secondary{
+  color:var(--gold);
+  background:#111;
+  border:1px solid rgba(212,175,55,.25);
 }
-
-.form-title{
-
-font-size:32px;
-color:#d4af37;
-
-margin-bottom:28px;
-
+.btn-danger{
+  color:#ffdada;
+  background:rgba(255,68,68,.08);
+  border:1px solid rgba(255,68,68,.24);
 }
-
-input,textarea{
-
-width:100%;
-
-padding:18px;
-
-margin-bottom:18px;
-
-background:#050505;
-
-border:1px solid #1f1f1f;
-
-border-radius:18px;
-
-color:white;
-
-font-size:15px;
-
-outline:none;
-
-transition:0.3s;
-
+.workflow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:24px;
 }
-
-input:focus,
-textarea:focus{
-
-border:1px solid #d4af37;
-
-box-shadow:0 0 18px rgba(212,175,55,0.15);
-
+.step{
+  padding:20px;
+  border-radius:24px;
+  background:#0d0d0d;
+  border:1px solid rgba(212,175,55,.12);
 }
-
+.step strong{
+  display:block;
+  color:var(--gold);
+  margin-bottom:8px;
+  font-size:16px;
+}
+.step span{
+  color:#aaa;
+  font-size:13.3px;
+  line-height:1.65;
+}
+.form-card{
+  padding:34px;
+  margin-bottom:24px;
+}
+.form-header{
+  max-width:880px;
+  margin-bottom:22px;
+}
+.form-header h2{
+  color:var(--gold);
+  font-size:34px;
+  margin-bottom:10px;
+}
+.form-header p{
+  color:#bdbdbd;
+  line-height:1.78;
+  font-size:14.5px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.field.full{
+  grid-column:1/-1;
+}
+label{
+  display:block;
+  color:var(--gold);
+  font-size:13px;
+  font-weight:850;
+  margin-bottom:8px;
+}
+input, textarea{
+  width:100%;
+  background:#050505;
+  border:1px solid #252525;
+  color:#fff;
+  border-radius:18px;
+  padding:16px;
+  font-size:16px;
+  outline:none;
+}
 textarea{
-
-height:180px;
-resize:none;
-
+  min-height:130px;
+  resize:vertical;
+  line-height:1.6;
 }
-
-button{
-
-width:100%;
-
-padding:18px;
-
-background:#d4af37;
-
-color:black;
-
-font-weight:bold;
-
-font-size:16px;
-
-border:none;
-
-border-radius:18px;
-
-cursor:pointer;
-
-transition:0.3s;
-
+input:focus, textarea:focus{
+  border-color:rgba(212,175,55,.55);
+  box-shadow:0 0 0 3px rgba(212,175,55,.08);
 }
-
-button:hover{
-
-transform:scale(1.02);
-
-box-shadow:0 0 20px rgba(212,175,55,0.25);
-
+.form-actions{
+  margin-top:18px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
 }
-
+.form-actions .btn{
+  flex:1;
+  min-width:240px;
+}
+.alert{
+  display:none;
+  margin-top:18px;
+  padding:16px;
+  border-radius:18px;
+  line-height:1.65;
+  font-size:14px;
+}
+.alert.ok{
+  display:block;
+  border:1px solid rgba(0,255,153,.22);
+  background:rgba(0,255,153,.055);
+  color:#d8ffec;
+}
+.alert.err{
+  display:block;
+  border:1px solid rgba(255,68,68,.26);
+  background:rgba(255,68,68,.07);
+  color:#ffd6d6;
+}
 .notice{
-
-margin-top:20px;
-
-font-size:13px;
-
-color:#888;
-
-line-height:1.8;
-
+  padding:18px;
+  border-radius:22px;
+  background:#0d0d0d;
+  border:1px solid rgba(255,204,0,.18);
+  color:#ddd0a2;
+  line-height:1.75;
+  font-size:14px;
+  margin-top:16px;
 }
-
 .footer{
-
-margin-top:70px;
-
-text-align:center;
-
-font-size:12px;
-
-color:#666;
-
-line-height:2;
-
-padding-bottom:50px;
-
-max-width:1000px;
-margin-left:auto;
-margin-right:auto;
-
+  margin-top:44px;
+  text-align:center;
+  color:#686868;
+  font-size:12px;
+  line-height:1.9;
 }
-
-@media(max-width:950px){
-
-.hero-grid{
-
-grid-template-columns:1fr;
-
+@media(max-width:960px){
+  .paths,.workflow{
+    grid-template-columns:1fr;
+  }
+  h1{
+    font-size:42px;
+  }
 }
-
-.main-title{
-
-font-size:38px;
-
+@media(max-width:680px){
+  .container{
+    padding:24px 14px 58px;
+  }
+  .logo-shell{
+    width:62px;
+    height:62px;
+    border-radius:18px;
+  }
+  .brand{
+    font-size:22px;
+  }
+  .status{
+    font-size:11px;
+  }
+  .badges{
+    justify-content:flex-start;
+  }
+  .hero,.path,.form-card{
+    padding:22px;
+    border-radius:26px;
+  }
+  h1{
+    font-size:35px;
+  }
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+  .price{
+    font-size:40px;
+  }
+  .form-actions{
+    display:grid;
+  }
+  .form-actions .btn{
+    min-width:0;
+  }
 }
-
-.topbar{
-
-padding:20px;
-
-}
-
-.brand{
-
-font-size:20px;
-
-}
-
-}
-
 </style>
-
 </head>
 
 <body>
-
-<div class="background-glow"></div>
-
-<div class="topbar">
-
-<div class="logo-area">
-
-<div class="logo">
-<img src="./nuovologo.png">
-</div>
-
-<div>
-
-<div class="brand">
-AETERNA Civil Shield™
-</div>
-
-<div class="status">
-THREAT INTELLIGENCE ONLINE
-</div>
-
-</div>
-
-</div>
-
-<div style="color:#00ff99;font-size:13px;">
-AI ENGINE ACTIVE
-</div>
-
-</div>
-
-<div class="hero">
-
-<div class="hero-grid">
-
-<div class="card">
-
-<div class="main-title">
-
-Cyber Protection<br>
-Against Digital Threats
-
-</div>
-
-<div class="description">
-
-AETERNA Civil Shield™ è una piattaforma avanzata di analisi cyber progettata per identificare possibili truffe digitali, phishing, richieste sospette, manipolazioni economiche, social engineering e contenuti potenzialmente dannosi tramite motori euristici intelligenti e sistemi dinamici di rilevamento rischio.
-
-</div>
-
-<div class="feature-box">
-
-<div class="feature">
-
-<div class="feature-title">
-Scam Detection
-</div>
-
-<div class="feature-text">
-Analisi di messaggi sospetti, phishing, richieste fraudolente e comunicazioni manipolative.
-</div>
-
-</div>
-
-<div class="feature">
-
-<div class="feature-title">
-AI Risk Engine
-</div>
-
-<div class="feature-text">
-Sistema avanzato di valutazione rischio basato su pattern cyber comportamentali.
-</div>
-
-</div>
-
-<div class="feature">
-
-<div class="feature-title">
-Threat Intelligence
-</div>
-
-<div class="feature-text">
-Rilevamento automatico di indicatori economici, sociali e digitali sospetti.
-</div>
-
-</div>
-
-<div class="feature">
-
-<div class="feature-title">
-Premium Protection
-</div>
-
-<div class="feature-text">
-Accesso riservato ai servizi avanzati AETERNA™ e supporto Guardian™.
-</div>
-
-</div>
-
-</div>
-
-<div class="payment-box">
-
-<div class="payment-title">
-Accesso Scanner Premium™
-</div>
-
-<div class="payment-text">
-
-Per ricevere il link personale con
-<span class="highlight">1 scansione premium disponibile</span>,
-effettua un contributo di
-<span class="highlight">0.99€</span> tramite bonifico.
-
-<br><br>
-
-<strong>Beneficiario:</strong><br>
-Andrea Paticchio
-
-<br><br>
-
-<strong>IBAN:</strong><br>
-IT72Q0306979272100000007248
-
-<br><br>
-
-<strong>Causale:</strong><br>
-ACCESSO AETERNA CIVIL SHIELD™
-
-</div>
-
-<div class="notice">
-
-Dopo il pagamento inviare conferma tramite email.
-L’accesso verrà verificato manualmente dal team AETERNA™.
-
-<br><br>
-
-Dopo la verifica del pagamento il cliente potrà essere contattato entro 24 ore da un Guardian AETERNA™ per l’accesso ai servizi riservati.
-
-</div>
-
-</div>
-
-<div class="cyber-status">
-
-<div class="status-line">
-
-<div class="status-name">
-Threat Engine
-</div>
-
-<div class="status-value">
-ONLINE
-</div>
-
-</div>
-
-<div class="status-line">
-
-<div class="status-name">
-AI Protection
-</div>
-
-<div class="status-value">
-ACTIVE
-</div>
-
-</div>
-
-<div class="status-line">
-
-<div class="status-name">
-Fraud Detection
-</div>
-
-<div class="status-value">
-RUNNING
-</div>
-
-</div>
-
-<div class="status-line">
-
-<div class="status-name">
-Cyber Monitoring
-</div>
-
-<div class="status-value">
-SECURED
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="form-title">
-
-Richiedi Accesso
-AETERNA Civil Shield™
-
-</div>
-
-<form
-action="mailto:info@aeternadigitallegacy.com"
-method="POST"
-enctype="text/plain">
-
-<input
-type="text"
-name="nome"
-placeholder="Nome">
-
-<input
-type="email"
-name="email"
-placeholder="Email">
-
-<textarea
-name="messaggio"
-placeholder="Descrivi richiesta, problema o attività sospetta..."></textarea>
-
-<button type="submit">
-
-INVIA RICHIESTA
-
-</button>
-
-</form>
-
-<div class="notice">
-
-Il team AETERNA™ analizzerà la richiesta e potrà contattarti per ulteriori verifiche operative o per l’accesso ai servizi premium disponibili.
-
-</div>
-
-</div>
-
-</div>
+<div class="container">
+
+<header class="topbar">
+  <div class="logo-area">
+    <div class="logo-shell">
+      <img
+        src="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=accesso-final-1"
+        alt="AETERNA Civil Shield"
+        onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex';"
+      >
+      <div id="logoFallback" class="logo-fallback">A</div>
+    </div>
+    <div>
+      <div class="brand">AETERNA Civil Shield™</div>
+      <div class="status">Scanner Access Gateway</div>
+    </div>
+  </div>
+
+  <div class="badges">
+    <div class="badge"><strong>Nuova offerta:</strong> 10 scansioni</div>
+    <div class="badge"><strong>Prezzo:</strong> 2,99€</div>
+    <div class="badge"><strong>Privacy:</strong> Zero Retention</div>
+  </div>
+</header>
+
+<section class="card hero">
+  <div class="kicker">AETERNA Digital Legacy™</div>
+  <h1>Accesso AETERNA Civil Shield™</h1>
+  <p class="lead">
+    Questa pagina sostituisce la precedente procedura “1 scansione”. 
+    Da ora l’accesso occasionale avviene tramite pacchetto da 10 scansioni a 2,99€,
+    con link personale, token cliente e contatore dedicato.
+  </p>
+  <div class="hero-note">
+    <strong>Accesso corretto:</strong> i clienti occasionali ricevono un link personale con token.
+    Gli abbonati Guardian™ usano il link riservato ricevuto da AETERNA, non il pacchetto da 10 scansioni.
+  </div>
+</section>
+
+<section class="paths">
+  <div class="card path">
+    <h2>Pacchetto 10 scansioni</h2>
+    <p>
+      Per utenti occasionali che vogliono analizzare SMS, email, link, screenshot, presunte multe,
+      notifiche digitali, numeri telefonici, IBAN, fatture o comunicazioni sospette.
+    </p>
+    <div class="price"><span>2,99€</span></div>
+    <div class="small" style="margin-bottom:16px;">
+      Include 10 scansioni. Nessuna scadenza temporale. Accesso con token personale.
+    </div>
+    <a class="btn btn-primary" href="#richiedi-scanner">Richiedi 10 scansioni</a>
+  </div>
+
+  <div class="card path">
+    <h2>Abbonati Guardian™</h2>
+    <p>
+      L’accesso illimitato Civil Shield™ è riservato ai clienti abbonati Guardian™ e al team AETERNA.
+      Per sicurezza non viene pubblicato come link aperto.
+    </p>
+    <a class="btn btn-secondary" href="mailto:info@aeternadigitallegacy.com?subject=Accesso%20abbonato%20Guardian%20Civil%20Shield">
+      Richiedi accesso abbonato
+    </a>
+    <div class="notice">
+      Se sei già abbonato, usa il link personale ricevuto da AETERNA. 
+      Se non lo hai ricevuto, contatta il supporto indicando l’email dell’abbonamento.
+    </div>
+  </div>
+</section>
+
+<section class="workflow">
+  <div class="step">
+    <strong>1. Richiesta</strong>
+    <span>Compili il modulo per il pacchetto 10 scansioni.</span>
+  </div>
+  <div class="step">
+    <strong>2. Pagamento</strong>
+    <span>La richiesta viene registrata come “DA PAGARE”.</span>
+  </div>
+  <div class="step">
+    <strong>3. Token</strong>
+    <span>Dopo pagamento, AETERNA associa il token alla tua email.</span>
+  </div>
+  <div class="step">
+    <strong>4. Link</strong>
+    <span>Ricevi il link personale dello scanner con contatore 10/10.</span>
+  </div>
+</section>
+
+<section class="card form-card" id="richiedi-scanner">
+  <div class="form-header">
+    <h2>Richiedi 10 scansioni Civil Shield™</h2>
+    <p>
+      Il modulo registra la richiesta nel foglio operativo AETERNA. 
+      Dopo la verifica del pagamento riceverai il link personale scanner-10 con token associato alla tua email.
+    </p>
+  </div>
+
+  <form id="orderForm">
+    <div class="form-grid">
+      <div class="field">
+        <label for="nome">Nome e cognome</label>
+        <input id="nome" name="nome" type="text" placeholder="Mario Rossi" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email cliente</label>
+        <input id="email" name="email" type="email" placeholder="cliente@email.com" required>
+      </div>
+
+      <div class="field">
+        <label for="telefono">Telefono</label>
+        <input id="telefono" name="telefono" type="text" placeholder="+39..." autocomplete="tel">
+      </div>
+
+      <div class="field">
+        <label for="prodotto">Prodotto</label>
+        <input id="prodotto" name="prodotto" type="text" value="Civil Shield 10 scansioni" readonly>
+      </div>
+
+      <div class="field full">
+        <label for="note">Note o urgenza della richiesta</label>
+        <textarea id="note" name="note" placeholder="Esempio: devo verificare un SMS sospetto, una multa, un link, una fattura..."></textarea>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button id="submitButton" class="btn btn-primary" type="submit">Invia richiesta 10 scansioni — 2,99€</button>
+      <a class="btn btn-secondary" href="mailto:info@aeternadigitallegacy.com?subject=Richiesta%20Civil%20Shield%2010%20scansioni">
+        Contatta AETERNA
+      </a>
+    </div>
+
+    <div id="orderAlert" class="alert"></div>
+  </form>
+</section>
 
 <div class="footer">
-
-AETERNA Civil Shield™ fornisce analisi probabilistiche basate su pattern euristici, indicatori comportamentali e segnali cyber automatizzati. Il servizio non garantisce certezza assoluta sull’affidabilità o pericolosità dei contenuti analizzati e non sostituisce consulenze professionali legali, investigative o finanziarie. L’utente mantiene piena responsabilità sulle decisioni intraprese in seguito ai risultati forniti dalla piattaforma.
-
+  AETERNA Civil Shield™ fornisce analisi probabilistiche basate su pattern euristici,
+  indicatori comportamentali e segnali cyber automatizzati. Non garantisce certezza assoluta
+  e non sostituisce consulenze professionali legali, investigative, sanitarie o finanziarie.
 </div>
 
 </div>
 
+<script>
+"use strict";
+
+const GATEWAY_URL = "https://script.google.com/macros/s/AKfycbzvOWD8IydyrqAZOGwgtlHq65v1jPZQMr0XYp6VgC1jnHHbnJKLjpxlLW0fQMVFO5NyIg/exec";
+
+function $(id){
+  return document.getElementById(id);
+}
+
+function escapeHtml(value){
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function jsonp(url, params = {}, timeoutMs = 10000){
+  return new Promise((resolve, reject) => {
+    const callbackName = "civilShieldOrderCallback_" + Math.random().toString(36).slice(2);
+    const script = document.createElement("script");
+
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error("Timeout gateway AETERNA"));
+    }, timeoutMs);
+
+    function cleanup(){
+      clearTimeout(timer);
+      delete window[callbackName];
+      if(script.parentNode){
+        script.parentNode.removeChild(script);
+      }
+    }
+
+    window[callbackName] = (data) => {
+      cleanup();
+      resolve(data);
+    };
+
+    const query = new URLSearchParams({
+      ...params,
+      callback: callbackName,
+      _: Date.now().toString()
+    });
+
+    script.onerror = () => {
+      cleanup();
+      reject(new Error("Errore collegamento gateway"));
+    };
+
+    script.src = url + "?" + query.toString();
+    document.body.appendChild(script);
+  });
+}
+
+function showAlert(type, message){
+  const alertBox = $("orderAlert");
+  alertBox.className = "alert " + type;
+  alertBox.innerHTML = message;
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  $("orderForm").addEventListener("submit", async function(event){
+    event.preventDefault();
+
+    const nome = $("nome").value.trim();
+    const email = $("email").value.trim().toLowerCase();
+    const telefono = $("telefono").value.trim();
+    const prodotto = $("prodotto").value.trim();
+    const note = $("note").value.trim();
+
+    if(!nome || !email || !email.includes("@")){
+      showAlert("err", "<strong>Dati mancanti.</strong><br>Inserisci nome ed email valida.");
+      return;
+    }
+
+    $("submitButton").disabled = true;
+    $("submitButton").textContent = "INVIO RICHIESTA...";
+
+    try{
+      const result = await jsonp(GATEWAY_URL, {
+        action: "order",
+        nome: nome,
+        email: email,
+        telefono: telefono,
+        prodotto: prodotto,
+        importo: "2,99",
+        note: note
+      });
+
+      if(!result.ok){
+        showAlert("err", "<strong>Richiesta non registrata.</strong><br>" + escapeHtml(result.error || "Errore sconosciuto."));
+        return;
+      }
+
+      showAlert(
+        "ok",
+        "<strong>Richiesta registrata correttamente.</strong><br>" +
+        "Codice ordine: <strong>" + escapeHtml(result.orderId || "registrato") + "</strong><br>" +
+        "Stato pagamento: <strong>DA PAGARE</strong><br>" +
+        "Dopo il pagamento AETERNA assocerà un token alla tua email e ti invierà il link personale dello scanner."
+      );
+
+      $("orderForm").reset();
+      $("prodotto").value = "Civil Shield 10 scansioni";
+
+    } catch(error){
+      showAlert("err", "<strong>Errore collegamento.</strong><br>" + escapeHtml(error.message));
+    } finally{
+      $("submitButton").disabled = false;
+      $("submitButton").textContent = "Invia richiesta 10 scansioni — 2,99€";
+    }
+  });
+});
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>AETERNA Civil Shield™ | 10 Scansioni</title>
+<title>AETERNA Civil Shield™ | 10 Scansioni Final</title>
 
 <link rel="icon" type="image/png" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=final-logo-1">
 <link rel="apple-touch-icon" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=final-logo-1">
@@ -622,7 +622,7 @@ button:disabled{
     </div>
     <div>
       <div class="brand">AETERNA Civil Shield™</div>
-      <div class="status">10 SCANSIONI TOKENIZZATE</div>
+      <div class="status">10 SCANSIONI TOKENIZZATE FINAL</div>
     </div>
   </div>
 
@@ -1046,22 +1046,13 @@ async function checkAccessStatus(){
       return;
     }
 
-    accessReady = true;
-    $("scanButton").disabled = false;
+    const boundEmail = String(data.customerEmail || "").trim().toLowerCase();
+    const chosenEmail = boundEmail || email;
 
-    if(data.customerEmail && $("customerEmail")){
-      $("customerEmail").value = data.customerEmail;
-      saveCustomerEmail(data.customerEmail);
-    } else if(email && $("customerEmail")){
-      $("customerEmail").value = email;
-      saveCustomerEmail(email);
+    if(chosenEmail && $("customerEmail")){
+      $("customerEmail").value = chosenEmail;
+      saveCustomerEmail(chosenEmail);
     }
-
-    $("accessBox").className = "access-status ok";
-    $("accessBox").innerHTML =
-      "<strong>Accesso Civil Shield™ attivo.</strong><br>" +
-      "Scansioni disponibili: <strong>" + data.remaining + "</strong> / " + data.total + "<br>" +
-      "Le scansioni non hanno scadenza temporale.";
 
     if(Number(data.remaining) <= 0){
       accessReady = false;
@@ -1070,7 +1061,32 @@ async function checkAccessStatus(){
       $("accessBox").innerHTML =
         "<strong>Scansioni esaurite.</strong><br>" +
         "Il pacchetto da 10 scansioni è terminato.";
+      return;
     }
+
+    if(!chosenEmail || !chosenEmail.includes("@")){
+      accessReady = false;
+      $("scanButton").disabled = true;
+      $("accessBox").className = "access-status warn";
+      $("accessBox").innerHTML =
+        "<strong>Token valido.</strong><br>" +
+        "Scansioni disponibili: <strong>" + data.remaining + "</strong> / " + data.total + "<br>" +
+        "Inserisci l'email cliente nel campo qui sotto e clicca <strong>VERIFICA ACCESSO</strong>.";
+      if($("customerEmail")){
+        $("customerEmail").focus();
+      }
+      return;
+    }
+
+    accessReady = true;
+    $("scanButton").disabled = false;
+
+    $("accessBox").className = "access-status ok";
+    $("accessBox").innerHTML =
+      "<strong>Accesso Civil Shield™ attivo.</strong><br>" +
+      "Email associata: <strong>" + escapeHtml(chosenEmail) + "</strong><br>" +
+      "Scansioni disponibili: <strong>" + data.remaining + "</strong> / " + data.total + "<br>" +
+      "Le scansioni non hanno scadenza temporale.";
 
   } catch(error){
     accessReady = false;
@@ -1092,10 +1108,12 @@ async function consumeScanCredit(){
   }
 
   if(!email || !email.includes("@")){
-    alert("Inserisci l'email cliente prima di avviare la scansione.");
+    alert("Inserisci l'email cliente, poi clicca VERIFICA ACCESSO prima di avviare la scansione.");
     if($("customerEmail")){
       $("customerEmail").focus();
     }
+    accessReady = false;
+    $("scanButton").disabled = true;
     return false;
   }
 
@@ -1117,8 +1135,14 @@ async function consumeScanCredit(){
     $("accessBox").className = "access-status ok";
     $("accessBox").innerHTML =
       "<strong>Scansione autorizzata.</strong><br>" +
+      "Email associata: <strong>" + escapeHtml(email) + "</strong><br>" +
       "Scansioni rimanenti: <strong>" + data.remaining + "</strong> / " + data.total + "<br>" +
       "Le scansioni non hanno scadenza temporale.";
+
+    if(Number(data.remaining) <= 0){
+      accessReady = false;
+      $("scanButton").disabled = true;
+    }
 
     return true;
   } catch(error){

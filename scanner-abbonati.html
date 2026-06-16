@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>AETERNA Civil Shield™ | Guardian Illimitato</title>
+<title>AETERNA Civil Shield™ | Guardian Super Finale</title>
 
-<link rel="icon" type="image/png" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=final-logo-1">
-<link rel="apple-touch-icon" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=final-logo-1">
+<link rel="icon" type="image/png" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-super-finale-1">
+<link rel="apple-touch-icon" href="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-super-finale-1">
 
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
@@ -604,9 +604,46 @@ button:disabled{
 }
 
 
-/* AETERNA mobile logo hard-fix */
+.language-panel{
+  margin-bottom:24px;
+  padding:18px;
+  border-radius:24px;
+  background:#0d0d0d;
+  border:1px solid rgba(212,175,55,.18);
+  display:flex;
+  gap:14px;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+.language-panel label{
+  color:var(--gold);
+  font-weight:900;
+  font-size:13px;
+}
+.language-panel select{
+  max-width:260px;
+  min-width:220px;
+}
+.language-note{
+  color:#a8a8a8;
+  font-size:12.5px;
+  line-height:1.6;
+}
+@media(max-width:760px){
+  .language-panel{
+    display:grid;
+  }
+  .language-panel select{
+    max-width:100%;
+    min-width:0;
+  }
+}
+
+
+/* AETERNA mobile logo hard-fix — mantiene multilingua e motore super */
 .logo-shell{
-  background:#070707 url("https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-logo-mobile-fix-2") center/contain no-repeat !important;
+  background:#070707 url("https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-super-finale-1") center/contain no-repeat !important;
   min-width:88px;
   min-height:88px;
 }
@@ -650,7 +687,7 @@ button:disabled{
     <div class="logo-shell" aria-label="Logo AETERNA Civil Shield">
       <img
         id="aeternaLogo"
-        src="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-logo-mobile-fix-2"
+        src="https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-super-finale-1"
         alt="AETERNA Civil Shield"
         loading="eager"
         decoding="async"
@@ -675,7 +712,7 @@ button:disabled{
     </div>
     <div>
       <div class="brand">AETERNA Civil Shield™</div>
-      <div class="status">GUARDIAN ACCESS ILLIMITATO</div>
+      <div class="status">GUARDIAN SUPER FINALE</div>
     </div>
   </div>
 
@@ -688,7 +725,7 @@ button:disabled{
 
 <section class="hero">
   <div class="hero-card">
-    <h1>Scanner Anti-Truffa Evoluto™</h1>
+    <h1><span data-i18n="heroTitle">Scanner Anti-Truffa Evoluto™</span></h1>
     <p>
       Analizza messaggi, SMS, email, link, numeri telefonici, IBAN, richieste di pagamento,
       screenshot, foto, PDF, fatture e comunicazioni sospette con il motore AETERNA Civil Shield™.
@@ -725,7 +762,7 @@ button:disabled{
 <div class="layout">
   <aside class="sidebar">
     <div class="panel">
-      <h3>Accesso Scanner™</h3>
+      <h3><span data-i18n="accessTitle">Accesso Scanner™</span></h3>
       <div class="access-status ok" id="accessBox">
         <strong>Guardian™ illimitato attivo.</strong><br>
         Accesso riservato Guardian™: token personale, email abbonato e scansioni illimitate.
@@ -733,7 +770,7 @@ button:disabled{
     </div>
 
     <div class="panel">
-      <h3>Soglie Rischio™</h3>
+      <h3><span data-i18n="riskThresholds">Soglie Rischio™</span></h3>
       <div class="risk-legend">
         <div class="legend-row"><span>0-24%</span><span class="green">Basso</span></div>
         <div class="legend-row"><span>25-54%</span><span class="yellow">Moderato</span></div>
@@ -743,7 +780,7 @@ button:disabled{
     </div>
 
     <div class="panel">
-      <h3>Zero Retention Policy™</h3>
+      <h3><span data-i18n="zeroRetention">Zero Retention Policy™</span></h3>
       <div class="privacy-list">
         <div>Il motore locale analizza il contenuto nel browser.</div>
         <div>AETERNA non richiede password, OTP, PIN o chiavi private.</div>
@@ -755,10 +792,24 @@ button:disabled{
   </aside>
 
   <main>
+
+<section class="language-panel">
+  <div>
+    <label for="languageSelect" data-i18n="languageLabel">Lingua scanner</label>
+    <div class="language-note" data-i18n="languageNote">Cambia lingua dell’interfaccia. Il motore di rischio resta AETERNA Civil Shield™.</div>
+  </div>
+  <select id="languageSelect">
+    <option value="it">Italiano</option>
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+    <option value="es">Español</option>
+  </select>
+</section>
+
     <section class="scanner-panel">
       <div class="scanner-header">
         <div>
-          <h2>Advanced Scam Analyzer™</h2>
+          <h2><span data-i18n="analyzerTitle">Advanced Scam Analyzer™</span></h2>
           <p>
             Seleziona il tipo di contenuto, incolla il testo o carica una foto/screenshot.
             Lo scanner combina motore locale AETERNA e backend Render, usando sempre il risultato più prudente.
@@ -768,36 +819,36 @@ button:disabled{
 
       <div class="scan-type-grid" id="scanTypeGrid">
         <button type="button" class="scan-type active" data-type="message">
-          <strong>Messaggio</strong>
-          <span>SMS, WhatsApp, Telegram, email, chat.</span>
+          <strong data-i18n="typeMessage">Messaggio</strong>
+          <span data-i18n="typeMessageDesc">SMS, WhatsApp, Telegram, email, chat.</span>
         </button>
         <button type="button" class="scan-type" data-type="link">
-          <strong>Link / URL</strong>
-          <span>Domini, link accorciati, pagine clone.</span>
+          <strong data-i18n="typeLink">Link / URL</strong>
+          <span data-i18n="typeLinkDesc">Domini, link accorciati, pagine clone.</span>
         </button>
         <button type="button" class="scan-type" data-type="payment">
-          <strong>Pagamento</strong>
-          <span>IBAN, fatture, bonifici, rimborsi, multe.</span>
+          <strong data-i18n="typePayment">Pagamento</strong>
+          <span data-i18n="typePaymentDesc">IBAN, fatture, bonifici, rimborsi, multe.</span>
         </button>
         <button type="button" class="scan-type" data-type="image">
-          <strong>Foto / Screenshot</strong>
-          <span>SMS fotografati, QR, profili, documenti.</span>
+          <strong data-i18n="typeImage">Foto / Screenshot</strong>
+          <span data-i18n="typeImageDesc">SMS fotografati, QR, profili, documenti.</span>
         </button>
         <button type="button" class="scan-type" data-type="profile">
-          <strong>Profilo sospetto</strong>
-          <span>Marketplace, social, romance scam, annunci.</span>
+          <strong data-i18n="typeProfile">Profilo sospetto</strong>
+          <span data-i18n="typeProfileDesc">Marketplace, social, romance scam, annunci.</span>
         </button>
         <button type="button" class="scan-type" data-type="document">
-          <strong>Documento</strong>
-          <span>PDF, contratti, finte comunicazioni, allegati.</span>
+          <strong data-i18n="typeDocument">Documento</strong>
+          <span data-i18n="typeDocumentDesc">PDF, contratti, finte comunicazioni, allegati.</span>
         </button>
         <button type="button" class="scan-type" data-type="phone">
-          <strong>Telefono</strong>
-          <span>Numeri da richiamare, call scam, finti uffici.</span>
+          <strong data-i18n="typePhone">Telefono</strong>
+          <span data-i18n="typePhoneDesc">Numeri da richiamare, call scam, finti uffici.</span>
         </button>
         <button type="button" class="scan-type" data-type="audio-video">
-          <strong>Audio / Video</strong>
-          <span>Inserire trascrizione o descrizione.</span>
+          <strong data-i18n="typeAudioVideo">Audio / Video</strong>
+          <span data-i18n="typeAudioVideoDesc">Inserire trascrizione o descrizione.</span>
         </button>
       </div>
 
@@ -820,32 +871,32 @@ button:disabled{
 
       <div class="form-grid">
         <div class="field">
-          <label for="urlInput">Link / dominio sospetto</label>
+          <label for="urlInput" data-i18n="urlLabel">Link / dominio sospetto</label>
           <input id="urlInput" type="text" placeholder="https://... oppure dominio sospetto">
         </div>
 
         <div class="field">
-          <label for="senderInput">Mittente email / nome profilo / ente dichiarato</label>
+          <label for="senderInput" data-i18n="senderLabel">Mittente email / nome profilo / ente dichiarato</label>
           <input id="senderInput" type="text" placeholder="Es. CUP, Comune, banca, corriere, profilo social...">
         </div>
 
         <div class="field">
-          <label for="phoneInput">Numero telefonico indicato</label>
+          <label for="phoneInput" data-i18n="phoneLabel">Numero telefonico indicato</label>
           <input id="phoneInput" type="text" placeholder="Es. +3989342221">
         </div>
 
         <div class="field">
-          <label for="paymentInput">IBAN / pagamento / fattura / richiesta economica</label>
+          <label for="paymentInput" data-i18n="paymentLabel">IBAN / pagamento / fattura / richiesta economica</label>
           <input id="paymentInput" type="text" placeholder="Incolla IBAN, causale, importo o testo pagamento">
         </div>
 
         <div class="field full">
-          <label for="messageInput">Testo da analizzare</label>
+          <label for="messageInput" data-i18n="messageLabel">Testo da analizzare</label>
           <textarea id="messageInput" placeholder="Incolla qui SMS, email, WhatsApp, comunicazione sospetta, annuncio, messaggio marketplace o trascrizione audio/video..."></textarea>
         </div>
 
         <div class="field full">
-          <label>Upload foto, screenshot, PDF, fattura, audio o video</label>
+          <label data-i18n="uploadLabel">Upload foto, screenshot, PDF, fattura, audio o video</label>
           <div class="upload-zone">
             <p>
               Carica screenshot di SMS/email/WhatsApp, foto di una comunicazione, PDF o documento.
@@ -857,19 +908,19 @@ button:disabled{
         </div>
 
         <div class="field full">
-          <label for="fileDescription">Descrizione manuale del file/foto</label>
+          <label for="fileDescription" data-i18n="fileDescriptionLabel">Descrizione manuale del file/foto</label>
           <textarea id="fileDescription" placeholder="Descrivi cosa si vede nella foto, nel PDF, nella fattura o nel messaggio vocale/video. Esempio: compare logo Comune, infrazione stradale, targa, link notifichedigitali-it.work..."></textarea>
         </div>
 
         <div class="field full">
-          <label for="ocrText">Testo estratto da foto/screenshot OCR</label>
+          <label for="ocrText" data-i18n="ocrLabel">Testo estratto da foto/screenshot OCR</label>
           <textarea id="ocrText" placeholder="Qui comparirà il testo OCR se disponibile. Puoi correggerlo o incollare manualmente il testo visibile."></textarea>
         </div>
       </div>
 
       <div class="button-row">
-        <button id="scanButton" class="btn-primary" type="button">AVVIA ANALISI CIVIL SHIELD™</button>
-        <button id="resetButton" class="btn-secondary" type="button">PULISCI</button>
+        <button id="scanButton" class="btn-primary" type="button" data-i18n="scanButton">AVVIA ANALISI CIVIL SHIELD™</button>
+        <button id="resetButton" class="btn-secondary" type="button" data-i18n="resetButton">PULISCI</button>
       </div>
     </section>
 
@@ -884,17 +935,17 @@ button:disabled{
 
         <div>
           <div class="result-section">
-            <h3>Motivi rilevati™</h3>
+            <h3><span data-i18n="reasonsTitle">Motivi rilevati™</span></h3>
             <ul id="reasonsList"></ul>
           </div>
 
           <div class="result-section">
-            <h3>Regole speciali attivate™</h3>
+            <h3><span data-i18n="specialRulesTitle">Regole speciali attivate™</span></h3>
             <ul id="specialRulesList"></ul>
           </div>
 
           <div class="result-section">
-            <h3>Consigli operativi AETERNA™</h3>
+            <h3><span data-i18n="recommendationsTitle">Consigli operativi AETERNA™</span></h3>
             <ul id="recommendationsList"></ul>
           </div>
 
@@ -902,7 +953,7 @@ button:disabled{
           <div class="backend-note" id="backendNote"></div>
 
           <div class="button-row">
-            <button id="copyButton" class="btn-secondary" type="button">COPIA RISULTATO</button>
+            <button id="copyButton" class="btn-secondary" type="button" data-i18n="copyButton">COPIA RISULTATO</button>
           </div>
         </div>
       </div>
@@ -987,6 +1038,16 @@ function setScanType(type){
   }
 
   activeScanType = type;
+
+  
+  if($("languageSelect")){
+    const savedLang = localStorage.getItem("civilShieldLang") || "it";
+    $("languageSelect").value = savedLang;
+    applyLanguage(savedLang);
+    $("languageSelect").addEventListener("change", function(){
+      applyLanguage(this.value);
+    });
+  }
 
   document.querySelectorAll(".scan-type").forEach((card) => {
     card.classList.toggle("active", card.dataset.type === type);
@@ -1217,10 +1278,11 @@ function analyzeLocally(rawText, fileInfo = null){
     {label:"Agenzia Entrate", regex:/agenzia\s+(delle\s+)?entrate|equitalia/i},
     {label:"SPID", regex:/\bspid\b/i},
     {label:"pagoPA", regex:/\bpagopa\b/i},
-    {label:"Banca / Nexi", regex:/\bbanca\b|\bnexi\b|\bunicredit\b|\bintesa\b|\bsanpaolo\b|\bpaypal\b/i},
+    {label:"Banca / Intesa Sanpaolo / Nexi", regex:/\bbanca\b|\bnexi\b|\bunicredit\b|\bintesa\b|\bintesa\s*sp\b|\bintesa\s*san\s*paolo\b|\bsanpaolo\b|\bpaypal\b|\bdigital\s*home\b/i},
     {label:"Corriere", regex:/\bcorriere\b|\bdhl\b|\bsda\b|\bbrt\b|\bups\b|\bfedex\b/i},
     {label:"Tribunale / Comune / Forze dell'ordine", regex:/\btribunale\b|\bcomune\b|\bcarabinieri\b|\bpolizia\b|\bpolizia locale\b/i},
     {label:"Notifiche digitali / avvisi pubblici", regex:/notifiche?\s*digitali|notifichedigitali/i},
+    {label:"Autostrada / Casello / Pedaggio", regex:/\bcasello\b|\bautostrada\b|\bautostradale\b|\bpedaggio\b|\btelepass\b|\bviacard\b|\btransito\b/i},
     {label:"Ospedale / Sanità", regex:/\bospedale\b|\bfascicolo sanitario\b|\bprenotazione sanitaria\b/i}
   ];
 
@@ -1232,7 +1294,7 @@ function analyzeLocally(rawText, fileInfo = null){
   const urgency = [
     /urgente/i, /urgentemente/i, /immediatamente/i, /entro oggi/i, /ultimo avviso/i,
     /scade/i, /scadenza/i, /blocco/i, /sospensione/i, /importante/i, /azione richiesta/i,
-    /evitare conseguenze/i, /prendere visione/i, /presa visione/i, /dettagli/i
+    /evitare conseguenze/i, /prendere visione/i, /presa visione/i, /dettagli/i, /bloccato/i, /bloccata/i, /alert/i, /avviso/i, /conferma/i
   ];
   const hasUrgency = matchAny(original, urgency);
   if(hasUrgency){
@@ -1280,19 +1342,64 @@ function analyzeLocally(rawText, fileInfo = null){
     /bonifico/i, /pagamento/i, /multa/i, /tassa/i, /rimborso/i, /premio/i,
     /investimento/i, /crypto/i, /wallet/i, /bitcoin/i, /trading/i, /spedizione/i,
     /dogana/i, /sblocco/i, /saldo/i, /fattura/i, /infrazione/i, /targa/i,
-    /verbale/i, /sanzione/i, /contravvenzione/i, /violazione stradale/i, /mancato pagamento/i
+    /verbale/i, /sanzione/i, /contravvenzione/i, /violazione stradale/i, /mancato pagamento/i, /casello/i, /autostradale/i, /autostrada/i, /pedaggio/i, /telepass/i, /viacard/i, /transito/i, /digital\s*home/i, /importo/i
   ];
   if(matchAny(original, payment)){
     addReason(result, 25, "Tema economico, pagamento o rimborso", "Le richieste economiche, rimborsi, multe, fatture e investimenti sono ad alto rischio.", "high");
   }
 
   const trafficFine = matchAny(original, [
-    /infrazione stradale/i, /registrazione della targa/i, /targa/i, /verbale/i,
+    /infrazione stradale/i, /avviso di infrazione/i, /infrazione casello/i, /casello autostradale/i, /registrazione della targa/i, /targa/i, /verbale/i,
     /sanzione/i, /contravvenzione/i, /violazione stradale/i, /multa/i
   ]);
   if(trafficFine){
     addReason(result, 32, "Possibile falsa notifica di infrazione stradale", "Riferimenti a targa, infrazione, verbale o sanzione sono spesso usati in truffe che imitano Comune, Polizia Locale o notifiche digitali.", "critical");
   }
+
+
+  const bankAlert = matchAny(original, [
+    /alert\s+intesa/i,
+    /\bintesa\s*sp\b/i,
+    /\bintesa\s*san\s*paolo\b/i,
+    /digital\s*home/i,
+    /pagamento\s+di\s+\d/i,
+    /bloccato/i,
+    /per\s+conferma\s+\d/i
+  ]);
+  const amountHigh = matchAny(original, [
+    /\b\d{1,3}(?:\.\d{3})*,\d{2}\s*(?:euro|€)/i,
+    /\b\d{4,}(?:[,.]\d{2})?\s*(?:euro|€)/i
+  ]);
+  const hasBankPhoneConfirmation = bankAlert && phones.length && (hasUrgency || hasAction || amountHigh);
+  if(hasBankPhoneConfirmation){
+    addReason(result, 42, "Possibile falso alert bancario con conferma telefonica", "Rilevati banca/Intesa, pagamento o importo, blocco/conferma e numero telefonico. Pattern compatibile con smishing bancario.", "critical");
+  }
+
+  const highwayTollScam = matchAny(original, [
+    /avviso\s+di\s+infrazione\s+casello\s+autostradale/i,
+    /infrazione\s+casello/i,
+    /casello\s+autostradale/i,
+    /mancato\s+pagamento\s+(?:pedaggio|casello|autostrada)/i,
+    /pedaggio\s+non\s+pagato/i,
+    /telepass.*(?:pagamento|blocco|infrazione|avviso)/i
+  ]);
+  if(highwayTollScam){
+    addReason(result, 38, "Possibile falsa infrazione autostradale o pedaggio", "Riferimenti a casello, autostrada, pedaggio o Telepass possono imitare notifiche di pagamento o sanzioni.", "critical");
+  }
+
+  const emailAddresses = original.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || [];
+  if(emailAddresses.length){
+    addReason(result, 8, "Indirizzo email rilevato", "Email rilevate: " + emailAddresses.slice(0,3).join(", "), "medium");
+    if(matchAny(original, [
+      /@(gmail|outlook|hotmail|libero|yahoo|icloud)\./i,
+      /reply-to/i,
+      /rispondi\s+a/i,
+      /pec[-_.]?(comune|polizia|banca|poste|intesa)/i
+    ]) && institutionMatches.length){
+      addReason(result, 24, "Mittente email potenzialmente incoerente con ente dichiarato", "Un ente, banca o servizio ufficiale non dovrebbe richiedere azioni sensibili da indirizzi generici o incoerenti.", "high");
+    }
+  }
+
 
   const urls = original.match(/(https?:\/\/[^\s]+|www\.[^\s]+|[a-z0-9.-]+\.[a-z]{2,}(?:\/[^\s]*)?)/gi) || [];
   if(urls.length){
@@ -1308,9 +1415,19 @@ function analyzeLocally(rawText, fileInfo = null){
     /https?:\/\/\d{1,3}(?:\.\d{1,3}){3}/i,
     /login[-_.]/i, /secure[-_.]/i, /verifica[-_.]/i, /account[-_.]/i, /cliente[-_.]/i,
     /\.(zip|top|xyz|click|monster|quest|cam|icu|rest|live|work|support|site|online)\b/i,
-    /notifichedigitali[-_.]?it/i, /notifiche[-_.]?digitali/i
+    /notifichedigitali[-_.]?it/i, /notifiche[-_.]?digitali/i, /intesa[-_.]?(sp|sanpaolo|sicurezza|alert|home)/i, /telepass[-_.]?(pagamento|pedaggio|alert)/i, /autostrade[-_.]?(pagamento|pedaggio|notifica)/i, /pagamento[-_.]?(sicuro|verifica|online)/i
   ])){
     addReason(result, 24, "Dominio o URL con caratteristiche sospette", "Il link presenta elementi compatibili con pagine clone o domini ad alto rischio.", "high");
+  }
+
+  if(urls.length && matchAny(original, [
+    /https?:\/\/[^\/\s]*@/i,
+    /%40/i,
+    /\/\/[^\/\s]*(intesa|poste|inps|comune|telepass|autostrade)[^\/\s]*\.(xyz|top|work|site|online|click|support|live|icu|rest)/i,
+    /[a-z0-9]{12,}\.[a-z]{2,}/i,
+    /(?:intesa|poste|inps|comune|telepass|autostrade).{0,30}(?:verifica|secure|login|pagamento|alert)/i
+  ])){
+    addReason(result, 28, "Possibile pagina clone o link mascherato", "Il link usa brand noti, parole di accesso/pagamento o tecniche di mascheramento compatibili con phishing.", "critical");
   }
 
   const dangerous = [/\.exe\b/i, /\.apk\b/i, /\.scr\b/i, /\.bat\b/i, /\.cmd\b/i, /\.js\b/i, /\.vbs\b/i, /\.jar\b/i, /\.zip\b/i, /\.rar\b/i, /macro/i];
@@ -1389,6 +1506,23 @@ function analyzeLocally(rawText, fileInfo = null){
     result.specialRules.push("Regola notifica pubblica falsa: Comune/Polizia/Notifiche digitali + infrazione/targa + link esterno => rischio minimo 96%.");
   }
 
+
+  if(hasBankPhoneConfirmation){
+    result.score = Math.max(result.score, 96);
+    result.specialRules.push("Regola banca/Intesa: alert pagamento + digital home/blocco/conferma + numero telefonico => rischio minimo 96%.");
+  }
+
+  if(highwayTollScam){
+    result.score = Math.max(result.score, 92);
+    result.specialRules.push("Regola casello autostradale: avviso infrazione/pedaggio/casello => rischio minimo 92%.");
+  }
+
+  if(highwayTollScam && (urls.length || hasAction || matchAny(original, payment))){
+    result.score = Math.max(result.score, 96);
+    result.specialRules.push("Regola pedaggio/casello con azione o pagamento: possibile falsa notifica autostradale => rischio minimo 96%.");
+  }
+
+
   result.score = Math.min(100, Math.round(result.score));
 
   if(result.score === 0 && original.trim()){
@@ -1442,6 +1576,14 @@ function buildRecommendations(result, ctx){
 
   if(result.reasons.some((item) => /infrazione|targa|verbale|sanzione|Comune/i.test(item.title + " " + item.detail))){
     recommendations.push("Per presunte multe o infrazioni, non aprire il link ricevuto: verifica solo tramite sito ufficiale del Comune/Polizia Locale o canali istituzionali noti.");
+  }
+
+  if(result.reasons.some((item) => /bancario|Intesa|banca|digital home/i.test(item.title + " " + item.detail))){
+    recommendations.push("Per presunti alert bancari, non chiamare numeri ricevuti via SMS: apri l’app ufficiale già installata o contatta la banca tramite numero ufficiale.");
+  }
+
+  if(result.reasons.some((item) => /autostradale|pedaggio|casello|Telepass/i.test(item.title + " " + item.detail))){
+    recommendations.push("Per presunti pedaggi, caselli o infrazioni autostradali, non usare link o numeri ricevuti: verifica solo su canali ufficiali del gestore.");
   }
 
   if(ctx.urls.length){
@@ -1622,7 +1764,7 @@ async function scanNow(){
   renderResult(finalResult);
 
   $("scanButton").disabled = false;
-  $("scanButton").textContent = "AVVIA ANALISI CIVIL SHIELD™";
+  applyLanguage(localStorage.getItem("civilShieldLang") || "it");
 }
 
 function resetScanner(){
@@ -1727,7 +1869,7 @@ function copyResult(){
   }
 
   const text = [
-    "AETERNA Civil Shield™ - Guardian Illimitato",
+    "AETERNA Civil Shield™ - Guardian Final Multilingua",
     "Rischio: " + lastResult.score + "%",
     "Livello: " + lastResult.level,
     "",
@@ -1749,12 +1891,189 @@ function copyResult(){
 }
 
 
+const I18N = {
+  it: {
+    languageLabel:"Lingua scanner",
+    languageNote:"Cambia lingua dell’interfaccia. Il motore di rischio resta AETERNA Civil Shield™.",
+    heroTitle:"Scanner Anti-Truffa Evoluto™",
+    analyzerTitle:"Advanced Scam Analyzer™",
+    accessTitle:"Accesso Scanner™",
+    riskThresholds:"Soglie Rischio™",
+    zeroRetention:"Zero Retention Policy™",
+    reasonsTitle:"Motivi rilevati™",
+    specialRulesTitle:"Regole speciali attivate™",
+    recommendationsTitle:"Consigli operativi AETERNA™",
+    scanButton:"AVVIA ANALISI CIVIL SHIELD™",
+    resetButton:"PULISCI",
+    copyButton:"COPIA RISULTATO",
+    typeMessage:"Messaggio",
+    typeMessageDesc:"SMS, WhatsApp, Telegram, email, chat.",
+    typeLink:"Link / URL",
+    typeLinkDesc:"Domini, link accorciati, pagine clone.",
+    typePayment:"Pagamento",
+    typePaymentDesc:"IBAN, fatture, bonifici, rimborsi, multe.",
+    typeImage:"Foto / Screenshot",
+    typeImageDesc:"SMS fotografati, QR, profili, documenti.",
+    typeProfile:"Profilo sospetto",
+    typeProfileDesc:"Marketplace, social, romance scam, annunci.",
+    typeDocument:"Documento",
+    typeDocumentDesc:"PDF, contratti, finte comunicazioni, allegati.",
+    typePhone:"Telefono",
+    typePhoneDesc:"Numeri da richiamare, call scam, finti uffici.",
+    typeAudioVideo:"Audio / Video",
+    typeAudioVideoDesc:"Inserire trascrizione o descrizione.",
+    urlLabel:"Link / dominio sospetto",
+    senderLabel:"Mittente email / nome profilo / ente dichiarato",
+    phoneLabel:"Numero telefonico indicato",
+    paymentLabel:"IBAN / pagamento / fattura / richiesta economica",
+    messageLabel:"Testo da analizzare",
+    uploadLabel:"Upload foto, screenshot, PDF, fattura, audio o video",
+    fileDescriptionLabel:"Descrizione manuale del file/foto",
+    ocrLabel:"Testo estratto da foto/screenshot OCR",
+    guardianEmailLabel:"Email abbonato Guardian™"
+  },
+  en: {
+    languageLabel:"Scanner language",
+    languageNote:"Change the interface language. The risk engine remains AETERNA Civil Shield™.",
+    heroTitle:"Advanced Anti-Scam Scanner™",
+    analyzerTitle:"Advanced Scam Analyzer™",
+    accessTitle:"Scanner Access™",
+    riskThresholds:"Risk Thresholds™",
+    zeroRetention:"Zero Retention Policy™",
+    reasonsTitle:"Detected reasons™",
+    specialRulesTitle:"Triggered special rules™",
+    recommendationsTitle:"AETERNA operational advice™",
+    scanButton:"START CIVIL SHIELD™ ANALYSIS",
+    resetButton:"CLEAR",
+    copyButton:"COPY RESULT",
+    typeMessage:"Message",
+    typeMessageDesc:"SMS, WhatsApp, Telegram, email, chat.",
+    typeLink:"Link / URL",
+    typeLinkDesc:"Domains, shortened links, cloned pages.",
+    typePayment:"Payment",
+    typePaymentDesc:"IBAN, invoices, transfers, refunds, fines.",
+    typeImage:"Photo / Screenshot",
+    typeImageDesc:"Captured SMS, QR codes, profiles, documents.",
+    typeProfile:"Suspicious profile",
+    typeProfileDesc:"Marketplace, social, romance scam, ads.",
+    typeDocument:"Document",
+    typeDocumentDesc:"PDFs, contracts, fake notices, attachments.",
+    typePhone:"Phone",
+    typePhoneDesc:"Numbers to call back, call scams, fake offices.",
+    typeAudioVideo:"Audio / Video",
+    typeAudioVideoDesc:"Enter transcription or description.",
+    urlLabel:"Suspicious link / domain",
+    senderLabel:"Sender email / profile name / declared institution",
+    phoneLabel:"Phone number shown",
+    paymentLabel:"IBAN / payment / invoice / money request",
+    messageLabel:"Text to analyze",
+    uploadLabel:"Upload photo, screenshot, PDF, invoice, audio or video",
+    fileDescriptionLabel:"Manual file/photo description",
+    ocrLabel:"Text extracted from photo/screenshot OCR",
+    guardianEmailLabel:"Guardian™ subscriber email"
+  },
+  fr: {
+    languageLabel:"Langue du scanner",
+    languageNote:"Changez la langue de l’interface. Le moteur de risque reste AETERNA Civil Shield™.",
+    heroTitle:"Scanner Anti-Arnaque Avancé™",
+    analyzerTitle:"Analyseur avancé d’arnaques™",
+    accessTitle:"Accès au scanner™",
+    riskThresholds:"Seuils de risque™",
+    zeroRetention:"Politique Zero Retention™",
+    reasonsTitle:"Motifs détectés™",
+    specialRulesTitle:"Règles spéciales activées™",
+    recommendationsTitle:"Conseils opérationnels AETERNA™",
+    scanButton:"LANCER L’ANALYSE CIVIL SHIELD™",
+    resetButton:"EFFACER",
+    copyButton:"COPIER LE RÉSULTAT",
+    typeMessage:"Message",
+    typeMessageDesc:"SMS, WhatsApp, Telegram, email, chat.",
+    typeLink:"Lien / URL",
+    typeLinkDesc:"Domaines, liens raccourcis, pages clonées.",
+    typePayment:"Paiement",
+    typePaymentDesc:"IBAN, factures, virements, remboursements, amendes.",
+    typeImage:"Photo / Capture",
+    typeImageDesc:"SMS photographiés, QR, profils, documents.",
+    typeProfile:"Profil suspect",
+    typeProfileDesc:"Marketplace, réseaux sociaux, romance scam, annonces.",
+    typeDocument:"Document",
+    typeDocumentDesc:"PDF, contrats, fausses communications, pièces jointes.",
+    typePhone:"Téléphone",
+    typePhoneDesc:"Numéros à rappeler, call scam, faux bureaux.",
+    typeAudioVideo:"Audio / Vidéo",
+    typeAudioVideoDesc:"Saisir une transcription ou description.",
+    urlLabel:"Lien / domaine suspect",
+    senderLabel:"Email expéditeur / nom profil / organisme déclaré",
+    phoneLabel:"Numéro de téléphone indiqué",
+    paymentLabel:"IBAN / paiement / facture / demande d’argent",
+    messageLabel:"Texte à analyser",
+    uploadLabel:"Upload photo, capture, PDF, facture, audio ou vidéo",
+    fileDescriptionLabel:"Description manuelle du fichier/photo",
+    ocrLabel:"Texte extrait de photo/capture OCR",
+    guardianEmailLabel:"Email abonné Guardian™"
+  },
+  es: {
+    languageLabel:"Idioma del escáner",
+    languageNote:"Cambia el idioma de la interfaz. El motor de riesgo sigue siendo AETERNA Civil Shield™.",
+    heroTitle:"Escáner Anti-Estafa Avanzado™",
+    analyzerTitle:"Analizador avanzado de estafas™",
+    accessTitle:"Acceso al escáner™",
+    riskThresholds:"Umbrales de riesgo™",
+    zeroRetention:"Política Zero Retention™",
+    reasonsTitle:"Motivos detectados™",
+    specialRulesTitle:"Reglas especiales activadas™",
+    recommendationsTitle:"Consejos operativos AETERNA™",
+    scanButton:"INICIAR ANÁLISIS CIVIL SHIELD™",
+    resetButton:"LIMPIAR",
+    copyButton:"COPIAR RESULTADO",
+    typeMessage:"Mensaje",
+    typeMessageDesc:"SMS, WhatsApp, Telegram, email, chat.",
+    typeLink:"Enlace / URL",
+    typeLinkDesc:"Dominios, enlaces acortados, páginas clonadas.",
+    typePayment:"Pago",
+    typePaymentDesc:"IBAN, facturas, transferencias, reembolsos, multas.",
+    typeImage:"Foto / Captura",
+    typeImageDesc:"SMS fotografiados, QR, perfiles, documentos.",
+    typeProfile:"Perfil sospechoso",
+    typeProfileDesc:"Marketplace, redes sociales, romance scam, anuncios.",
+    typeDocument:"Documento",
+    typeDocumentDesc:"PDF, contratos, falsas comunicaciones, adjuntos.",
+    typePhone:"Teléfono",
+    typePhoneDesc:"Números para devolver llamada, call scam, oficinas falsas.",
+    typeAudioVideo:"Audio / Vídeo",
+    typeAudioVideoDesc:"Introducir transcripción o descripción.",
+    urlLabel:"Enlace / dominio sospechoso",
+    senderLabel:"Email remitente / nombre perfil / entidad declarada",
+    phoneLabel:"Número de teléfono indicado",
+    paymentLabel:"IBAN / pago / factura / solicitud económica",
+    messageLabel:"Texto para analizar",
+    uploadLabel:"Subir foto, captura, PDF, factura, audio o vídeo",
+    fileDescriptionLabel:"Descripción manual del archivo/foto",
+    ocrLabel:"Texto extraído de foto/captura OCR",
+    guardianEmailLabel:"Email abonado Guardian™"
+  }
+};
+
+function applyLanguage(lang){
+  const dictionary = I18N[lang] || I18N.it;
+  document.documentElement.lang = lang;
+  localStorage.setItem("civilShieldLang", lang);
+  document.querySelectorAll("[data-i18n]").forEach((node) => {
+    const key = node.getAttribute("data-i18n");
+    if(dictionary[key]){
+      node.textContent = dictionary[key];
+    }
+  });
+}
+
+
+
 function showLogoFallback(){
   const logo = document.getElementById("aeternaLogo");
   const fallback = document.getElementById("logoFallback");
   const shell = document.querySelector(".logo-shell");
   if(shell){
-    shell.style.backgroundImage = "url('https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-logo-mobile-fix-2')";
+    shell.style.backgroundImage = "url('https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-super-finale-1')";
     shell.style.backgroundSize = "contain";
     shell.style.backgroundPosition = "center";
     shell.style.backgroundRepeat = "no-repeat";
@@ -1772,10 +2091,10 @@ function fixAeternaLogo(){
   const logo = document.getElementById("aeternaLogo");
   const fallback = document.getElementById("logoFallback");
   if(!logo) return;
-  const primary = "https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-logo-mobile-fix-2";
-  const secondary = "nuovologo.png?v=guardian-logo-mobile-fix-2";
-  const sources = [primary, secondary];
+
+  const sources = ["https://paticchiomultiservice-tech.github.io/aeterna-civil-shield/nuovologo.png?v=guardian-super-finale-1", "nuovologo.png?v=guardian-super-finale-1"];
   let attempt = 0;
+
   logo.onerror = function(){
     attempt += 1;
     if(attempt < sources.length){
@@ -1784,13 +2103,16 @@ function fixAeternaLogo(){
     }
     showLogoFallback();
   };
+
   logo.onload = function(){
     if(logo.naturalWidth > 0){
       logo.style.display = "block";
       if(fallback) fallback.style.display = "none";
     }
   };
-  logo.src = primary;
+
+  logo.src = sources[0];
+
   setTimeout(function(){
     if(!logo.complete || logo.naturalWidth === 0){
       logo.onerror();
@@ -1801,6 +2123,16 @@ function fixAeternaLogo(){
 
 document.addEventListener("DOMContentLoaded", function(){
   fixAeternaLogo();
+
+  if($("languageSelect")){
+    const savedLang = localStorage.getItem("civilShieldLang") || "it";
+    $("languageSelect").value = savedLang;
+    applyLanguage(savedLang);
+    $("languageSelect").addEventListener("change", function(){
+      applyLanguage(this.value);
+    });
+  }
+
   document.querySelectorAll(".scan-type").forEach((card) => {
     card.addEventListener("click", () => setScanType(card.dataset.type));
     card.addEventListener("touchend", (event) => {

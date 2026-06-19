@@ -803,6 +803,7 @@ button:disabled{
     <option value="en">English</option>
     <option value="fr">Français</option>
     <option value="es">Español</option>
+    <option value="pt">Português</option>
   </select>
 </section>
 
@@ -1694,25 +1695,25 @@ function renderResult(result){
   $("resultPanel").style.display = "block";
   $("scoreNumber").style.color = color;
   $("scoreNumber").textContent = result.score + "%";
-  $("scoreLabel").textContent = "RISCHIO " + result.level;
-  $("scoreMeta").innerHTML = "Motore: " + escapeHtml(result.engine) + "<br>Modalità: Guardian™ illimitato";
+  $("scoreLabel").textContent = aeternaScannerTranslate("RISCHIO") + " " + aeternaScannerTranslate(result.level);
+  $("scoreMeta").innerHTML = aeternaScannerTranslate("Motore") + ": " + escapeHtml(result.engine) + "<br>" + aeternaScannerTranslate("Modalità: Guardian™ illimitato");
   $("scoreFill").style.width = result.score + "%";
   $("scoreFill").style.background = color;
 
   $("reasonsList").innerHTML = result.reasons.length
-    ? result.reasons.map((reason) => "<li><strong>" + escapeHtml(reason.title) + ":</strong> " + escapeHtml(reason.detail) + "</li>").join("")
-    : "<li>Nessun pattern specifico rilevato.</li>";
+    ? result.reasons.map((reason) => "<li><strong>" + escapeHtml(aeternaScannerTranslate(reason.title)) + ":</strong> " + escapeHtml(aeternaScannerTranslate(reason.detail)) + "</li>").join("")
+    : "<li>" + aeternaScannerTranslate("Nessun pattern specifico rilevato.") + "</li>";
 
   $("recommendationsList").innerHTML = result.recommendations
-    .map((item) => "<li>" + escapeHtml(item) + "</li>")
+    .map((item) => "<li>" + escapeHtml(aeternaScannerTranslate(item)) + "</li>")
     .join("");
 
   $("specialRulesList").innerHTML = result.specialRules && result.specialRules.length
-    ? result.specialRules.map((item) => "<li>" + escapeHtml(item) + "</li>").join("")
-    : "<li>Nessuna regola speciale attivata.</li>";
+    ? result.specialRules.map((item) => "<li>" + escapeHtml(aeternaScannerTranslate(item)) + "</li>").join("")
+    : "<li>" + aeternaScannerTranslate("Nessuna regola speciale attivata.") + "</li>";
 
-  $("finalAdvice").innerHTML = buildFinalAdvice(result);
-  $("backendNote").textContent = result.backendNote || "Analisi completata dal motore AETERNA Civil Shield™.";
+  $("finalAdvice").innerHTML = aeternaScannerTranslate(buildFinalAdvice(result));
+  $("backendNote").textContent = aeternaScannerTranslate(result.backendNote || "Analisi completata dal motore AETERNA Civil Shield™.");
 
   setTimeout(() => {
     $("resultPanel").scrollIntoView({behavior:"smooth", block:"start"});
@@ -1722,7 +1723,7 @@ function renderResult(result){
 async function scanNow(){
   if(ocrPromise){
     $("scanButton").disabled = true;
-    $("scanButton").textContent = "COMPLETO LETTURA OCR...";
+    $("scanButton").textContent = aeternaScannerTranslate("COMPLETO LETTURA OCR...");
     try{
       await ocrPromise;
     } catch(error){
@@ -1749,7 +1750,7 @@ async function scanNow(){
   }
 
   $("scanButton").disabled = true;
-  $("scanButton").textContent = "ANALISI IN CORSO...";
+  $("scanButton").textContent = aeternaScannerTranslate("ANALISI IN CORSO...");
 
   const fileInfo = uploadedFile ? {
     name: uploadedFile.name,
@@ -2054,6 +2055,767 @@ const I18N = {
   }
 };
 
+
+const AETERNA_SCANNER_EXTRA = {
+  "en": {
+    "placeholders": {
+      "email usata per l'acquisto": "email used for purchase",
+      "https://... oppure dominio sospetto": "https://... or suspicious domain",
+      "Es. CUP, Comune, banca, corriere, profilo social...": "E.g. public office, bank, courier, social profile...",
+      "Es. +3989342221": "E.g. +441234567890",
+      "Incolla IBAN, causale, importo o testo pagamento": "Paste IBAN, reason, amount or payment text",
+      "Incolla qui SMS, email, WhatsApp, comunicazione sospetta, annuncio, messaggio marketplace o trascrizione audio/video...": "Paste SMS, email, WhatsApp, suspicious notice, ad, marketplace message or audio/video transcript here...",
+      "Descrivi cosa si vede nella foto, nel PDF, nella fattura o nel messaggio vocale/video. Esempio: compare logo Comune, infrazione stradale, targa, link notifichedigitali-it.work...": "Describe what appears in the photo, PDF, invoice or voice/video message. Example: public office logo, traffic violation, license plate, suspicious link...",
+      "Qui comparirà il testo OCR se disponibile. Puoi correggerlo o incollare manualmente il testo visibile.": "OCR text appears here if available. You can correct it or paste the visible text manually."
+    },
+    "typeLabels": {
+      "message": "Message / SMS / Email",
+      "link": "Link / URL",
+      "payment": "Payment / IBAN / Invoice",
+      "image": "Photo / Screenshot",
+      "profile": "Suspicious profile",
+      "document": "Document / PDF",
+      "phone": "Phone",
+      "audio-video": "Audio / Video"
+    },
+    "text": {
+      "Modalità scansione mobile": "Mobile scan mode",
+      "Modalità attiva:": "Active mode:",
+      "Carica screenshot di SMS/email/WhatsApp, foto di una comunicazione, PDF o documento. Per immagini lo scanner prova OCR locale; per PDF/audio/video inserisci anche una descrizione o trascrizione.": "Upload screenshots of SMS/email/WhatsApp, photos of a notice, PDF or document. For images the scanner tries local OCR; for PDF/audio/video also enter a description or transcript.",
+      "BASSO": "LOW",
+      "MODERATO": "MODERATE",
+      "ALTO": "HIGH",
+      "CRITICO": "CRITICAL",
+      "RISCHIO": "RISK",
+      "Nessuna regola speciale attivata.": "No special rule triggered.",
+      "Nessun pattern specifico rilevato.": "No specific pattern detected.",
+      "Analisi completata dal motore AETERNA Civil Shield™.": "Analysis completed by the AETERNA Civil Shield™ engine.",
+      "Motore": "Engine",
+      "Modalità: 10 scansioni tokenizzate": "Mode: 10 tokenized scans",
+      "Modalità: Guardian™ illimitato": "Mode: unlimited Guardian™",
+      "Token mancante.": "Missing token.",
+      "Apri lo scanner dal link personale ricevuto dopo l'acquisto.": "Open the scanner from the personal link received after purchase.",
+      "Verifica token in corso...": "Checking token...",
+      "Token rilevato:": "Token detected:",
+      "Accesso non disponibile.": "Access unavailable.",
+      "Token non valido.": "Invalid token.",
+      "Scansioni esaurite.": "Scans used up.",
+      "Il pacchetto da 10 scansioni è terminato.": "The 10-scan package has ended.",
+      "Token valido.": "Valid token.",
+      "Scansioni disponibili:": "Scans available:",
+      "Inserisci l'email cliente nel campo qui sotto e clicca": "Enter the customer email in the field below and click",
+      "VERIFICA ACCESSO": "VERIFY ACCESS",
+      "Accesso Civil Shield™ attivo.": "Civil Shield™ access active.",
+      "Email associata:": "Associated email:",
+      "Le scansioni non hanno scadenza temporale.": "Scans have no time expiry.",
+      "Token gateway non raggiungibile.": "Token gateway unreachable.",
+      "Token Guardian™ mancante.": "Missing Guardian™ token.",
+      "Usa il link personale ricevuto da AETERNA.": "Use the personal link received from AETERNA.",
+      "Verifica token Guardian™ in corso...": "Checking Guardian™ token...",
+      "Accesso Guardian™ non disponibile.": "Guardian™ access unavailable.",
+      "Token Guardian™ valido.": "Valid Guardian™ token.",
+      "Inserisci l'email abbonato e clicca": "Enter the subscriber email and click",
+      "VERIFICA ACCESSO GUARDIAN™": "VERIFY GUARDIAN™ ACCESS",
+      "Accesso Guardian™ illimitato attivo.": "Unlimited Guardian™ access active.",
+      "Email abbonato:": "Subscriber email:",
+      "illimitate": "unlimited",
+      "Nessun contatore a scalare.": "No decreasing counter.",
+      "Gateway Guardian™ non raggiungibile.": "Guardian™ gateway unreachable.",
+      "Modalità:": "Mode:",
+      "Foto:": "Photo:",
+      "Privacy:": "Privacy:",
+      "10 scansioni": "10 scans",
+      "scansioni illimitate": "unlimited scans",
+      "Basso": "Low",
+      "Moderato": "Moderate",
+      "Alto": "High",
+      "Critico": "Critical",
+      "Analizza messaggi, SMS, email, link, numeri telefonici, IBAN, richieste di pagamento, screenshot, foto, PDF, fatture e comunicazioni sospette con il motore AETERNA Civil Shield™. Il sistema usa regole severe contro phishing, scam, impersonificazione istituzionale, false notifiche pubbliche, truffe su multe, targa, CUP, Comune, corrieri, banche e urgenza artificiale.": "Analyze messages, SMS, emails, links, phone numbers, IBANs, payment requests, screenshots, photos, PDFs, invoices and suspicious communications with the AETERNA Civil Shield™ engine. The system uses strict rules against phishing, scams, institutional impersonation, fake public notices, fine/license plate scams, public offices, couriers, banks and artificial urgency.",
+      "Regola AETERNA anti-ambiguità:": "AETERNA anti-ambiguity rule:",
+      "messaggi con ente/sigla istituzionale, urgenza, richiesta di azione e numero/link non devono restare in zona grigia. Vengono classificati come rischio alto o critico.": "messages with an institution/acronym, urgency, action request and number/link must not remain in a grey area. They are classified as high or critical risk.",
+      "Versione clienti occasionali: token personale, email cliente, 10 scansioni a 2,99€ e motore super AETERNA.": "Occasional-client version: personal token, customer email, 10 scans for €2.99 and super AETERNA engine.",
+      "Guardian™ illimitato attivo.": "Unlimited Guardian™ active.",
+      "Accesso riservato Guardian™: token personale, email abbonato e scansioni illimitate.": "Reserved Guardian™ access: personal token, subscriber email and unlimited scans.",
+      "Analisi foto e screenshot con estrazione testo nel browser, quando disponibile.": "Photo and screenshot analysis with in-browser text extraction when available.",
+      "Soglia minima per Comune/Notifiche Digitali + infrazione/targa + link esterno.": "Minimum threshold for public office/digital notices + violation/license plate + external link.",
+      "Il contatore scala automaticamente a ogni analisi autorizzata.": "The counter decreases automatically with every authorized analysis.",
+      "Il token resta attivo finché l’abbonamento Guardian™ è attivo.": "The token remains active as long as the Guardian™ subscription is active.",
+      "Il motore locale analizza il contenuto nel browser.": "The local engine analyzes the content in the browser.",
+      "AETERNA non richiede password, OTP, PIN o chiavi private.": "AETERNA does not request passwords, OTPs, PINs or private keys.",
+      "Non inserire dati sensibili non necessari.": "Do not enter unnecessary sensitive data.",
+      "Per foto e screenshot, OCR locale se disponibile.": "For photos and screenshots, local OCR is used when available.",
+      "Il risultato è probabilistico e non sostituisce verifica ufficiale.": "The result is probabilistic and does not replace official verification.",
+      "Seleziona il tipo di contenuto, incolla il testo o carica una foto/screenshot. Lo scanner combina motore locale AETERNA e backend Render, usando sempre il risultato più prudente.": "Select the content type, paste the text or upload a photo/screenshot. The scanner combines the local AETERNA engine and Render backend, always using the most cautious result."
+    },
+    "alerts": {
+      "Token mancante. Usa il link personale Civil Shield™.": "Missing token. Use your personal Civil Shield™ link.",
+      "Inserisci l'email cliente, poi clicca VERIFICA ACCESSO prima di avviare la scansione.": "Enter the customer email, then click VERIFY ACCESS before starting the scan.",
+      "Scansione non autorizzata.": "Scan not authorized.",
+      "Inserisci un contenuto, un link, un numero, un pagamento oppure carica un file/foto.": "Enter content, a link, a number, a payment or upload a file/photo.",
+      "Accesso non pronto. Verifica token ed email.": "Access not ready. Verify token and email.",
+      "Nessun risultato da copiare.": "No result to copy.",
+      "Risultato copiato.": "Result copied.",
+      "Copia non riuscita.": "Copy failed."
+    },
+    "dynamic": {
+      "Riferimento a ente, servizio pubblico o brand sensibile": "Reference to institution, public service or sensitive brand",
+      "Urgenza artificiale o pressione psicologica": "Artificial urgency or psychological pressure",
+      "Richiesta di azione immediata": "Immediate action request",
+      "Numero telefonico indicato come canale esterno": "Phone number shown as external channel",
+      "Messaggio generico senza riferimenti verificabili": "Generic message without verifiable references",
+      "Richiesta o riferimento a dati sensibili": "Request or reference to sensitive data",
+      "Tema economico, pagamento o rimborso": "Economic topic, payment or refund",
+      "Possibile falsa notifica di infrazione stradale": "Possible fake traffic violation notice",
+      "Possibile falso alert bancario con conferma telefonica": "Possible fake bank alert with phone confirmation",
+      "Possibile falsa infrazione autostradale o pedaggio": "Possible fake motorway violation or toll",
+      "Indirizzo email rilevato": "Email address detected",
+      "Mittente email potenzialmente incoerente con ente dichiarato": "Email sender potentially inconsistent with declared institution",
+      "Link o dominio presente": "Link or domain present",
+      "Link accorciato": "Shortened link",
+      "Dominio o URL con caratteristiche sospette": "Domain or URL with suspicious characteristics",
+      "Possibile pagina clone o link mascherato": "Possible cloned page or masked link",
+      "Allegato o estensione potenzialmente pericolosa": "Potentially dangerous attachment or extension",
+      "Possibile impersonificazione di servizio noto": "Possible impersonation of a known service",
+      "Possibile manipolazione emotiva o richiesta anomala": "Possible emotional manipulation or anomalous request",
+      "Messaggio breve e poco verificabile": "Short and hard-to-verify message",
+      "Foto o screenshot allegato": "Photo or screenshot attached",
+      "OCR assente o non leggibile": "Missing or unreadable OCR",
+      "Documento PDF allegato": "PDF document attached",
+      "Audio o video allegato": "Audio or video attached",
+      "Nome file o tipo allegato pericoloso": "Dangerous file name or attachment type",
+      "Nessun indicatore forte rilevato": "No strong indicator detected",
+      "Pattern backend AETERNA": "AETERNA backend pattern",
+      "COMPLETO LETTURA OCR...": "COMPLETING OCR READING...",
+      "ANALISI IN CORSO...": "ANALYSIS IN PROGRESS...",
+      "Motore locale + backend Render combinati. Il punteggio finale usa il valore più prudente.": "Local engine + Render backend combined. The final score uses the most cautious value.",
+      "Regola screenshot non leggibile: foto/screenshot senza testo OCR o descrizione non può essere classificato basso; richiesta verifica manuale e trascrizione.": "Unreadable screenshot rule: a photo/screenshot without OCR text or description cannot be classified as low risk; manual verification and transcription are required.",
+      "Il contenuto dell'immagine non è stato estratto. Per evitare falsi negativi Civil Shield™ alza il rischio e richiede testo/descrizione.": "The image content was not extracted. To avoid false negatives, Civil Shield™ raises the risk and requires text/description.",
+      "Regola anti-ambiguità: ente/sigla + urgenza + azione + canale esterno => rischio minimo 78%.": "Anti-ambiguity rule: institution/acronym + urgency + action + external channel => minimum risk 78%.",
+      "Regola CUP/ente pubblico: messaggio generico + urgenza + numero/link => rischio minimo 82%.": "Public office rule: generic message + urgency + number/link => minimum risk 82%.",
+      "Regola credenziali: richiesta dati sensibili + canale esterno => rischio minimo 88%.": "Credentials rule: sensitive data request + external channel => minimum risk 88%.",
+      "Regola ente/pagamento: ente o brand + pagamento + pressione => rischio minimo 85%.": "Institution/payment rule: institution or brand + payment + pressure => minimum risk 85%.",
+      "Regola truffa Comune/targa: infrazione stradale o targa + link => rischio minimo 92%.": "Municipality/license plate scam rule: traffic violation or license plate + link => minimum risk 92%.",
+      "Regola notifica pubblica falsa: Comune/Polizia/Notifiche digitali + infrazione/targa + link esterno => rischio minimo 96%.": "Fake public notice rule: municipality/police/digital notices + violation/license plate + external link => minimum risk 96%.",
+      "Regola banca/Intesa: alert pagamento + digital home/blocco/conferma + numero telefonico => rischio minimo 96%.": "Bank alert rule: payment alert + digital home/block/confirmation + phone number => minimum risk 96%.",
+      "Regola casello autostradale: avviso infrazione/pedaggio/casello => rischio minimo 92%.": "Motorway toll rule: violation/toll/toll booth notice => minimum risk 92%.",
+      "Regola pedaggio/casello con azione o pagamento: possibile falsa notifica autostradale => rischio minimo 96%.": "Toll/payment action rule: possible fake motorway notice => minimum risk 96%.",
+      "<strong>Azione consigliata:</strong> blocca il contenuto, non rispondere, non cliccare, non chiamare e conserva prova/screenshot per eventuale verifica.": "<strong>Recommended action:</strong> block the content, do not reply, do not click, do not call and keep proof/screenshots for possible verification.",
+      "<strong>Azione consigliata:</strong> verifica solo tramite canali ufficiali esterni al messaggio. Evita ogni azione diretta dal contenuto ricevuto.": "<strong>Recommended action:</strong> verify only through official channels outside the message. Avoid any direct action from the received content.",
+      "<strong>Azione consigliata:</strong> controlla mittente, dominio, numero, IBAN e richiesta prima di procedere.": "<strong>Recommended action:</strong> check sender, domain, number, IBAN and request before proceeding.",
+      "<strong>Azione consigliata:</strong> nessun segnale grave rilevato, ma resta prudente se vengono richiesti dati personali, pagamento o accessi.": "<strong>Recommended action:</strong> no severe signal detected, but stay cautious if personal data, payment or access is requested.",
+      "Il contenuto non mostra pattern evidenti, ma la verifica manuale resta consigliata in caso di dubbio.": "The content shows no obvious patterns, but manual verification is still recommended if in doubt.",
+      "Non cliccare, non chiamare, non pagare e non inviare dati. Tratta il contenuto come potenzialmente ostile.": "Do not click, call, pay or send data. Treat the content as potentially hostile.",
+      "Non usare i contatti indicati nel messaggio. Verifica solo tramite canali ufficiali già noti.": "Do not use the contacts shown in the message. Verify only through already known official channels.",
+      "Procedi con cautela. Controlla mittente, dominio, numero telefonico e richiesta specifica.": "Proceed carefully. Check sender, domain, phone number and specific request.",
+      "Rischio basso, ma non nullo. Mantieni prudenza se sono richiesti dati, denaro o accessi.": "Low risk, but not zero. Stay cautious if data, money or access is requested."
+    }
+  },
+  "fr": {
+    "placeholders": {
+      "email usata per l'acquisto": "email utilisée pour l'achat",
+      "https://... oppure dominio sospetto": "https://... ou domaine suspect",
+      "Es. CUP, Comune, banca, corriere, profilo social...": "Ex. service public, banque, transporteur, profil social...",
+      "Es. +3989342221": "Ex. +33123456789",
+      "Incolla IBAN, causale, importo o testo pagamento": "Collez IBAN, motif, montant ou texte de paiement",
+      "Incolla qui SMS, email, WhatsApp, comunicazione sospetta, annuncio, messaggio marketplace o trascrizione audio/video...": "Collez ici SMS, email, WhatsApp, communication suspecte, annonce, message marketplace ou transcription audio/vidéo...",
+      "Descrivi cosa si vede nella foto, nel PDF, nella fattura o nel messaggio vocale/video. Esempio: compare logo Comune, infrazione stradale, targa, link notifichedigitali-it.work...": "Décrivez ce qui apparaît dans la photo, le PDF, la facture ou le message vocal/vidéo.",
+      "Qui comparirà il testo OCR se disponibile. Puoi correggerlo o incollare manualmente il testo visibile.": "Le texte OCR apparaîtra ici si disponible. Vous pouvez le corriger ou coller le texte visible."
+    },
+    "typeLabels": {
+      "message": "Message / SMS / Email",
+      "link": "Lien / URL",
+      "payment": "Paiement / IBAN / Facture",
+      "image": "Photo / Capture",
+      "profile": "Profil suspect",
+      "document": "Document / PDF",
+      "phone": "Téléphone",
+      "audio-video": "Audio / Vidéo"
+    },
+    "text": {
+      "Modalità scansione mobile": "Mode d'analyse mobile",
+      "Modalità attiva:": "Mode actif :",
+      "Carica screenshot di SMS/email/WhatsApp, foto di una comunicazione, PDF o documento. Per immagini lo scanner prova OCR locale; per PDF/audio/video inserisci anche una descrizione o trascrizione.": "Téléversez des captures SMS/email/WhatsApp, photos de communication, PDF ou document. Pour les images le scanner tente un OCR local; pour PDF/audio/vidéo ajoutez aussi une description ou transcription.",
+      "BASSO": "FAIBLE",
+      "MODERATO": "MODÉRÉ",
+      "ALTO": "ÉLEVÉ",
+      "CRITICO": "CRITIQUE",
+      "RISCHIO": "RISQUE",
+      "Nessuna regola speciale attivata.": "Aucune règle spéciale activée.",
+      "Nessun pattern specifico rilevato.": "Aucun motif spécifique détecté.",
+      "Analisi completata dal motore AETERNA Civil Shield™.": "Analyse complétée par le moteur AETERNA Civil Shield™.",
+      "Motore": "Moteur",
+      "Modalità: 10 scansioni tokenizzate": "Mode : 10 analyses tokenisées",
+      "Modalità: Guardian™ illimitato": "Mode : Guardian™ illimité",
+      "Token mancante.": "Token manquant.",
+      "Apri lo scanner dal link personale ricevuto dopo l'acquisto.": "Ouvrez le scanner depuis le lien personnel reçu après l'achat.",
+      "Verifica token in corso...": "Vérification du token en cours...",
+      "Token rilevato:": "Token détecté :",
+      "Accesso non disponibile.": "Accès non disponible.",
+      "Token non valido.": "Token non valide.",
+      "Scansioni esaurite.": "Scans épuisés.",
+      "Il pacchetto da 10 scansioni è terminato.": "Le pack de 10 scans est terminé.",
+      "Token valido.": "Token valide.",
+      "Scansioni disponibili:": "Scans disponibles :",
+      "Inserisci l'email cliente nel campo qui sotto e clicca": "Saisissez l'email client dans le champ ci-dessous et cliquez",
+      "VERIFICA ACCESSO": "VÉRIFIER L'ACCÈS",
+      "Accesso Civil Shield™ attivo.": "Accès Civil Shield™ actif.",
+      "Email associata:": "Email associé :",
+      "Le scansioni non hanno scadenza temporale.": "Les scans n'ont pas d'expiration temporelle.",
+      "Token gateway non raggiungibile.": "Passerelle token inaccessible.",
+      "Token Guardian™ mancante.": "Token Guardian™ manquant.",
+      "Usa il link personale ricevuto da AETERNA.": "Utilisez le lien personnel reçu d'AETERNA.",
+      "Verifica token Guardian™ in corso...": "Vérification du token Guardian™ en cours...",
+      "Accesso Guardian™ non disponibile.": "Accès Guardian™ non disponible.",
+      "Token Guardian™ valido.": "Token Guardian™ valide.",
+      "Inserisci l'email abbonato e clicca": "Saisissez l'email abonné et cliquez",
+      "VERIFICA ACCESSO GUARDIAN™": "VÉRIFIER L'ACCÈS GUARDIAN™",
+      "Accesso Guardian™ illimitato attivo.": "Accès Guardian™ illimité actif.",
+      "Email abbonato:": "Email abonné :",
+      "illimitate": "illimités",
+      "Nessun contatore a scalare.": "Aucun compteur dégressif.",
+      "Gateway Guardian™ non raggiungibile.": "Passerelle Guardian™ inaccessible.",
+      "Modalità:": "Mode :",
+      "Foto:": "Photo :",
+      "Privacy:": "Confidentialité :",
+      "10 scansioni": "10 scans",
+      "scansioni illimitate": "scans illimités",
+      "Basso": "Faible",
+      "Moderato": "Modéré",
+      "Alto": "Élevé",
+      "Critico": "Critique",
+      "Analizza messaggi, SMS, email, link, numeri telefonici, IBAN, richieste di pagamento, screenshot, foto, PDF, fatture e comunicazioni sospette con il motore AETERNA Civil Shield™. Il sistema usa regole severe contro phishing, scam, impersonificazione istituzionale, false notifiche pubbliche, truffe su multe, targa, CUP, Comune, corrieri, banche e urgenza artificiale.": "Analysez messages, SMS, emails, liens, numéros de téléphone, IBAN, demandes de paiement, captures, photos, PDF, factures et communications suspectes avec le moteur AETERNA Civil Shield™. Le système utilise des règles strictes contre phishing, arnaques, usurpation institutionnelle, fausses notifications publiques, arnaques aux amendes/plaque, organismes publics, livreurs, banques et urgence artificielle.",
+      "Regola AETERNA anti-ambiguità:": "Règle AETERNA anti-ambiguïté :",
+      "messaggi con ente/sigla istituzionale, urgenza, richiesta di azione e numero/link non devono restare in zona grigia. Vengono classificati come rischio alto o critico.": "les messages avec organisme/sigle institutionnel, urgence, demande d'action et numéro/lien ne doivent pas rester en zone grise. Ils sont classés comme risque élevé ou critique.",
+      "Versione clienti occasionali: token personale, email cliente, 10 scansioni a 2,99€ e motore super AETERNA.": "Version clients occasionnels : token personnel, email client, 10 scans à 2,99 € et moteur super AETERNA.",
+      "Guardian™ illimitato attivo.": "Guardian™ illimité actif.",
+      "Accesso riservato Guardian™: token personale, email abbonato e scansioni illimitate.": "Accès réservé Guardian™ : token personnel, email abonné et scans illimités.",
+      "Analisi foto e screenshot con estrazione testo nel browser, quando disponibile.": "Analyse de photos et captures avec extraction de texte dans le navigateur, si disponible.",
+      "Soglia minima per Comune/Notifiche Digitali + infrazione/targa + link esterno.": "Seuil minimum pour mairie/notifications numériques + infraction/plaque + lien externe.",
+      "Il contatore scala automaticamente a ogni analisi autorizzata.": "Le compteur diminue automatiquement à chaque analyse autorisée.",
+      "Il token resta attivo finché l’abbonamento Guardian™ è attivo.": "Le token reste actif tant que l'abonnement Guardian™ est actif.",
+      "Il motore locale analizza il contenuto nel browser.": "Le moteur local analyse le contenu dans le navigateur.",
+      "AETERNA non richiede password, OTP, PIN o chiavi private.": "AETERNA ne demande pas de mots de passe, OTP, PIN ou clés privées.",
+      "Non inserire dati sensibili non necessari.": "N'insérez pas de données sensibles non nécessaires.",
+      "Per foto e screenshot, OCR locale se disponibile.": "Pour photos et captures, OCR local si disponible.",
+      "Il risultato è probabilistico e non sostituisce verifica ufficiale.": "Le résultat est probabiliste et ne remplace pas une vérification officielle.",
+      "Seleziona il tipo di contenuto, incolla il testo o carica una foto/screenshot. Lo scanner combina motore locale AETERNA e backend Render, usando sempre il risultato più prudente.": "Sélectionnez le type de contenu, collez le texte ou chargez une photo/capture. Le scanner combine moteur local AETERNA et backend Render, en utilisant toujours le résultat le plus prudent."
+    },
+    "alerts": {
+      "Token mancante. Usa il link personale Civil Shield™.": "Token manquant. Utilisez votre lien personnel Civil Shield™.",
+      "Inserisci l'email cliente, poi clicca VERIFICA ACCESSO prima di avviare la scansione.": "Saisissez l'email client, puis cliquez sur VÉRIFIER L'ACCÈS avant de lancer l'analyse.",
+      "Scansione non autorizzata.": "Analyse non autorisée.",
+      "Inserisci un contenuto, un link, un numero, un pagamento oppure carica un file/foto.": "Saisissez un contenu, un lien, un numéro, un paiement ou téléversez un fichier/photo.",
+      "Accesso non pronto. Verifica token ed email.": "Accès non prêt. Vérifiez token et email.",
+      "Nessun risultato da copiare.": "Aucun résultat à copier.",
+      "Risultato copiato.": "Résultat copié.",
+      "Copia non riuscita.": "Copie échouée."
+    },
+    "dynamic": {
+      "Riferimento a ente, servizio pubblico o brand sensibile": "Référence à organisme, service public ou marque sensible",
+      "Urgenza artificiale o pressione psicologica": "Urgence artificielle ou pression psychologique",
+      "Richiesta di azione immediata": "Demande d'action immédiate",
+      "Numero telefonico indicato come canale esterno": "Numéro de téléphone indiqué comme canal externe",
+      "Messaggio generico senza riferimenti verificabili": "Message générique sans références vérifiables",
+      "Richiesta o riferimento a dati sensibili": "Demande ou référence à des données sensibles",
+      "Tema economico, pagamento o rimborso": "Sujet économique, paiement ou remboursement",
+      "Possibile falsa notifica di infrazione stradale": "Possible fausse notification d'infraction routière",
+      "Possibile falso alert bancario con conferma telefonica": "Possible fausse alerte bancaire avec confirmation téléphonique",
+      "Possibile falsa infrazione autostradale o pedaggio": "Possible fausse infraction autoroutière ou péage",
+      "Indirizzo email rilevato": "Adresse email détectée",
+      "Mittente email potenzialmente incoerente con ente dichiarato": "Expéditeur email potentiellement incohérent avec l'organisme déclaré",
+      "Link o dominio presente": "Lien ou domaine présent",
+      "Link accorciato": "Lien raccourci",
+      "Dominio o URL con caratteristiche sospette": "Domaine ou URL avec caractéristiques suspectes",
+      "Possibile pagina clone o link mascherato": "Possible page clonée ou lien masqué",
+      "Allegato o estensione potenzialmente pericolosa": "Pièce jointe ou extension potentiellement dangereuse",
+      "Possibile impersonificazione di servizio noto": "Possible usurpation d'un service connu",
+      "Possibile manipolazione emotiva o richiesta anomala": "Possible manipulation émotionnelle ou demande anormale",
+      "Messaggio breve e poco verificabile": "Message court et difficile à vérifier",
+      "Foto o screenshot allegato": "Photo ou capture jointe",
+      "OCR assente o non leggibile": "OCR absent ou illisible",
+      "Documento PDF allegato": "Document PDF joint",
+      "Audio o video allegato": "Audio ou vidéo joint",
+      "Nome file o tipo allegato pericoloso": "Nom de fichier ou type de pièce jointe dangereux",
+      "Nessun indicatore forte rilevato": "Aucun indicateur fort détecté",
+      "Pattern backend AETERNA": "Motif backend AETERNA",
+      "COMPLETO LETTURA OCR...": "FINALISATION DE LA LECTURE OCR...",
+      "ANALISI IN CORSO...": "ANALYSE EN COURS...",
+      "Motore locale + backend Render combinati. Il punteggio finale usa il valore più prudente.": "Moteur local + backend Render combinés. Le score final utilise la valeur la plus prudente.",
+      "Regola screenshot non leggibile: foto/screenshot senza testo OCR o descrizione non può essere classificato basso; richiesta verifica manuale e trascrizione.": "Règle capture illisible : une photo/capture sans texte OCR ni description ne peut pas être classée en risque faible ; vérification manuelle et transcription requises.",
+      "Il contenuto dell'immagine non è stato estratto. Per evitare falsi negativi Civil Shield™ alza il rischio e richiede testo/descrizione.": "Le contenu de l'image n'a pas été extrait. Pour éviter les faux négatifs, Civil Shield™ augmente le risque et demande texte/description.",
+      "Regola anti-ambiguità: ente/sigla + urgenza + azione + canale esterno => rischio minimo 78%.": "Règle anti-ambiguïté : organisme/sigle + urgence + action + canal externe => risque minimum 78 %.",
+      "Regola CUP/ente pubblico: messaggio generico + urgenza + numero/link => rischio minimo 82%.": "Règle organisme public : message générique + urgence + numéro/lien => risque minimum 82 %.",
+      "Regola credenziali: richiesta dati sensibili + canale esterno => rischio minimo 88%.": "Règle identifiants : demande de données sensibles + canal externe => risque minimum 88 %.",
+      "Regola ente/pagamento: ente o brand + pagamento + pressione => rischio minimo 85%.": "Règle organisme/paiement : organisme ou marque + paiement + pression => risque minimum 85 %.",
+      "Regola truffa Comune/targa: infrazione stradale o targa + link => rischio minimo 92%.": "Règle arnaque mairie/plaque : infraction routière ou plaque + lien => risque minimum 92 %.",
+      "Regola notifica pubblica falsa: Comune/Polizia/Notifiche digitali + infrazione/targa + link esterno => rischio minimo 96%.": "Règle fausse notification publique : mairie/police/notifications numériques + infraction/plaque + lien externe => risque minimum 96 %.",
+      "Regola banca/Intesa: alert pagamento + digital home/blocco/conferma + numero telefonico => rischio minimo 96%.": "Règle alerte bancaire : alerte paiement + digital home/blocage/confirmation + numéro de téléphone => risque minimum 96 %.",
+      "Regola casello autostradale: avviso infrazione/pedaggio/casello => rischio minimo 92%.": "Règle péage autoroutier : avis infraction/péage/barrière => risque minimum 92 %.",
+      "Regola pedaggio/casello con azione o pagamento: possibile falsa notifica autostradale => rischio minimo 96%.": "Règle péage avec action ou paiement : possible fausse notification autoroutière => risque minimum 96 %.",
+      "<strong>Azione consigliata:</strong> blocca il contenuto, non rispondere, non cliccare, non chiamare e conserva prova/screenshot per eventuale verifica.": "<strong>Action conseillée :</strong> bloquez le contenu, ne répondez pas, ne cliquez pas, n'appelez pas et conservez preuve/capture pour vérification éventuelle.",
+      "<strong>Azione consigliata:</strong> verifica solo tramite canali ufficiali esterni al messaggio. Evita ogni azione diretta dal contenuto ricevuto.": "<strong>Action conseillée :</strong> vérifiez uniquement par canaux officiels externes au message. Évitez toute action directe depuis le contenu reçu.",
+      "<strong>Azione consigliata:</strong> controlla mittente, dominio, numero, IBAN e richiesta prima di procedere.": "<strong>Action conseillée :</strong> vérifiez expéditeur, domaine, numéro, IBAN et demande avant de continuer.",
+      "<strong>Azione consigliata:</strong> nessun segnale grave rilevato, ma resta prudente se vengono richiesti dati personali, pagamento o accessi.": "<strong>Action conseillée :</strong> aucun signal grave détecté, mais restez prudent si des données personnelles, un paiement ou des accès sont demandés.",
+      "Il contenuto non mostra pattern evidenti, ma la verifica manuale resta consigliata in caso di dubbio.": "Le contenu ne montre aucun motif évident, mais une vérification manuelle reste conseillée en cas de doute.",
+      "Non cliccare, non chiamare, non pagare e non inviare dati. Tratta il contenuto come potenzialmente ostile.": "Ne cliquez pas, n'appelez pas, ne payez pas et n'envoyez pas de données. Traitez le contenu comme potentiellement hostile.",
+      "Non usare i contatti indicati nel messaggio. Verifica solo tramite canali ufficiali già noti.": "N'utilisez pas les contacts indiqués dans le message. Vérifiez uniquement par canaux officiels déjà connus.",
+      "Procedi con cautela. Controlla mittente, dominio, numero telefonico e richiesta specifica.": "Procédez avec prudence. Vérifiez expéditeur, domaine, numéro et demande précise.",
+      "Rischio basso, ma non nullo. Mantieni prudenza se sono richiesti dati, denaro o accessi.": "Risque faible, mais non nul. Restez prudent si données, argent ou accès sont demandés."
+    }
+  },
+  "es": {
+    "placeholders": {
+      "email usata per l'acquisto": "email usada para la compra",
+      "https://... oppure dominio sospetto": "https://... o dominio sospechoso",
+      "Es. CUP, Comune, banca, corriere, profilo social...": "Ej. servicio público, banco, mensajería, perfil social...",
+      "Es. +3989342221": "Ej. +34123456789",
+      "Incolla IBAN, causale, importo o testo pagamento": "Pega IBAN, concepto, importe o texto de pago",
+      "Incolla qui SMS, email, WhatsApp, comunicazione sospetta, annuncio, messaggio marketplace o trascrizione audio/video...": "Pega aquí SMS, email, WhatsApp, comunicación sospechosa, anuncio, mensaje marketplace o transcripción audio/vídeo...",
+      "Descrivi cosa si vede nella foto, nel PDF, nella fattura o nel messaggio vocale/video. Esempio: compare logo Comune, infrazione stradale, targa, link notifichedigitali-it.work...": "Describe lo que aparece en la foto, PDF, factura o mensaje vocal/vídeo.",
+      "Qui comparirà il testo OCR se disponibile. Puoi correggerlo o incollare manualmente il testo visibile.": "Aquí aparecerá el texto OCR si está disponible. Puedes corregirlo o pegar manualmente el texto visible."
+    },
+    "typeLabels": {
+      "message": "Mensaje / SMS / Email",
+      "link": "Enlace / URL",
+      "payment": "Pago / IBAN / Factura",
+      "image": "Foto / Captura",
+      "profile": "Perfil sospechoso",
+      "document": "Documento / PDF",
+      "phone": "Teléfono",
+      "audio-video": "Audio / Vídeo"
+    },
+    "text": {
+      "Modalità scansione mobile": "Modo de análisis móvil",
+      "Modalità attiva:": "Modo activo:",
+      "Carica screenshot di SMS/email/WhatsApp, foto di una comunicazione, PDF o documento. Per immagini lo scanner prova OCR locale; per PDF/audio/video inserisci anche una descrizione o trascrizione.": "Sube capturas de SMS/email/WhatsApp, fotos de una comunicación, PDF o documento. Para imágenes el escáner intenta OCR local; para PDF/audio/vídeo añade también una descripción o transcripción.",
+      "BASSO": "BAJO",
+      "MODERATO": "MODERADO",
+      "ALTO": "ALTO",
+      "CRITICO": "CRÍTICO",
+      "RISCHIO": "RIESGO",
+      "Nessuna regola speciale attivata.": "Ninguna regla especial activada.",
+      "Nessun pattern specifico rilevato.": "Ningún patrón específico detectado.",
+      "Analisi completata dal motore AETERNA Civil Shield™.": "Análisis completado por el motor AETERNA Civil Shield™.",
+      "Motore": "Motor",
+      "Modalità: 10 scansioni tokenizzate": "Modo: 10 análisis tokenizados",
+      "Modalità: Guardian™ illimitato": "Modo: Guardian™ ilimitado",
+      "Token mancante.": "Token faltante.",
+      "Apri lo scanner dal link personale ricevuto dopo l'acquisto.": "Abre el escáner desde el enlace personal recibido después de la compra.",
+      "Verifica token in corso...": "Verificando token...",
+      "Token rilevato:": "Token detectado:",
+      "Accesso non disponibile.": "Acceso no disponible.",
+      "Token non valido.": "Token no válido.",
+      "Scansioni esaurite.": "Escaneos agotados.",
+      "Il pacchetto da 10 scansioni è terminato.": "El paquete de 10 escaneos ha terminado.",
+      "Token valido.": "Token válido.",
+      "Scansioni disponibili:": "Escaneos disponibles:",
+      "Inserisci l'email cliente nel campo qui sotto e clicca": "Introduce el email del cliente en el campo inferior y haz clic en",
+      "VERIFICA ACCESSO": "VERIFICAR ACCESO",
+      "Accesso Civil Shield™ attivo.": "Acceso Civil Shield™ activo.",
+      "Email associata:": "Email asociado:",
+      "Le scansioni non hanno scadenza temporale.": "Los escaneos no tienen caducidad temporal.",
+      "Token gateway non raggiungibile.": "Gateway de token no alcanzable.",
+      "Token Guardian™ mancante.": "Token Guardian™ faltante.",
+      "Usa il link personale ricevuto da AETERNA.": "Usa el enlace personal recibido de AETERNA.",
+      "Verifica token Guardian™ in corso...": "Verificando token Guardian™...",
+      "Accesso Guardian™ non disponibile.": "Acceso Guardian™ no disponible.",
+      "Token Guardian™ valido.": "Token Guardian™ válido.",
+      "Inserisci l'email abbonato e clicca": "Introduce el email del abonado y haz clic en",
+      "VERIFICA ACCESSO GUARDIAN™": "VERIFICAR ACCESO GUARDIAN™",
+      "Accesso Guardian™ illimitato attivo.": "Acceso Guardian™ ilimitado activo.",
+      "Email abbonato:": "Email abonado:",
+      "illimitate": "ilimitados",
+      "Nessun contatore a scalare.": "Sin contador descendente.",
+      "Gateway Guardian™ non raggiungibile.": "Gateway Guardian™ no alcanzable.",
+      "Modalità:": "Modo:",
+      "Foto:": "Foto:",
+      "Privacy:": "Privacidad:",
+      "10 scansioni": "10 escaneos",
+      "scansioni illimitate": "escaneos ilimitados",
+      "Basso": "Bajo",
+      "Moderato": "Moderado",
+      "Alto": "Alto",
+      "Critico": "Crítico",
+      "Analizza messaggi, SMS, email, link, numeri telefonici, IBAN, richieste di pagamento, screenshot, foto, PDF, fatture e comunicazioni sospette con il motore AETERNA Civil Shield™. Il sistema usa regole severe contro phishing, scam, impersonificazione istituzionale, false notifiche pubbliche, truffe su multe, targa, CUP, Comune, corrieri, banche e urgenza artificiale.": "Analiza mensajes, SMS, emails, enlaces, números de teléfono, IBAN, solicitudes de pago, capturas, fotos, PDF, facturas y comunicaciones sospechosas con el motor AETERNA Civil Shield™. El sistema usa reglas severas contra phishing, estafas, suplantación institucional, falsas notificaciones públicas, estafas de multas/matrícula, entidades públicas, mensajerías, bancos y urgencia artificial.",
+      "Regola AETERNA anti-ambiguità:": "Regla AETERNA antiambigüedad:",
+      "messaggi con ente/sigla istituzionale, urgenza, richiesta di azione e numero/link non devono restare in zona grigia. Vengono classificati come rischio alto o critico.": "los mensajes con entidad/sigla institucional, urgencia, solicitud de acción y número/enlace no deben quedar en zona gris. Se clasifican como riesgo alto o crítico.",
+      "Versione clienti occasionali: token personale, email cliente, 10 scansioni a 2,99€ e motore super AETERNA.": "Versión clientes ocasionales: token personal, email del cliente, 10 escaneos por 2,99 € y motor super AETERNA.",
+      "Guardian™ illimitato attivo.": "Guardian™ ilimitado activo.",
+      "Accesso riservato Guardian™: token personale, email abbonato e scansioni illimitate.": "Acceso reservado Guardian™: token personal, email del abonado y escaneos ilimitados.",
+      "Analisi foto e screenshot con estrazione testo nel browser, quando disponibile.": "Análisis de fotos y capturas con extracción de texto en el navegador, cuando esté disponible.",
+      "Soglia minima per Comune/Notifiche Digitali + infrazione/targa + link esterno.": "Umbral mínimo para entidad pública/notificaciones digitales + infracción/matrícula + enlace externo.",
+      "Il contatore scala automaticamente a ogni analisi autorizzata.": "El contador baja automáticamente en cada análisis autorizado.",
+      "Il token resta attivo finché l’abbonamento Guardian™ è attivo.": "El token permanece activo mientras la suscripción Guardian™ esté activa.",
+      "Il motore locale analizza il contenuto nel browser.": "El motor local analiza el contenido en el navegador.",
+      "AETERNA non richiede password, OTP, PIN o chiavi private.": "AETERNA no solicita contraseñas, OTP, PIN ni claves privadas.",
+      "Non inserire dati sensibili non necessari.": "No introduzcas datos sensibles innecesarios.",
+      "Per foto e screenshot, OCR locale se disponibile.": "Para fotos y capturas, OCR local si está disponible.",
+      "Il risultato è probabilistico e non sostituisce verifica ufficiale.": "El resultado es probabilístico y no sustituye la verificación oficial.",
+      "Seleziona il tipo di contenuto, incolla il testo o carica una foto/screenshot. Lo scanner combina motore locale AETERNA e backend Render, usando sempre il risultato più prudente.": "Selecciona el tipo de contenido, pega el texto o sube una foto/captura. El escáner combina motor local AETERNA y backend Render, usando siempre el resultado más prudente."
+    },
+    "alerts": {
+      "Token mancante. Usa il link personale Civil Shield™.": "Token ausente. Usa tu enlace personal Civil Shield™.",
+      "Inserisci l'email cliente, poi clicca VERIFICA ACCESSO prima di avviare la scansione.": "Introduce el email del cliente y pulsa VERIFICAR ACCESO antes de iniciar el análisis.",
+      "Scansione non autorizzata.": "Análisis no autorizado.",
+      "Inserisci un contenuto, un link, un numero, un pagamento oppure carica un file/foto.": "Introduce contenido, enlace, número, pago o sube un archivo/foto.",
+      "Accesso non pronto. Verifica token ed email.": "Acceso no listo. Verifica token y email.",
+      "Nessun risultato da copiare.": "No hay resultado para copiar.",
+      "Risultato copiato.": "Resultado copiado.",
+      "Copia non riuscita.": "Copia fallida."
+    },
+    "dynamic": {
+      "Riferimento a ente, servizio pubblico o brand sensibile": "Referencia a entidad, servicio público o marca sensible",
+      "Urgenza artificiale o pressione psicologica": "Urgencia artificial o presión psicológica",
+      "Richiesta di azione immediata": "Solicitud de acción inmediata",
+      "Numero telefonico indicato come canale esterno": "Número telefónico indicado como canal externo",
+      "Messaggio generico senza riferimenti verificabili": "Mensaje genérico sin referencias verificables",
+      "Richiesta o riferimento a dati sensibili": "Solicitud o referencia a datos sensibles",
+      "Tema economico, pagamento o rimborso": "Tema económico, pago o reembolso",
+      "Possibile falsa notifica di infrazione stradale": "Posible falsa notificación de infracción de tráfico",
+      "Possibile falso alert bancario con conferma telefonica": "Posible falsa alerta bancaria con confirmación telefónica",
+      "Possibile falsa infrazione autostradale o pedaggio": "Posible falsa infracción de autopista o peaje",
+      "Indirizzo email rilevato": "Dirección email detectada",
+      "Mittente email potenzialmente incoerente con ente dichiarato": "Remitente email potencialmente incoherente con la entidad declarada",
+      "Link o dominio presente": "Enlace o dominio presente",
+      "Link accorciato": "Enlace acortado",
+      "Dominio o URL con caratteristiche sospette": "Dominio o URL con características sospechosas",
+      "Possibile pagina clone o link mascherato": "Posible página clonada o enlace enmascarado",
+      "Allegato o estensione potenzialmente pericolosa": "Adjunto o extensión potencialmente peligrosa",
+      "Possibile impersonificazione di servizio noto": "Posible suplantación de un servicio conocido",
+      "Possibile manipolazione emotiva o richiesta anomala": "Posible manipulación emocional o solicitud anómala",
+      "Messaggio breve e poco verificabile": "Mensaje breve y poco verificable",
+      "Foto o screenshot allegato": "Foto o captura adjunta",
+      "OCR assente o non leggibile": "OCR ausente o no legible",
+      "Documento PDF allegato": "Documento PDF adjunto",
+      "Audio o video allegato": "Audio o vídeo adjunto",
+      "Nome file o tipo allegato pericoloso": "Nombre de archivo o tipo de adjunto peligroso",
+      "Nessun indicatore forte rilevato": "Ningún indicador fuerte detectado",
+      "Pattern backend AETERNA": "Patrón backend AETERNA",
+      "COMPLETO LETTURA OCR...": "COMPLETANDO LECTURA OCR...",
+      "ANALISI IN CORSO...": "ANÁLISIS EN CURSO...",
+      "Motore locale + backend Render combinati. Il punteggio finale usa il valore più prudente.": "Motor local + backend Render combinados. La puntuación final usa el valor más prudente.",
+      "Regola screenshot non leggibile: foto/screenshot senza testo OCR o descrizione non può essere classificato basso; richiesta verifica manuale e trascrizione.": "Regla de captura no legible: una foto/captura sin texto OCR o descripción no puede clasificarse como riesgo bajo; se requiere verificación manual y transcripción.",
+      "Il contenuto dell'immagine non è stato estratto. Per evitare falsi negativi Civil Shield™ alza il rischio e richiede testo/descrizione.": "El contenido de la imagen no se extrajo. Para evitar falsos negativos, Civil Shield™ eleva el riesgo y solicita texto/descripción.",
+      "Regola anti-ambiguità: ente/sigla + urgenza + azione + canale esterno => rischio minimo 78%.": "Regla antiambigüedad: entidad/sigla + urgencia + acción + canal externo => riesgo mínimo 78%.",
+      "Regola CUP/ente pubblico: messaggio generico + urgenza + numero/link => rischio minimo 82%.": "Regla entidad pública: mensaje genérico + urgencia + número/enlace => riesgo mínimo 82%.",
+      "Regola credenziali: richiesta dati sensibili + canale esterno => rischio minimo 88%.": "Regla credenciales: solicitud de datos sensibles + canal externo => riesgo mínimo 88%.",
+      "Regola ente/pagamento: ente o brand + pagamento + pressione => rischio minimo 85%.": "Regla entidad/pago: entidad o marca + pago + presión => riesgo mínimo 85%.",
+      "Regola truffa Comune/targa: infrazione stradale o targa + link => rischio minimo 92%.": "Regla estafa municipio/matrícula: infracción de tráfico o matrícula + enlace => riesgo mínimo 92%.",
+      "Regola notifica pubblica falsa: Comune/Polizia/Notifiche digitali + infrazione/targa + link esterno => rischio minimo 96%.": "Regla falsa notificación pública: municipio/policía/notificaciones digitales + infracción/matrícula + enlace externo => riesgo mínimo 96%.",
+      "Regola banca/Intesa: alert pagamento + digital home/blocco/conferma + numero telefonico => rischio minimo 96%.": "Regla alerta bancaria: alerta de pago + digital home/bloqueo/confirmación + número telefónico => riesgo mínimo 96%.",
+      "Regola casello autostradale: avviso infrazione/pedaggio/casello => rischio minimo 92%.": "Regla peaje/autopista: aviso de infracción/peaje/cabina => riesgo mínimo 92%.",
+      "Regola pedaggio/casello con azione o pagamento: possibile falsa notifica autostradale => rischio minimo 96%.": "Regla peaje con acción o pago: posible falsa notificación de autopista => riesgo mínimo 96%.",
+      "<strong>Azione consigliata:</strong> blocca il contenuto, non rispondere, non cliccare, non chiamare e conserva prova/screenshot per eventuale verifica.": "<strong>Acción recomendada:</strong> bloquea el contenido, no respondas, no hagas clic, no llames y conserva prueba/captura para posible verificación.",
+      "<strong>Azione consigliata:</strong> verifica solo tramite canali ufficiali esterni al messaggio. Evita ogni azione diretta dal contenuto ricevuto.": "<strong>Acción recomendada:</strong> verifica solo por canales oficiales externos al mensaje. Evita cualquier acción directa desde el contenido recibido.",
+      "<strong>Azione consigliata:</strong> controlla mittente, dominio, numero, IBAN e richiesta prima di procedere.": "<strong>Acción recomendada:</strong> comprueba remitente, dominio, número, IBAN y solicitud antes de continuar.",
+      "<strong>Azione consigliata:</strong> nessun segnale grave rilevato, ma resta prudente se vengono richiesti dati personali, pagamento o accessi.": "<strong>Acción recomendada:</strong> no se detecta señal grave, pero mantén prudencia si se solicitan datos personales, pago o accesos.",
+      "Il contenuto non mostra pattern evidenti, ma la verifica manuale resta consigliata in caso di dubbio.": "El contenido no muestra patrones evidentes, pero se recomienda verificación manual en caso de duda.",
+      "Non cliccare, non chiamare, non pagare e non inviare dati. Tratta il contenuto come potenzialmente ostile.": "No hagas clic, no llames, no pagues ni envíes datos. Trata el contenido como potencialmente hostil.",
+      "Non usare i contatti indicati nel messaggio. Verifica solo tramite canali ufficiali già noti.": "No uses los contactos indicados en el mensaje. Verifica solo por canales oficiales ya conocidos.",
+      "Procedi con cautela. Controlla mittente, dominio, numero telefonico e richiesta specifica.": "Procede con cautela. Comprueba remitente, dominio, número y solicitud específica.",
+      "Rischio basso, ma non nullo. Mantieni prudenza se sono richiesti dati, denaro o accessi.": "Riesgo bajo, pero no nulo. Mantén prudencia si se piden datos, dinero o accesos."
+    }
+  },
+  "pt": {
+    "placeholders": {
+      "email usata per l'acquisto": "email usada na compra",
+      "https://... oppure dominio sospetto": "https://... ou domínio suspeito",
+      "Es. CUP, Comune, banca, corriere, profilo social...": "Ex. serviço público, banco, transportadora, perfil social...",
+      "Es. +3989342221": "Ex. +5511999999999",
+      "Incolla IBAN, causale, importo o testo pagamento": "Cole IBAN, motivo, valor ou texto de pagamento",
+      "Incolla qui SMS, email, WhatsApp, comunicazione sospetta, annuncio, messaggio marketplace o trascrizione audio/video...": "Cole aqui SMS, email, WhatsApp, comunicação suspeita, anúncio, mensagem marketplace ou transcrição áudio/vídeo...",
+      "Descrivi cosa si vede nella foto, nel PDF, nella fattura o nel messaggio vocale/video. Esempio: compare logo Comune, infrazione stradale, targa, link notifichedigitali-it.work...": "Descreva o que aparece na foto, PDF, fatura ou mensagem de voz/vídeo.",
+      "Qui comparirà il testo OCR se disponibile. Puoi correggerlo o incollare manualmente il testo visibile.": "O texto OCR aparecerá aqui se disponível. Você pode corrigi-lo ou colar manualmente o texto visível."
+    },
+    "typeLabels": {
+      "message": "Mensagem / SMS / Email",
+      "link": "Link / URL",
+      "payment": "Pagamento / IBAN / Fatura",
+      "image": "Foto / Screenshot",
+      "profile": "Perfil suspeito",
+      "document": "Documento / PDF",
+      "phone": "Telefone",
+      "audio-video": "Áudio / Vídeo"
+    },
+    "text": {
+      "Modalità scansione mobile": "Modo de análise móvel",
+      "Modalità attiva:": "Modo ativo:",
+      "Carica screenshot di SMS/email/WhatsApp, foto di una comunicazione, PDF o documento. Per immagini lo scanner prova OCR locale; per PDF/audio/video inserisci anche una descrizione o trascrizione.": "Carregue screenshots de SMS/email/WhatsApp, fotos de uma comunicação, PDF ou documento. Para imagens o scanner tenta OCR local; para PDF/áudio/vídeo insira também uma descrição ou transcrição.",
+      "BASSO": "BAIXO",
+      "MODERATO": "MODERADO",
+      "ALTO": "ALTO",
+      "CRITICO": "CRÍTICO",
+      "RISCHIO": "RISCO",
+      "Nessuna regola speciale attivata.": "Nenhuma regra especial ativada.",
+      "Nessun pattern specifico rilevato.": "Nenhum padrão específico detectado.",
+      "Analisi completata dal motore AETERNA Civil Shield™.": "Análise concluída pelo motor AETERNA Civil Shield™.",
+      "Motore": "Motor",
+      "Modalità: 10 scansioni tokenizzate": "Modo: 10 análises tokenizadas",
+      "Modalità: Guardian™ illimitato": "Modo: Guardian™ ilimitado",
+      "Token mancante.": "Token ausente.",
+      "Apri lo scanner dal link personale ricevuto dopo l'acquisto.": "Abra o scanner pelo link pessoal recebido após a compra.",
+      "Verifica token in corso...": "Verificação do token em andamento...",
+      "Token rilevato:": "Token detectado:",
+      "Accesso non disponibile.": "Acesso indisponível.",
+      "Token non valido.": "Token inválido.",
+      "Scansioni esaurite.": "Escaneamentos esgotados.",
+      "Il pacchetto da 10 scansioni è terminato.": "O pacote de 10 escaneamentos terminou.",
+      "Token valido.": "Token válido.",
+      "Scansioni disponibili:": "Escaneamentos disponíveis:",
+      "Inserisci l'email cliente nel campo qui sotto e clicca": "Insira o email do cliente no campo abaixo e clique em",
+      "VERIFICA ACCESSO": "VERIFICAR ACESSO",
+      "Accesso Civil Shield™ attivo.": "Acesso Civil Shield™ ativo.",
+      "Email associata:": "Email associado:",
+      "Le scansioni non hanno scadenza temporale.": "Os escaneamentos não têm validade temporal.",
+      "Token gateway non raggiungibile.": "Gateway de token inacessível.",
+      "Token Guardian™ mancante.": "Token Guardian™ ausente.",
+      "Usa il link personale ricevuto da AETERNA.": "Use o link pessoal recebido da AETERNA.",
+      "Verifica token Guardian™ in corso...": "Verificação do token Guardian™ em andamento...",
+      "Accesso Guardian™ non disponibile.": "Acesso Guardian™ indisponível.",
+      "Token Guardian™ valido.": "Token Guardian™ válido.",
+      "Inserisci l'email abbonato e clicca": "Insira o email do assinante e clique em",
+      "VERIFICA ACCESSO GUARDIAN™": "VERIFICAR ACESSO GUARDIAN™",
+      "Accesso Guardian™ illimitato attivo.": "Acesso Guardian™ ilimitado ativo.",
+      "Email abbonato:": "Email do assinante:",
+      "illimitate": "ilimitados",
+      "Nessun contatore a scalare.": "Sem contador regressivo.",
+      "Gateway Guardian™ non raggiungibile.": "Gateway Guardian™ inacessível.",
+      "Modalità:": "Modo:",
+      "Foto:": "Foto:",
+      "Privacy:": "Privacidade:",
+      "10 scansioni": "10 escaneamentos",
+      "scansioni illimitate": "escaneamentos ilimitados",
+      "Basso": "Baixo",
+      "Moderato": "Moderado",
+      "Alto": "Alto",
+      "Critico": "Crítico",
+      "Analizza messaggi, SMS, email, link, numeri telefonici, IBAN, richieste di pagamento, screenshot, foto, PDF, fatture e comunicazioni sospette con il motore AETERNA Civil Shield™. Il sistema usa regole severe contro phishing, scam, impersonificazione istituzionale, false notifiche pubbliche, truffe su multe, targa, CUP, Comune, corrieri, banche e urgenza artificiale.": "Analise mensagens, SMS, emails, links, números de telefone, IBANs, pedidos de pagamento, screenshots, fotos, PDFs, faturas e comunicações suspeitas com o motor AETERNA Civil Shield™. O sistema usa regras severas contra phishing, golpes, impersonificação institucional, falsas notificações públicas, golpes de multas/placa, entidades públicas, entregadores, bancos e urgência artificial.",
+      "Regola AETERNA anti-ambiguità:": "Regra AETERNA antiambiguidade:",
+      "messaggi con ente/sigla istituzionale, urgenza, richiesta di azione e numero/link non devono restare in zona grigia. Vengono classificati come rischio alto o critico.": "mensagens com entidade/sigla institucional, urgência, pedido de ação e número/link não devem ficar em zona cinzenta. São classificadas como risco alto ou crítico.",
+      "Versione clienti occasionali: token personale, email cliente, 10 scansioni a 2,99€ e motore super AETERNA.": "Versão para clientes ocasionais: token pessoal, email do cliente, 10 escaneamentos por 2,99 € e motor super AETERNA.",
+      "Guardian™ illimitato attivo.": "Guardian™ ilimitado ativo.",
+      "Accesso riservato Guardian™: token personale, email abbonato e scansioni illimitate.": "Acesso reservado Guardian™: token pessoal, email do assinante e escaneamentos ilimitados.",
+      "Analisi foto e screenshot con estrazione testo nel browser, quando disponibile.": "Análise de fotos e screenshots com extração de texto no navegador, quando disponível.",
+      "Soglia minima per Comune/Notifiche Digitali + infrazione/targa + link esterno.": "Limite mínimo para entidade pública/notificações digitais + infração/placa + link externo.",
+      "Il contatore scala automaticamente a ogni analisi autorizzata.": "O contador diminui automaticamente a cada análise autorizada.",
+      "Il token resta attivo finché l’abbonamento Guardian™ è attivo.": "O token permanece ativo enquanto a assinatura Guardian™ estiver ativa.",
+      "Il motore locale analizza il contenuto nel browser.": "O motor local analisa o conteúdo no navegador.",
+      "AETERNA non richiede password, OTP, PIN o chiavi private.": "AETERNA não solicita senhas, OTP, PIN ou chaves privadas.",
+      "Non inserire dati sensibili non necessari.": "Não insira dados sensíveis desnecessários.",
+      "Per foto e screenshot, OCR locale se disponibile.": "Para fotos e screenshots, OCR local se disponível.",
+      "Il risultato è probabilistico e non sostituisce verifica ufficiale.": "O resultado é probabilístico e não substitui verificação oficial.",
+      "Seleziona il tipo di contenuto, incolla il testo o carica una foto/screenshot. Lo scanner combina motore locale AETERNA e backend Render, usando sempre il risultato più prudente.": "Selecione o tipo de conteúdo, cole o texto ou carregue uma foto/screenshot. O scanner combina motor local AETERNA e backend Render, usando sempre o resultado mais prudente."
+    },
+    "alerts": {
+      "Token mancante. Usa il link personale Civil Shield™.": "Token ausente. Use seu link pessoal Civil Shield™.",
+      "Inserisci l'email cliente, poi clicca VERIFICA ACCESSO prima di avviare la scansione.": "Insira o email do cliente e clique em VERIFICAR ACESSO antes de iniciar a análise.",
+      "Scansione non autorizzata.": "Análise não autorizada.",
+      "Inserisci un contenuto, un link, un numero, un pagamento oppure carica un file/foto.": "Insira conteúdo, link, número, pagamento ou carregue um arquivo/foto.",
+      "Accesso non pronto. Verifica token ed email.": "Acesso não pronto. Verifique token e email.",
+      "Nessun risultato da copiare.": "Nenhum resultado para copiar.",
+      "Risultato copiato.": "Resultado copiado.",
+      "Copia non riuscita.": "Falha ao copiar."
+    },
+    "dynamic": {
+      "Riferimento a ente, servizio pubblico o brand sensibile": "Referência a entidade, serviço público ou marca sensível",
+      "Urgenza artificiale o pressione psicologica": "Urgência artificial ou pressão psicológica",
+      "Richiesta di azione immediata": "Pedido de ação imediata",
+      "Numero telefonico indicato come canale esterno": "Número de telefone indicado como canal externo",
+      "Messaggio generico senza riferimenti verificabili": "Mensagem genérica sem referências verificáveis",
+      "Richiesta o riferimento a dati sensibili": "Pedido ou referência a dados sensíveis",
+      "Tema economico, pagamento o rimborso": "Tema econômico, pagamento ou reembolso",
+      "Possibile falsa notifica di infrazione stradale": "Possível falsa notificação de infração de trânsito",
+      "Possibile falso alert bancario con conferma telefonica": "Possível falso alerta bancário com confirmação telefônica",
+      "Possibile falsa infrazione autostradale o pedaggio": "Possível falsa infração rodoviária ou pedágio",
+      "Indirizzo email rilevato": "Endereço de email detectado",
+      "Mittente email potenzialmente incoerente con ente dichiarato": "Remetente email potencialmente incoerente com a entidade declarada",
+      "Link o dominio presente": "Link ou domínio presente",
+      "Link accorciato": "Link encurtado",
+      "Dominio o URL con caratteristiche sospette": "Domínio ou URL com características suspeitas",
+      "Possibile pagina clone o link mascherato": "Possível página clonada ou link mascarado",
+      "Allegato o estensione potenzialmente pericolosa": "Anexo ou extensão potencialmente perigosa",
+      "Possibile impersonificazione di servizio noto": "Possível impersonificação de serviço conhecido",
+      "Possibile manipolazione emotiva o richiesta anomala": "Possível manipulação emocional ou pedido anômalo",
+      "Messaggio breve e poco verificabile": "Mensagem curta e pouco verificável",
+      "Foto o screenshot allegato": "Foto ou screenshot anexado",
+      "OCR assente o non leggibile": "OCR ausente ou ilegível",
+      "Documento PDF allegato": "Documento PDF anexado",
+      "Audio o video allegato": "Áudio ou vídeo anexado",
+      "Nome file o tipo allegato pericoloso": "Nome de arquivo ou tipo de anexo perigoso",
+      "Nessun indicatore forte rilevato": "Nenhum indicador forte detectado",
+      "Pattern backend AETERNA": "Padrão backend AETERNA",
+      "COMPLETO LETTURA OCR...": "CONCLUINDO LEITURA OCR...",
+      "ANALISI IN CORSO...": "ANÁLISE EM ANDAMENTO...",
+      "Motore locale + backend Render combinati. Il punteggio finale usa il valore più prudente.": "Motor local + backend Render combinados. A pontuação final usa o valor mais prudente.",
+      "Regola screenshot non leggibile: foto/screenshot senza testo OCR o descrizione non può essere classificato basso; richiesta verifica manuale e trascrizione.": "Regra de screenshot ilegível: foto/screenshot sem texto OCR ou descrição não pode ser classificado como baixo risco; verificação manual e transcrição são necessárias.",
+      "Il contenuto dell'immagine non è stato estratto. Per evitare falsi negativi Civil Shield™ alza il rischio e richiede testo/descrizione.": "O conteúdo da imagem não foi extraído. Para evitar falsos negativos, Civil Shield™ eleva o risco e exige texto/descrição.",
+      "Regola anti-ambiguità: ente/sigla + urgenza + azione + canale esterno => rischio minimo 78%.": "Regra antiambiguidade: entidade/sigla + urgência + ação + canal externo => risco mínimo 78%.",
+      "Regola CUP/ente pubblico: messaggio generico + urgenza + numero/link => rischio minimo 82%.": "Regra entidade pública: mensagem genérica + urgência + número/link => risco mínimo 82%.",
+      "Regola credenziali: richiesta dati sensibili + canale esterno => rischio minimo 88%.": "Regra credenciais: pedido de dados sensíveis + canal externo => risco mínimo 88%.",
+      "Regola ente/pagamento: ente o brand + pagamento + pressione => rischio minimo 85%.": "Regra entidade/pagamento: entidade ou marca + pagamento + pressão => risco mínimo 85%.",
+      "Regola truffa Comune/targa: infrazione stradale o targa + link => rischio minimo 92%.": "Regra golpe município/placa: infração de trânsito ou placa + link => risco mínimo 92%.",
+      "Regola notifica pubblica falsa: Comune/Polizia/Notifiche digitali + infrazione/targa + link esterno => rischio minimo 96%.": "Regra falsa notificação pública: município/polícia/notificações digitais + infração/placa + link externo => risco mínimo 96%.",
+      "Regola banca/Intesa: alert pagamento + digital home/blocco/conferma + numero telefonico => rischio minimo 96%.": "Regra alerta bancário: alerta de pagamento + digital home/bloqueio/confirmação + número telefônico => risco mínimo 96%.",
+      "Regola casello autostradale: avviso infrazione/pedaggio/casello => rischio minimo 92%.": "Regra pedágio/autoestrada: aviso de infração/pedágio/cabine => risco mínimo 92%.",
+      "Regola pedaggio/casello con azione o pagamento: possibile falsa notifica autostradale => rischio minimo 96%.": "Regra pedágio com ação ou pagamento: possível falsa notificação rodoviária => risco mínimo 96%.",
+      "<strong>Azione consigliata:</strong> blocca il contenuto, non rispondere, non cliccare, non chiamare e conserva prova/screenshot per eventuale verifica.": "<strong>Ação recomendada:</strong> bloqueie o conteúdo, não responda, não clique, não ligue e conserve prova/screenshot para eventual verificação.",
+      "<strong>Azione consigliata:</strong> verifica solo tramite canali ufficiali esterni al messaggio. Evita ogni azione diretta dal contenuto ricevuto.": "<strong>Ação recomendada:</strong> verifique apenas por canais oficiais fora da mensagem. Evite qualquer ação direta a partir do conteúdo recebido.",
+      "<strong>Azione consigliata:</strong> controlla mittente, dominio, numero, IBAN e richiesta prima di procedere.": "<strong>Ação recomendada:</strong> verifique remetente, domínio, número, IBAN e pedido antes de prosseguir.",
+      "<strong>Azione consigliata:</strong> nessun segnale grave rilevato, ma resta prudente se vengono richiesti dati personali, pagamento o accessi.": "<strong>Ação recomendada:</strong> nenhum sinal grave detectado, mas mantenha cautela se forem pedidos dados pessoais, pagamento ou acessos.",
+      "Il contenuto non mostra pattern evidenti, ma la verifica manuale resta consigliata in caso di dubbio.": "O conteúdo não mostra padrões evidentes, mas a verificação manual continua recomendada em caso de dúvida.",
+      "Non cliccare, non chiamare, non pagare e non inviare dati. Tratta il contenuto come potenzialmente ostile.": "Não clique, não ligue, não pague e não envie dados. Trate o conteúdo como potencialmente hostil.",
+      "Non usare i contatti indicati nel messaggio. Verifica solo tramite canali ufficiali già noti.": "Não use os contatos indicados na mensagem. Verifique apenas por canais oficiais já conhecidos.",
+      "Procedi con cautela. Controlla mittente, dominio, numero telefonico e richiesta specifica.": "Prossiga com cautela. Verifique remetente, domínio, número e pedido específico.",
+      "Rischio basso, ma non nullo. Mantieni prudenza se sono richiesti dati, denaro o accessi.": "Risco baixo, mas não nulo. Mantenha cautela se forem pedidos dados, dinheiro ou acessos."
+    }
+  }
+};
+const AETERNA_SCANNER_PT = {
+  "languageLabel": "Idioma do scanner",
+  "languageNote": "Altere o idioma da interface. O motor de risco continua sendo AETERNA Civil Shield™.",
+  "heroTitle": "Scanner Anti-Golpe Avançado™",
+  "analyzerTitle": "Analisador avançado de golpes™",
+  "accessTitle": "Acesso ao scanner™",
+  "riskThresholds": "Limiares de risco™",
+  "zeroRetention": "Política Zero Retention™",
+  "reasonsTitle": "Motivos detectados™",
+  "specialRulesTitle": "Regras especiais ativadas™",
+  "recommendationsTitle": "Conselhos operacionais AETERNA™",
+  "scanButton": "INICIAR ANÁLISE CIVIL SHIELD™",
+  "resetButton": "LIMPAR",
+  "copyButton": "COPIAR RESULTADO",
+  "verifyAccessButton": "VERIFICAR ACESSO",
+  "customerEmailLabel": "Email do cliente",
+  "guardianEmailLabel": "Email do assinante Guardian™",
+  "tokenNote": "O token é pessoal. Cada análise autorizada desconta 1 crédito do pacote.",
+  "typeMessage": "Mensagem",
+  "typeMessageDesc": "SMS, WhatsApp, Telegram, email, chat.",
+  "typeLink": "Link / URL",
+  "typeLinkDesc": "Domínios, links encurtados, páginas clonadas.",
+  "typePayment": "Pagamento",
+  "typePaymentDesc": "IBAN, faturas, transferências, reembolsos, multas.",
+  "typeImage": "Foto / Screenshot",
+  "typeImageDesc": "SMS fotografados, QR, perfis, documentos.",
+  "typeProfile": "Perfil suspeito",
+  "typeProfileDesc": "Marketplace, redes sociais, romance scam, anúncios.",
+  "typeDocument": "Documento",
+  "typeDocumentDesc": "PDF, contratos, comunicações falsas, anexos.",
+  "typePhone": "Telefone",
+  "typePhoneDesc": "Números para retornar, golpes por chamada, falsos escritórios.",
+  "typeAudioVideo": "Áudio / Vídeo",
+  "typeAudioVideoDesc": "Inserir transcrição ou descrição.",
+  "urlLabel": "Link / domínio suspeito",
+  "senderLabel": "Email remetente / nome do perfil / entidade declarada",
+  "phoneLabel": "Número de telefone indicado",
+  "paymentLabel": "IBAN / pagamento / fatura / pedido de dinheiro",
+  "messageLabel": "Texto para analisar",
+  "uploadLabel": "Upload de foto, screenshot, PDF, fatura, áudio ou vídeo",
+  "fileDescriptionLabel": "Descrição manual do arquivo/foto",
+  "ocrLabel": "Texto extraído de foto/screenshot OCR"
+};
+I18N.pt = Object.assign({}, I18N.en, AETERNA_SCANNER_PT);
+Object.keys(AETERNA_SCANNER_EXTRA).forEach(function(lang){
+  I18N[lang] = Object.assign({}, I18N[lang] || I18N.it, AETERNA_SCANNER_EXTRA[lang]);
+});
+
+function aeternaScannerLang(){
+  return localStorage.getItem("civilShieldLang") || document.documentElement.lang || "it";
+}
+
+function aeternaScannerDict(){
+  return I18N[aeternaScannerLang()] || I18N.it;
+}
+
+function aeternaScannerTranslate(value){
+  const dict = aeternaScannerDict();
+  const text = String(value || "");
+  if(!text) return text;
+  const dynamic = dict.dynamic || {};
+  const ui = dict.text || {};
+  if(dynamic[text]) return dynamic[text];
+  if(ui[text]) return ui[text];
+  const prefixes = [
+    ["Rilevati: ", {"en":"Detected: ","fr":"Détectés : ","es":"Detectados: ","pt":"Detectados: "}],
+    ["Rilevato possibile numero: ", {"en":"Possible number detected: ","fr":"Numéro possible détecté : ","es":"Posible número detectado: ","pt":"Possível número detectado: "}],
+    ["Email rilevate: ", {"en":"Emails detected: ","fr":"Emails détectés : ","es":"Emails detectados: ","pt":"Emails detectados: "}],
+    ["Rilevati link/domini: ", {"en":"Links/domains detected: ","fr":"Liens/domaines détectés : ","es":"Enlaces/dominios detectados: ","pt":"Links/domínios detectados: "}],
+    ["Backend Render non disponibile: usato motore locale AETERNA.", {"en":"Render backend unavailable: local AETERNA engine used.","fr":"Backend Render indisponible : moteur local AETERNA utilisé.","es":"Backend Render no disponible: se usó el motor local AETERNA.","pt":"Backend Render indisponível: motor local AETERNA usado."}],
+    ["Usato motore locale AETERNA.", {"en":"Local AETERNA engine used.","fr":"Moteur local AETERNA utilisé.","es":"Motor local AETERNA utilizado.","pt":"Motor local AETERNA usado."}]
+  ];
+  for(const [prefix, translations] of prefixes){
+    if(text.startsWith(prefix)){
+      return (translations[aeternaScannerLang()] || prefix) + text.slice(prefix.length);
+    }
+    if(text === prefix){
+      return translations[aeternaScannerLang()] || text;
+    }
+  }
+  return text;
+}
+
+function aeternaTranslateScannerDom(lang){
+  const dict = I18N[lang] || I18N.it;
+  const textMap = dict.text || {};
+  const reverseText = {};
+  Object.values(I18N).forEach((langMap) => {
+    Object.entries(langMap.text || {}).forEach(([source, translated]) => { reverseText[translated] = source; });
+  });
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      const parent = node.parentElement;
+      if(!parent || ["SCRIPT","STYLE"].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+      if(parent.closest("[data-i18n]")) return NodeFilter.FILTER_REJECT;
+      return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  const nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((node) => {
+    const raw = node.nodeValue;
+    const trimmed = raw.trim().replace(/\s+/g, " ");
+    if(!node.__aeternaSourceText){
+      node.__aeternaSourceText = reverseText[trimmed] || trimmed;
+    }
+    const translated = lang === "it" ? node.__aeternaSourceText : (textMap[node.__aeternaSourceText] || node.__aeternaSourceText);
+    node.nodeValue = raw.replace(raw.trim(), translated);
+  });
+  document.querySelectorAll("[placeholder]").forEach((node) => {
+    const current = node.getAttribute("placeholder");
+    const reverse = {};
+    Object.values(I18N).forEach((langMap) => {
+      Object.entries(langMap.placeholders || {}).forEach(([source, translated]) => { reverse[translated] = source; });
+    });
+    if(!node.dataset.aeternaPlaceholderSource){
+      node.dataset.aeternaPlaceholderSource = reverse[current] || current;
+    }
+    const source = node.dataset.aeternaPlaceholderSource;
+    node.setAttribute("placeholder", lang === "it" ? source : ((dict.placeholders || {})[source] || source));
+  });
+  if(dict.typeLabels){
+    Object.assign(TYPE_LABELS, dict.typeLabels);
+    const mobile = $("scanTypeMobileSelect");
+    if(mobile){
+      Array.from(mobile.options).forEach((option) => {
+        if(dict.typeLabels[option.value]) option.textContent = dict.typeLabels[option.value];
+      });
+    }
+    const activeType = activeScanType || ($("scanMode") ? $("scanMode").value : "message") || "message";
+    if(mobile) mobile.value = activeType;
+    const activeMode = $("activeModeText");
+    if(activeMode){
+      const prefix = (dict.text && dict.text["Modalità attiva:"]) || "Modalità attiva:";
+      activeMode.textContent = prefix + " " + (dict.typeLabels[activeType] || TYPE_LABELS[activeType] || activeType);
+    }
+  }
+}
+
+const aeternaOriginalAlert = window.alert.bind(window);
+window.alert = function(message){
+  const dict = aeternaScannerDict();
+  const translated = (dict.alerts && dict.alerts[message]) || aeternaScannerTranslate(message);
+  return aeternaOriginalAlert(translated);
+};
+
 function applyLanguage(lang){
   const dictionary = I18N[lang] || I18N.it;
   document.documentElement.lang = lang;
@@ -2064,6 +2826,7 @@ function applyLanguage(lang){
       node.textContent = dictionary[key];
     }
   });
+  aeternaTranslateScannerDom(lang);
 }
 
 
@@ -2115,7 +2878,7 @@ function fixAeternaLogo(){
 
   setTimeout(function(){
     if(!logo.complete || logo.naturalWidth === 0){
-      logo.onerror();
+      if(typeof logo.onerror === "function"){logo.onerror();}
     }
   }, 1500);
 }
